@@ -7,4 +7,28 @@ class Player < ApplicationRecord
   has_many :match_rosters
   has_many :matches, through: :match_rosters
   has_many :matched_teams, through: :match_rosters, source: :team
+
+  def teams_current
+    teams.where(roster_records: { left_at: nil })
+  end
+
+  def teams_history
+    teams.where.not(roster_records: { left_at: nil })
+  end
+
+  def matches_played
+    matches.distinct
+  end
+
+  def most_played_play_area_with_count
+    play_area_counts = matches.group(:play_area_id).count
+    most_played_play_area_id, count = play_area_counts.max_by { |_, count| count }
+
+    most_played_play_area = PlayArea.find_by_id(most_played_play_area_id)
+
+    {
+      play_area: most_played_play_area,
+      count: count
+    }
+  end
 end
