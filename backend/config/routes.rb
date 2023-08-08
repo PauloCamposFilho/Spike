@@ -18,5 +18,9 @@ Rails.application.routes.draw do
     end
   end
   resources :play_areas
-  resources :matches
+  resources :matches do
+    member do
+      get 'teams', to: 'matches#teams'
+    end
+  end
 end
