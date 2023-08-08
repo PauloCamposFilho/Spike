@@ -1,0 +1,2 @@
+class PlayAreasController < ApplicationController
+end
