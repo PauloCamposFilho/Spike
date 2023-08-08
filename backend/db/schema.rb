@@ -51,8 +51,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_08_225228) do
     t.integer "net_height"
     t.boolean "is_lined"
     t.boolean "is_public"
-    t.string "has_rentals"
-    t.string "has_restrooms"
+    t.boolean "has_rentals"
+    t.boolean "has_restrooms"
   end
 
   create_table "players", force: :cascade do |t|
