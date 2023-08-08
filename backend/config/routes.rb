@@ -3,4 +3,14 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+  resources :players do
+    member do
+      get 'matches', to: 'players#player_matches'
+      get 'teams', to: 'players#player_teams'
+      get 'playarea/favorite', to: 'players#player_playarea_favorite'
+    end
+  end
+  resources :teams
+  resources :play_areas
+  resources :matches
 end
