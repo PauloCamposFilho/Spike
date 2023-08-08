@@ -49,7 +49,12 @@ BASKETBALL_COURT_NAMES.each do |court_name|
     image: Faker::LoremFlickr.image,
     num_courts: Faker::Number.between(from: 1, to: 5),
     latitude: Faker::Address.latitude,
-    longitude: Faker::Address.longitude
+    longitude: Faker::Address.longitude,
+    net_height: Faker::Number.between(from: 0, to: 2),
+    is_lined: [0,1].sample,
+    is_public: [0,1].sample,
+    has_rentals: [0,1].sample,
+    has_restrooms: [0,1].sample,
   )
 end
 
