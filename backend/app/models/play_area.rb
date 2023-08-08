@@ -1,0 +1,2 @@
+class PlayArea < ApplicationRecord
+end
