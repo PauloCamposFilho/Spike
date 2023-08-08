@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
+# db/seeds.rb
 require 'faker'
 
 # Custom basketball court names
@@ -18,8 +19,9 @@ BASKETBALL_COURT_NAMES = [
 ].freeze
 
 # Seed Players
+players = []
 10.times do
-  Player.create!(
+  players << Player.create!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     avatar_picture: Faker::LoremFlickr.image,
@@ -29,8 +31,9 @@ BASKETBALL_COURT_NAMES = [
 end
 
 # Seed Teams
+teams = []
 5.times do
-  Team.create!(
+  teams << Team.create!(
     name: Faker::Sports::Football.team,
     picture: Faker::LoremFlickr.image,
     description: Faker::Lorem.paragraph
@@ -38,8 +41,9 @@ end
 end
 
 # Seed PlayAreas
+play_areas = []
 BASKETBALL_COURT_NAMES.each do |court_name|
-  PlayArea.create!(
+  play_areas << PlayArea.create!(
     name: court_name,
     description: Faker::Lorem.paragraph,
     image: Faker::LoremFlickr.image,
@@ -49,19 +53,54 @@ BASKETBALL_COURT_NAMES.each do |court_name|
   )
 end
 
-# Seed Matches
-10.times do
-  winner_team = Team.all.sample
-  other_team = Team.where.not(id: winner_team.id).sample
-  created_by = Player.all.sample
-  play_area = PlayArea.all.sample
+# Seed RosterRecords
+teams.each do |team|
+  players.sample(5).each do |player|
+    RosterRecord.create!(
+      team: team,
+      player: player,
+      joined_at: Faker::Time.between(from: 2.years.ago, to: 1.year.ago),
+      left_at: [nil, Faker::Time.between(from: 1.year.ago, to: Date.today)].sample,
+      is_active: Faker::Boolean.boolean
+    )
+  end
+end
 
-  Match.create!(
+# Method to create MatchRosters for a match
+def create_match_rosters(match)
+  match.winner_team.players.each do |player|
+    MatchRoster.create!(
+      match: match,
+      team: match.winner_team,
+      player: player
+    )
+  end
+  match.other_team.players.each do |player|
+    MatchRoster.create!(
+      match: match,
+      team: match.other_team,
+      player: player
+    )
+  end
+end
+
+# Seed Matches
+matches = 10.times.map do
+  winner_team = teams.sample
+  {
     winner_team: winner_team,
-    other_team: other_team,
-    play_area: play_area,
+    other_team: (teams - [winner_team]).sample,
+    play_area: play_areas.sample,
     created_at: Faker::Time.between(from: 30.days.ago, to: Date.today),
     is_validated: Faker::Boolean.boolean,
-    created_by: created_by
-  )
+    created_by: players.sample
+  }
 end
+
+matches = Match.create!(matches)
+
+# Seed MatchRosters for each match
+matches.each do |match|
+  create_match_rosters(match)
+end
+
