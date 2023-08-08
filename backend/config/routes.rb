@@ -10,7 +10,13 @@ Rails.application.routes.draw do
       get 'playarea/favorite', to: 'players#player_playarea_favorite'
     end
   end
-  resources :teams
+  resources :teams do
+    member do
+      get 'matches', to: 'teams#team_matches'
+      get 'players/current', to: 'teams#players_current'
+      get 'players/history', to: 'teams#players_history'
+    end
+  end
   resources :play_areas
   resources :matches
 end

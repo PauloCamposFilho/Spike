@@ -5,6 +5,11 @@ class PlayersController < ApplicationController
     
     render json: @Player
   end 
+
+  def index
+    @Players = Player.all
+    render json: @Players
+  end
   
   def player_matches
     @player_id = params[:id]
