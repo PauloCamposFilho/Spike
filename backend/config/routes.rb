@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :matches do
     member do
       get 'teams', to: 'matches#teams'
+      get 'playarea', to: 'matches#playarea'
     end
   end
 end
