@@ -1,5 +1,5 @@
 import { indigo } from "@material-ui/core/colors";
-import { fetchCurrentUserData } from "../helpers/fetchData";
+import { fetchCurrentUserData } from "../helpers/fetchCurrentUserData";
 import { reducer } from "../helpers/reducer";
 import { useEffect, useReducer } from "react";
 
@@ -13,7 +13,6 @@ const ACTIONS = {
 
 const initialState = {
   currentPlayArea: null,
-  homePlayArea: null,
   qrModal: {
     isOpen: false,
     qrDetails: {

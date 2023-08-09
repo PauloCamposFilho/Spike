@@ -8,6 +8,7 @@ import Ranking from './components/Ranking';
 
 // Manage State
 import { useUserData } from './hooks/useUserData';
+import { setPlayArea, openQR, closeModal } from './helpers/dispatch';
 
 function App() {
   const { state, dispatch } = useUserData();

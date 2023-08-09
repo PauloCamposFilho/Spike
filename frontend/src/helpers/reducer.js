@@ -8,7 +8,7 @@ const reducer = (state, action) => {
     case SET_CURRENT_PLAY_AREA:
       const currentPlayAreaAfterUpdate = {
         ... state,
-        // data should be a play area object
+        // data should be a play area id, or empty string if untoggling
         currentPlayArea: action.data
       };
       return currentPlayAreaAfterUpdate;
