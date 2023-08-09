@@ -20,7 +20,11 @@ Rails.application.routes.draw do
       end
     end
     
-    resources :play_areas
+    resources :play_areas do
+      member do
+        get 'matches', to: 'play_areas#matches_history'
+      end
+    end
     
     resources :matches do
       member do
