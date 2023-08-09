@@ -3,25 +3,30 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  resources :players do
-    member do
-      get 'matches', to: 'players#player_matches'
-      get 'teams', to: 'players#player_teams'
-      get 'playarea/favorite', to: 'players#player_playarea_favorite'
+  namespace :api do
+    resources :players do
+      member do
+        get 'matches', to: 'players#player_matches'
+        get 'teams', to: 'players#player_teams'
+        get 'playarea/favorite', to: 'players#player_playarea_favorite'
+      end
     end
-  end
-  resources :teams do
-    member do
-      get 'matches', to: 'teams#team_matches'
-      get 'players/current', to: 'teams#players_current'
-      get 'players/history', to: 'teams#players_history'
+    
+    resources :teams do
+      member do
+        get 'matches', to: 'teams#team_matches'
+        get 'players/current', to: 'teams#players_current'
+        get 'players/history', to: 'teams#players_history'
+      end
     end
-  end
-  resources :play_areas
-  resources :matches do
-    member do
-      get 'teams', to: 'matches#teams'
-      get 'playarea', to: 'matches#playarea'
+    
+    resources :play_areas
+    
+    resources :matches do
+      member do
+        get 'teams', to: 'matches#teams'
+        get 'playarea', to: 'matches#playarea'
+      end
     end
   end
 end
