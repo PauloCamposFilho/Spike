@@ -3,3 +3,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+/* the elemter will automatically growth with the margin and padding and border if add those spaces in the element */
+* {
+  box-sizing: border-box;
+}
