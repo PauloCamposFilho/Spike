@@ -32,5 +32,9 @@ Rails.application.routes.draw do
         get 'playarea', to: 'matches#playarea'
       end
     end
+
+    get 'login', to: 'sessions#login'
+    get 'logout', to: 'sessions#logout'
+    get 'testlogin', to: 'sessions#testlogin'
   end
 end
