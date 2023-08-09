@@ -9,8 +9,10 @@ import Ranking from './components/Ranking';
 // Manage State
 import { useUserData } from './hooks/useUserData';
 import { setPlayArea, openQR, closeModal } from './helpers/dispatch';
+import { UserContext } from './contexts/userContext';
 
 function App() {
+  // Custom hook manages all global state through action suite, and fetches data relevant to user on initial pageload
   const { state, dispatch } = useUserData();
 
   return (

@@ -2,14 +2,7 @@ import { indigo } from "@material-ui/core/colors";
 import { fetchCurrentUserData } from "../helpers/fetchCurrentUserData";
 import { reducer } from "../helpers/reducer";
 import { useEffect, useReducer } from "react";
-
-const ACTIONS = {
-  SET_CURRENT_PLAY_AREA: 'SET_CURRENT_PLAY_AREA',
-  OPEN_QR: 'OPEN_QR',
-  CLOSE_MODAL: 'CLOSE_MODAL',
-  // API Actions
-  UPDATE_USER_DATA: 'UPDATE_USER_DATA',
-}
+import { ACTIONS } from "../constants/ACTIONS";
 
 const initialState = {
   currentPlayArea: null,
