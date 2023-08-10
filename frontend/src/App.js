@@ -5,7 +5,16 @@ import Matches from './components/Matches.js';
 import Location from './components/Location';
 import Homepage from './components/Homepage';
 import Ranking from './components/Ranking';
+
+// Manage State
+import { useUserData } from './hooks/useUserData';
+import { setPlayArea, openQR, closeModal } from './helpers/dispatch';
+import { UserContext } from './contexts/userContext';
+
 function App() {
+  // Custom hook manages all global state through action suite, and fetches data relevant to user on initial pageload
+  const { state, dispatch } = useUserData();
+
   return (
     <Router>
       <Switch>
