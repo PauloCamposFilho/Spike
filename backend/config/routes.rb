@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
     resources :teams do
       member do
+        post 'add_player/:user_id', to: 'teams#add_player'
+        post 'remove_player/:user_id', to: 'teams#remove_player'
         get 'matches', to: 'teams#team_matches'
         get 'players/current', to: 'teams#players_current'
         get 'players/history', to: 'teams#players_history'
