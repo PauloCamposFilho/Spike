@@ -275,8 +275,6 @@ export default function Homepage() {
             edge="start"
             color="inherit"
             aria-label="logo"
-            component={Link}
-            to="/QRcode"
           >
             <QRCodeGenerator />
           </IconButton>
