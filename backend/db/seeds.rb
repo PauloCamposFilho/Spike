@@ -109,3 +109,10 @@ matches.each do |match|
   create_match_rosters(match)
 end
 
+# Seed captains for each team
+Team.all.each do |team|
+  # Set captain_id for each team. Just using the first player of a team.
+  captain = team.players.first
+  team.update(captain: captain) if captain
+end
+
