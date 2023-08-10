@@ -27,7 +27,7 @@ function App() {
   };
   
   const openQR = () => {
-  
+    return dispatch({ type: ACTIONS.OPEN_QR })
   };
   
   const closeModal = () => {
