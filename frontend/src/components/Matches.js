@@ -20,6 +20,8 @@ import Paper from '@mui/material/Paper';
 import SportsVolleyballIcon from "@mui/icons-material/SportsVolleyball";
 import MenuIcon from "@mui/icons-material/Menu";
 
+import NavBar from "./NavBar";
+
 
 
 function createData(name, calories, fat, carbs, protein) {
@@ -37,30 +39,7 @@ const rows = [
 export default function Matches() {
   return (
     <div>
-      <AppBar>
-        <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="logo"
-              component={Link}
-              to="/"
-            >
-              <SportsVolleyballIcon />
-            </IconButton>
-            <Typography
-              variant="h6"
-              component="h2"
-              color="inherit"
-              sx={{ marginLeft: "8px" }}
-            >
-              SPIKE!
-            </Typography>
-          </div>
-        </Toolbar>
-      </AppBar>
+      <NavBar />
       <div style={{padding : "80px"}}>
         <Typography variant="h6" component="h2" color="inherit">
           Matches Table
