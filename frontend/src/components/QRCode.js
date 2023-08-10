@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { UserContext } from '../contexts/UserContext';
+import { UserContext } from '../contexts/userContext';
 import ReactDOM from 'react-dom';
 import { QRCodeSVG } from 'qrcode.react'
 import QrCodeIcon from '@mui/icons-material/QrCode';
