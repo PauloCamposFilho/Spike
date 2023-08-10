@@ -25,11 +25,19 @@ import {
 
 export default function Location() {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [openMenu, setOpenMenu] = useState(null);
+  const [openLocation, setOpenLocation] = useState(null);
   const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  const handleClick = (event, setOpen) => {
+    console.log(event);
+    setOpenMenu(false);
+    setOpenLocation(false);
+    setAnchorEl(event.target);
+    setOpen(true);
   };
   const handleClose = () => {
+    setOpenMenu(false);
+    setOpenLocation(false);
     setAnchorEl(null);
   };
   return (
@@ -56,33 +64,34 @@ export default function Location() {
               SPIKE!
             </Typography>
           </div>
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <Stack direction="row" spcing={2}>
-                <Button color="inherit" component={Link} to="/profile">
-                  Profile
-                </Button>
-                <Button color="inherit" component={Link} to="/matches">
-                  Matches
-                </Button>
-                <Button
-                  id="location-button"
-                  color="inherit"
-                  onClick={handleClick}
-                  aria-controls={open ? "location-resources" : undefined}
-                  aria-haspopup="true"
-                  aria-expanded={open ? "true" : undefined}
-                >
-                  Location
-                </Button>
-                <Button color="inherit" component={Link} to="ranking">
-                  Ranking
-                </Button>
-                {/* we can add authentication after the data retrievment test is done */}
-              </Stack>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <Stack direction="row" spcing={2}>
+              <Button color="inherit" component={Link} to="/profile">
+                Profile
+              </Button>
+              <Button color="inherit" component={Link} to="/matches">
+                Matches
+              </Button>
+              <Button
+                id="location-button"
+                color="inherit"
+                onClick={(event) => handleClick(event, setOpenLocation)}
+                aria-controls={open ? "location-resources" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+              >
+                Location
+              </Button>
+              <Button color="inherit" component={Link} to="ranking">
+                Ranking
+              </Button>
+              {/* we can add authentication after the data retrievment test is done */}
+            </Stack>
+            {anchorEl && (
               <Menu
                 id="location-resources"
                 anchorEl={anchorEl}
-                open={open}
+                open={openLocation}
                 onClose={handleClose}
                 MenuListProps={{
                   "aria-labelledby": "location-button",
@@ -95,31 +104,34 @@ export default function Location() {
                   Maps
                 </MenuItem>
               </Menu>
-              <IconButton
-                id="nav-menu"
-                style={{ marginRight: "8px" }}
-                color="inherit"
-                onClick={handleClick}
-                aria-controls={open ? "menu-resources" : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? "true" : undefined}
-              >
-                <MenuIcon />
-              </IconButton>
+            )}
+            <IconButton
+              id="nav-menu"
+              style={{ marginRight: "8px" }}
+              color="inherit"
+              onClick={(event) => handleClick(event, setOpenMenu)}
+              aria-controls={open ? "menu-resources" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+            >
+              <MenuIcon />
+            </IconButton>
+            {anchorEl && (
               <Menu
                 id="menu-resources"
                 anchorEl={anchorEl}
-                open={open}
+                open={openMenu}
                 onClose={handleClose}
                 MenuListProps={{
-                  "aria-labelledby": "nav-menu",
+                  "aria-labelledby2": "nav-menu",
                 }}
               >
                 <MenuItem onClick={handleClose} component={Link} to="/login">
-                  Login
+                  Login 123
                 </MenuItem>
               </Menu>
-            </div>
+            )}
+          </div>
         </Toolbar>
       </AppBar>
       <div style={{ padding: "80px" }}>
