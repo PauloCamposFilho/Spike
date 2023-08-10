@@ -56,7 +56,7 @@ module Api
           MatchRoster.create(match: match, team: other_team, player: player)
         end
 
-        render json: { message: 'Match created successfully.' }
+        render json: { message: 'Match created successfully.', match_id: Match.id }
       else
         render json: { message: 'Failed to create match.' }, status: :unprocessable_entity
       end
