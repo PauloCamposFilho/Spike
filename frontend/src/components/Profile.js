@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import {
   AppBar,
@@ -24,6 +25,8 @@ export default function Profile() {
               edge="start"
               color="inherit"
               aria-label="logo"
+              component={Link}
+              to="/"
             >
               <SportsVolleyballIcon />
             </IconButton>
