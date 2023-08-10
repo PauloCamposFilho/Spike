@@ -12,6 +12,31 @@ module Api
       render json: @Players
     end
 
+    def create
+      player = Player.new(player_params)
+      player.elo_rating = 1500
+
+      if player.save
+        session[:user_id] = player.id
+        render json: { statusCode: 200, message: 'Player created successfully.' }
+      else
+        render json: { errors: players.errors.full_messages }, status: :unprocessable_entity
+      end
+    end
+
+    def edit
+      user_id = session[:user_id]
+      if user_id.nil?
+        render json: { statusCode: 401, message: 'Unauthorized. Not logged in. '}
+        return
+      end
+
+      player = Player.find_by_id(user_id)
+      player.update(player_params)
+
+      render json: { statusCode: 200, message: 'Player profile updated successfully. '}
+    end
+
     def my_profile
       if session[:user_id].nil?
         render json: { message: 'User not logged in', player: nil }
@@ -47,6 +72,12 @@ module Api
       @favorite_playarea = @Player.most_played_play_area_with_count
 
       render json: @favorite_playarea
+    end
+
+    private
+
+    def player_params
+      params.permit(:first_name, :last_name, :description, :avatar_image)
     end
   end
 end

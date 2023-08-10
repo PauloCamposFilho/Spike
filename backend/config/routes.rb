@@ -10,6 +10,9 @@ Rails.application.routes.draw do
         get 'teams', to: 'players#player_teams'
         get 'playarea/favorite', to: 'players#player_playarea_favorite'
       end
+      collection do
+        post 'edit'
+      end
     end
 
     resources :teams do
