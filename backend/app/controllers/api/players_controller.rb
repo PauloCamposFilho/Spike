@@ -53,16 +53,35 @@ module Api
       render json: @match_history
     end
 
+    # def player_teams
+    #   @player_id = params[:id]
+    #   @Player = Player.find_by_id(@player_id)
+    #   @teams_current = @Player.teams_current
+    #   @teams_history = @Player.teams_history
+    #   response_data = {
+    #     teams_current: @teams_current,
+    #     teams_history: @teams_history
+    #   }
+
+    #   render json: response_data
+    # end
+
     def player_teams
       @player_id = params[:id]
       @Player = Player.find_by_id(@player_id)
       @teams_current = @Player.teams_current
+      @teams_current_with_rosters = @teams_current.map do |team|
+        {
+          team: team,
+          roster: team.roster_records.where(left_at: nil).map(&:player)
+        }
+      end
       @teams_history = @Player.teams_history
       response_data = {
-        teams_current: @teams_current,
+        teams_current: @teams_current_with_rosters,
         teams_history: @teams_history
       }
-
+    
       render json: response_data
     end
 
