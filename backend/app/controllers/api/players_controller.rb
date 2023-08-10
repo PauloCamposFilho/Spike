@@ -3,23 +3,56 @@ module Api
     def show
       @player_id = params[:id]
       @Player = Player.find_by_id(@player_id)
-      
+
       render json: @Player
-    end 
-  
+    end
+
     def index
       @Players = Player.all
       render json: @Players
     end
-    
+
+    def create
+      player = Player.new(player_params)
+      player.elo_rating = 1500
+
+      if player.save
+        session[:user_id] = player.id
+        render json: { statusCode: 200, message: 'Player created successfully.' }
+      else
+        render json: { errors: players.errors.full_messages }, status: :unprocessable_entity
+      end
+    end
+
+    def edit
+      user_id = session[:user_id]
+      if user_id.nil?
+        render json: { statusCode: 401, message: 'Unauthorized. Not logged in. '}
+        return
+      end
+
+      player = Player.find_by_id(user_id)
+      player.update(player_params)
+
+      render json: { statusCode: 200, message: 'Player profile updated successfully. '}
+    end
+
+    def my_profile
+      if session[:user_id].nil?
+        render json: { message: 'User not logged in', player: nil }
+      else
+        render json: { player: Player.find_by_id(session[:user_id]) }
+      end
+    end
+
     def player_matches
       @player_id = params[:id]
       @Player = Player.find_by_id(@player_id)
       @match_history = @Player.matches_played
-  
+
       render json: @match_history
     end
-  
+
     def player_teams
       @player_id = params[:id]
       @Player = Player.find_by_id(@player_id)
@@ -29,16 +62,22 @@ module Api
         teams_current: @teams_current,
         teams_history: @teams_history
       }
-      
+
       render json: response_data
     end
-  
+
     def player_playarea_favorite
       @player_id = params[:id]
       @Player = Player.find_by_id(@player_id)
       @favorite_playarea = @Player.most_played_play_area_with_count
-  
+
       render json: @favorite_playarea
+    end
+
+    private
+
+    def player_params
+      params.permit(:first_name, :last_name, :description, :avatar_image)
     end
   end
 end

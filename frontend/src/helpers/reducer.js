@@ -1,4 +1,4 @@
-import { ACTIONS } from "../hooks/useUserData";
+import { ACTIONS } from "../constants/ACTIONS";
 
 const { SET_CURRENT_PLAY_AREA, OPEN_QR, CLOSE_MODAL, UPDATE_USER_DATA } = ACTIONS;
 
@@ -21,7 +21,7 @@ const reducer = (state, action) => {
           ... state.qrModal,
           isOpen: true,
           // data should be an appropriate label and a valid endpoint url
-          qrDetails: action.data
+          // qrDetails: action.data
         }
       }
       return newQR

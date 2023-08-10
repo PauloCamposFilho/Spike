@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_08_225228) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_10_010439) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -83,6 +83,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_08_225228) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "captain_id"
+    t.index ["captain_id"], name: "index_teams_on_captain_id"
   end
 
   add_foreign_key "match_rosters", "matches"
@@ -94,4 +96,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_08_225228) do
   add_foreign_key "matches", "teams", column: "winner_team_id"
   add_foreign_key "roster_records", "players"
   add_foreign_key "roster_records", "teams"
+  add_foreign_key "teams", "players", column: "captain_id"
 end

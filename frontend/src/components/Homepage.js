@@ -36,7 +36,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { DataGrid } from "@mui/x-data-grid";
 import MenuIcon from "@mui/icons-material/Menu";
-import QrCodeIcon from "@mui/icons-material/QrCode";
+import { QRCodeGenerator } from "./QRCode";
 
 const columns = [
   { field: "id", headerName: "ID", width: 70 },
@@ -279,7 +279,7 @@ export default function Homepage() {
             component={Link}
             to="/QRcode"
           >
-            <QrCodeIcon />
+            <QRCodeGenerator />
           </IconButton>
         </div>
       </div>
