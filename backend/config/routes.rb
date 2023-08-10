@@ -35,6 +35,11 @@ Rails.application.routes.draw do
       member do
         get 'teams', to: 'matches#teams'
         get 'playarea', to: 'matches#playarea'
+        get 'validate', to: 'matches#validate'
+        get 'delete', to: 'matches#delete'
+      end
+      collection do
+        get 'create/:winner_team_id/:other_team_id/:play_area_id', to: 'matches#create'
       end
     end
 
