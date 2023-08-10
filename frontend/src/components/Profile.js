@@ -13,6 +13,7 @@ import {
 } from "@material-ui/core";
 import SportsVolleyballIcon from "@mui/icons-material/SportsVolleyball";
 import MenuIcon from "@mui/icons-material/Menu";
+import Scanner from "./Scanner";
 
 export default function Profile() {
   return (
@@ -44,6 +45,7 @@ export default function Profile() {
       <div style={{padding : "80px"}}>
         <Typography variant="h6" component="h2" color="inherit">
           Player Profiles
+          <Scanner />
         </Typography>
       </div>
     </div>
