@@ -10,7 +10,7 @@ import Ranking from './components/Ranking';
 import { useUserData } from './hooks/useUserData';
 import { ACTIONS } from './constants/ACTIONS';
 import { setPlayArea, openQR, closeModal } from './helpers/dispatch';
-import { UserContext } from './contexts/userContext';
+import { UserContext } from './contexts/UserContext';
 
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
   };
   
   const openQR = () => {
-  
+    return dispatch({ type: ACTIONS.OPEN_QR })
   };
   
   const closeModal = () => {
@@ -35,25 +35,27 @@ function App() {
   };
 
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/">
-          <Homepage />
-        </Route>
-        <Route path="/Profile">
-          <Profile />
-        </Route>
-        <Route path="/matches">
-          <Matches />
-        </Route>
-        <Route path="/location">
-          <Location />
-        </Route>
-        <Route path="/eloranking">
-          <Ranking />
-        </Route>
-      </Switch>
-    </Router>
+    <UserContext.Provider value={{ state, dispatch, openQR}}>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Homepage />
+          </Route>
+          <Route path="/Profile">
+            <Profile />
+          </Route>
+          <Route path="/matches">
+            <Matches />
+          </Route>
+          <Route path="/location">
+            <Location />
+          </Route>
+          <Route path="/eloranking">
+            <Ranking />
+          </Route>
+        </Switch>
+      </Router>
+    </UserContext.Provider>
   );
 }
 
