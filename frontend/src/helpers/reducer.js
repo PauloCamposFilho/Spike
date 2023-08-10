@@ -1,4 +1,4 @@
-import { ACTIONS } from "../hooks/useUserData";
+import { ACTIONS } from "../constants/ACTIONS";
 
 const { SET_CURRENT_PLAY_AREA, OPEN_QR, CLOSE_MODAL, UPDATE_USER_DATA } = ACTIONS;
 
