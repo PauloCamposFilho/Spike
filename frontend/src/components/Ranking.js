@@ -20,7 +20,7 @@ export default function Ranking() {
         <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center" }}>
             <IconButton
-              size="large"
+              size="medium"
               edge="start"
               color="inherit"
               aria-label="logo"
