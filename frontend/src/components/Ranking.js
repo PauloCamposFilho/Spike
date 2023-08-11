@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   AppBar,
@@ -9,6 +9,8 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  TableCell,
+  Paper,
 } from "@material-ui/core";
 import {
   Stack,
@@ -18,11 +20,23 @@ import {
   Menu,
   MenuItem,
   Data,
+  Table,
+  TableContainer,
+  TableHead,
+  TableBody,
+  TableRow,
+  Avatar
 } from "@mui/material";
 import SportsVolleyballIcon from "@mui/icons-material/SportsVolleyball";
 import MenuIcon from "@mui/icons-material/Menu";
+import { UserContext } from "../contexts/userContext";
 
 export default function Ranking() {
+  const { state } = useContext(UserContext)
+  const { teams, playerRankings } = state.userData.rankings;
+
+  console.log("THE STATE", playerRankings);
+
   const [anchorEl, setAnchorEl] = useState(null);
   const [openMenu, setOpenMenu] = useState(null);
   const [openLocation, setOpenLocation] = useState(null);
@@ -133,7 +147,7 @@ export default function Ranking() {
           </div>
         </Toolbar>
       </AppBar>
-      <div style={{padding : "80px"}}>
+      {/* <div style={{padding : "80px"}}>
         <Typography variant="h4" component="h2" color="inherit">
           Elo Ranking System
         </Typography>
@@ -147,6 +161,45 @@ export default function Ranking() {
           alt="Elo Rating Diagram"
           style={{ maxWidth: "40%", height: "auto", marginTop: "20px" }}
         />
+      </div> */}
+      <div style={{ padding: "80px", "text-align": "center", "margin-top": "30px" }}>
+        <Typography variant="h4" component="h2" color="inherit">
+          Latest Rankings
+        </Typography>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 300, maxWidth: 800 }} aria-label="a dense table">
+            <TableHead>
+              <TableRow>
+                <TableCell colSpan={4} align="center"><h2>Players</h2></TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell></TableCell>
+                <TableCell>First name</TableCell>
+                <TableCell>Last name</TableCell>
+                <TableCell>Elo Rating</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {playerRankings.map((player, index) => {
+                return (
+                  <TableRow key={index}>
+                    <TableCell>
+                      <Avatar
+                        sx={{ width: 60, height: 60 }}
+                        alt={`${player.first_name} ${player.last_name}`}
+                        // src="https://i.pinimg.com/736x/33/06/b8/3306b8156653fea183b5406151c74ded.jpg"
+                        src={player.avatar_picture + `?id=${player.id}`}
+                      />
+                    </TableCell>
+                    <TableCell>{player.first_name}</TableCell>
+                    <TableCell>{player.last_name}</TableCell>
+                    <TableCell>{player.elo_rating}</TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </div>
     </div>
   )

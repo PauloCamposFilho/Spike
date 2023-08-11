@@ -6,12 +6,16 @@ const fetchCurrentUserData = async (playerId) => {
     const teamsRes = await fetch(`api/players/${playerId}/teams`);
     const teamsMatchesRes = await fetch(`api/players/${playerId}/teams/matches`);
     const playAreaRes = await fetch(`api/players/${playerId}/playarea/favorite`);
+    const playerRankingsRes = await fetch(`api/players/rankings`);
+    const teamRankingsRes = await fetch(`api/teams/rankings`);
     // Parse JSON
     const playerData = await playerRes.json();
     const matchesData = await matchesRes.json();
     const teamsData = await teamsRes.json();
     const teamsMatchesData = await teamsMatchesRes.json();
     const playAreaData = await playAreaRes.json();
+    const playerRankings = await playerRankingsRes.json();
+    const teamRankings = await teamRankingsRes.json();
     // Bundle and return
     const currentUserData = {
       playerData,
@@ -19,6 +23,10 @@ const fetchCurrentUserData = async (playerId) => {
       teamsData,
       teamsMatchesData,
       playAreaData,
+      rankings: {
+        teams: teamRankings,
+        playerRankings: playerRankings
+      }
     };
     return currentUserData;
   }
