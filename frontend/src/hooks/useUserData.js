@@ -3,7 +3,7 @@ import { fetchCurrentUserData } from "../helpers/fetchCurrentUserData";
 import { reducer } from "../helpers/reducer";
 import { useEffect, useReducer } from "react";
 import { ACTIONS } from "../constants/ACTIONS";
-import generateGridData from "../helpers/generateGridData";
+import { generateGridData } from "../helpers/generateGridData";
 
 const initialState = {
   currentPlayArea: null,
@@ -15,6 +15,9 @@ const initialState = {
     },
   },
   userData: {
+    matchesData: [],
+    playerAreaData: {},
+    playerData: {},
     teams_current: {},
     teams_history: {},
     gridData: [],

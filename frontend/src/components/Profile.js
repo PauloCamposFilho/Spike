@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import SportsVolleyballIcon from "@mui/icons-material/SportsVolleyball";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -31,6 +31,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { UserContext } from "../contexts/userContext";
 function createData(name, value) {
   return { name, value };
 }
@@ -49,6 +50,9 @@ export default function Profile() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [openMenu, setOpenMenu] = useState(null);
   const [openLocation, setOpenLocation] = useState(null);
+  const { state } = useContext(UserContext);
+  const { playerData, matchesData } = state.userData;
+
   const open = Boolean(anchorEl);
   const handleClick = (event, setOpen) => {
     console.log(event);
@@ -183,7 +187,8 @@ export default function Profile() {
               <Avatar
                 sx={{ width: 200, height: 200 }}
                 alt="Remy Sharp"
-                src="https://i.pinimg.com/736x/33/06/b8/3306b8156653fea183b5406151c74ded.jpg"
+                // src="https://i.pinimg.com/736x/33/06/b8/3306b8156653fea183b5406151c74ded.jpg"
+                src={playerData.avatar_picture}
               />
             </Stack>
           </div>
@@ -195,8 +200,8 @@ export default function Profile() {
               >
                 <TableHead className="table-header">
                   <TableRow>
-                    <TableCell>Name</TableCell>
-                    <TableCell>Value</TableCell>
+                    <TableCell>First Name</TableCell>
+                    <TableCell>Last Name</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -209,8 +214,45 @@ export default function Profile() {
                         {row.name}
                       </TableCell>
                       <TableCell align="left">{row.value}</TableCell>
-                    </TableRow>
-                  ))}
+                    </TableRow>))}
+                  </TableBody>
+                  <TableBody>
+                    <TableRow key="bio" sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                        <TableCell component="th" scope="row">
+                          {playerData.description}
+                        </TableCell>
+                      </TableRow>
+                  </TableBody>
+                </Table>
+            </TableContainer>
+
+            <TableContainer component={Paper} style={ { "margin-top": "30px" } }>
+              <Table style={{ width: "650px" }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell colSpan={4} align="center"><h2>Recent Matches</h2></TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell style={{ "width": "110px"}} align="left"><h4>Team</h4></TableCell>
+                    <TableCell><h4></h4></TableCell>
+                    <TableCell style={{ "width": "110px"}} align="left"><h4>Team</h4></TableCell>
+                    <TableCell align="left"><h4>Location</h4></TableCell>
+                    <TableCell align="left"><h4>Date</h4></TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                    {matchesData.map((item, index) => {
+                      return (
+                        <TableRow key={item.id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                          <TableCell align="left">{item.winner_team_name}</TableCell>
+                          <TableCell><strong>defeats</strong></TableCell>
+                          <TableCell align="left">{item.other_team_name}</TableCell>
+                          <TableCell align="left">{item.play_area_name}</TableCell>
+                          <TableCell align="left">{item.created_at}</TableCell>
+                        </TableRow>
+                      )
+                    })}
+                    {state.matchesData}
                 </TableBody>
               </Table>
             </TableContainer>
