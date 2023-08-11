@@ -49,7 +49,7 @@ function App() {
           <Route path="/location">
             <Location />
           </Route>
-          <Route path="/eloranking">
+          <Route path="/ranking">
             <Ranking />
           </Route>
         </Switch>

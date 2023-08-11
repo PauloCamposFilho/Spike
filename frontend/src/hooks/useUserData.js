@@ -21,7 +21,11 @@ const initialState = {
     teams_current: {},
     teams_history: {},
     gridData: [],
-    teamsMatchesData: []
+    teamsMatchesData: [],
+    rankings: {
+      teams: [],
+      playerRankings: []
+    }
   }
 }
 
