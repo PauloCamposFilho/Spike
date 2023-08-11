@@ -166,8 +166,9 @@ export default function Ranking() {
         <Typography variant="h4" component="h2" color="inherit">
           Latest Rankings
         </Typography>
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 300, maxWidth: 800 }} aria-label="a dense table">
+        <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-around", marginTop: "50px" }}>
+
+          <Table sx={{ minWidth: 300, maxWidth: 800, display: "inline-table", border: "1px solid lightgrey" }} aria-label="a dense table">
             <TableHead>
               <TableRow>
                 <TableCell colSpan={4} align="center"><h2>Players</h2></TableCell>
@@ -182,7 +183,7 @@ export default function Ranking() {
             <TableBody>
               {playerRankings.map((player, index) => {
                 return (
-                  <TableRow key={index}>
+                  <TableRow key={index} data-id={player.id}>
                     <TableCell>
                       <Avatar
                         sx={{ width: 60, height: 60 }}
@@ -199,7 +200,39 @@ export default function Ranking() {
               })}
             </TableBody>
           </Table>
-        </TableContainer>
+
+          <Table sx={{ minWidth: 300, maxWidth: 800, display: "inline-table", border: "1px solid lightgrey" }} aria-label="a dense table">
+            <TableHead>
+              <TableRow>
+                <TableCell colSpan={3} align="center"><h2>Teams</h2></TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell></TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>Elo Rating</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {teams.map((team, index) => {
+                return (
+                  <TableRow key={index} data-id={team.id}>
+                    <TableCell>
+                      <Avatar
+                        sx={{ width: 60, height: 60 }}
+                        alt={`${team.name}`}
+                        // src="https://i.pinimg.com/736x/33/06/b8/3306b8156653fea183b5406151c74ded.jpg"
+                        src={team.picture + `?id=${team.id}`}
+                      />
+                    </TableCell>
+                    <TableCell>{team.name}</TableCell>
+                    <TableCell>{team.elo_rating}</TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+
+        </div>
       </div>
     </div>
   )
