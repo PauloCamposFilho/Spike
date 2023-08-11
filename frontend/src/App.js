@@ -10,7 +10,7 @@ import Ranking from './components/Ranking';
 import { useUserData } from './hooks/useUserData';
 import { ACTIONS } from './constants/ACTIONS';
 import { setPlayArea, openQR, closeModal } from './helpers/dispatch';
-import { UserContext } from './contexts/userContext';
+import { UserContext } from './contexts/UserContext';
 
 
 function App() {

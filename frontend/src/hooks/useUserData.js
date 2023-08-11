@@ -18,8 +18,10 @@ const initialState = {
     matchesData: [],
     playerAreaData: {},
     playerData: {},
-    teams_current: {},
-    teams_history: {},
+    teamsData: {
+      teams_current: [],
+      teams_history: [],
+    },
     gridData: [],
     teamsMatchesData: []
   }

@@ -29,7 +29,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { UserContext } from "../contexts/userContext";
+import { UserContext } from "../contexts/UserContext";
 function createData(name, value) {
   return { name, value };
 }
