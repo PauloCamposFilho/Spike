@@ -15,13 +15,15 @@ const initialState = {
     },
   },
   userData: {
-    matchesData: [],
-    playerAreaData: {},
     playerData: {},
-    teams_current: {},
-    teams_history: {},
+    matchesData: [],
+    teamsData: {
+      teams_current: [],
+      teams_history: []
+    },
+    teamsMatchesData: [],
+    playAreaData: {},
     gridData: [],
-    teamsMatchesData: []
   }
 }
 
