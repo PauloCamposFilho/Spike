@@ -35,7 +35,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { DataGrid } from "@mui/x-data-grid";
 import MenuIcon from "@mui/icons-material/Menu";
-import { QRCodeGenerator } from "./QRCode";
+import { QRCodeGenerator } from "./QRcode";
 import { UserContext } from "../contexts/userContext";
 import columns from "../constants/GRID_DATA_COLUMNS";
 
