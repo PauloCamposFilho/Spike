@@ -2,8 +2,6 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import SportsVolleyballIcon from "@mui/icons-material/SportsVolleyball";
 import MenuIcon from "@mui/icons-material/Menu";
-import "../style/Profile.css";
-
 import {
   AppBar,
   IconButton,
@@ -38,10 +36,7 @@ function createData(name, value) {
 
 const rows = [
   createData("Full name", "Player Full Name"),
-  createData(
-    "Description",
-    "Repudiandae quis et. Vel dolorem corporis. Aperiam earum animi."
-  ),
+  createData("Description", "Repudiandae quis et. Vel dolorem corporis. Aperiam earum animi."),
   createData("elo_rating", 2011),
   createData("Create at", "2023-08-11T02:10:14.175z"),
   createData("Updated at", "2023-08-11T02:10:14.175z"),
@@ -67,11 +62,8 @@ export default function Profile() {
     setAnchorEl(null);
   };
   return (
-    <div
-      className="profile-container"
-      style={{ display: "flex", justifyContent: "center" }}
-    >
-      <AppBar position="static">
+    <div style={{display:"flex",justifyContent:"center"}}>
+      <AppBar>
         <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center" }}>
             <IconButton
@@ -163,26 +155,24 @@ export default function Profile() {
           </div>
         </Toolbar>
       </AppBar>
-      <div className="profile-content" style={{ padding: "80px" }}>
-        <Typography
-          variant="h4"
-          component="h2"
-          color="inherit"
-          paddingbottom="10px"
-        >
+      <div style={{ padding: "80px"}}>
+        <Typography variant="h4" component="h2" color="inherit" paddingbottom="10px">
           Player Profiles
         </Typography>
         <div
-          className="profile-details"
-          // style={{
-          //   direction: "row",
-          //   display: "flex",
-          //   height: "800px",
-          //   paddingTop: "40px"
-          // }}
+          style={{
+            direction: "row",
+            display: "flex",
+            height: "800px",
+            paddingTop: "40px"
+          }}
         >
           {/* use border: "1px solid red" for the frame of <div> or different element */}
-          <div className="avatar-section">
+          <div
+            style={{
+              margin:"30px"
+            }}
+          >
             <Stack direction="row" spacing={2}>
               <Avatar
                 sx={{ width: 200, height: 200 }}
@@ -192,30 +182,43 @@ export default function Profile() {
               />
             </Stack>
           </div>
-          <div className="table-section">
+          <div>
             <TableContainer component={Paper}>
-              <Table
-                style={{ width: "650px", height: "750px" }}
-                aria-label="simple table"
-              >
-                <TableHead className="table-header">
+              <Table style={{ width: "650px" }} aria-label="simple table">
+                <TableHead>
                   <TableRow>
                     <TableCell>First Name</TableCell>
                     <TableCell>Last Name</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.map((row, index) => (
-                    <TableRow
-                      key={index}
-                      className="table-row"
-                    >
-                      <TableCell component="th" scope="row">
-                        {row.name}
-                      </TableCell>
-                      <TableCell align="left">{row.value}</TableCell>
-                    </TableRow>))}
-                  </TableBody>
+                  <TableRow key="name" sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                    <TableCell component="th" scope="row">
+                      {playerData.first_name}
+                    </TableCell>
+                    <TableCell align="left">{playerData.last_name}</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+
+            <TableContainer component={Paper} style={ {"margin-top": "30px"} }>
+              <Table style={{ width: "650px" }} aria-label="simple table">
+                  <TableHead>
+                  <TableRow key="elo" sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                    <TableCell component="th" scope="row" ><h3>Current Elo Rating: {playerData.elo_rating}</h3></TableCell>
+                  </TableRow>
+                  </TableHead>
+                </Table>
+            </TableContainer>
+
+            <TableContainer component={Paper} style={ {"margin-top": "30px"} }>
+              <Table style={{ width: "650px" }} aria-label="simple table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell colSpan={2} align="center">Description</TableCell>
+                    </TableRow>
+                  </TableHead>
                   <TableBody>
                     <TableRow key="bio" sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                         <TableCell component="th" scope="row">
