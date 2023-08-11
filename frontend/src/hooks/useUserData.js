@@ -24,6 +24,12 @@ const initialState = {
     },
     gridData: [],
     teamsMatchesData: []
+  },
+  teamData: {
+    teamInfoData: {},
+    teamMatchesData: [],
+    teamCurrentRosterData: [],
+    teamPastPlayersData: [],
   }
 }
 
@@ -35,8 +41,6 @@ const useUserData = () => {
     const updateInitialState = async () => {
       const userData = await fetchCurrentUserData(1);
       const gridData = generateGridData(userData.teamsData.teams_current);
-      console.log("dataDATA", userData);
-
       dispatch({ type: ACTIONS.UPDATE_USER_DATA, data: { ...userData, gridData } });
     }
     updateInitialState();

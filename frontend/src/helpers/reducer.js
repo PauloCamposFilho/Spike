@@ -1,6 +1,6 @@
 import { ACTIONS } from "../constants/ACTIONS";
 
-const { SET_CURRENT_PLAY_AREA, OPEN_QR, CLOSE_MODAL, UPDATE_USER_DATA } = ACTIONS;
+const { SET_CURRENT_PLAY_AREA, OPEN_QR, CLOSE_MODAL, UPDATE_USER_DATA, UPDATE_TEAM_DATA } = ACTIONS;
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -43,6 +43,13 @@ const reducer = (state, action) => {
         userData: action.data
       }
       return userDataAfterUpdate;
+    
+    case UPDATE_TEAM_DATA:
+      const teamDataAfterUpdate = {
+        ... state,
+        teamData: action.data
+      };
+      return teamDataAfterUpdate;
 
     // Return current state if action type unrecognized
     default: 
