@@ -3,6 +3,7 @@ import { fetchCurrentUserData } from "../helpers/fetchCurrentUserData";
 import { reducer } from "../helpers/reducer";
 import { useEffect, useReducer } from "react";
 import { ACTIONS } from "../constants/ACTIONS";
+import generateGridData from "../helpers/generateGridData";
 
 const initialState = {
   currentPlayArea: null,
@@ -13,7 +14,12 @@ const initialState = {
       endpoint: '',
     },
   },
-  userData: null,
+  userData: {
+    teams_current: {},
+    teams_history: {},
+    gridData: [],
+    teamsMatchesData: []
+  }
 }
 
 const useUserData = () => {
@@ -21,10 +27,14 @@ const useUserData = () => {
 
   useEffect(() => {
     // assume default user for now
-    fetchCurrentUserData('1')
-      .then((res) => {
-        dispatch({ type: ACTIONS.UPDATE_USER_DATA, data: res})
-      })
+    const updateInitialState = async () => {
+      const userData = await fetchCurrentUserData(1);
+      const gridData = generateGridData(userData.teamsData.teams_current);
+      console.log("dataDATA", userData);
+
+      dispatch({ type: ACTIONS.UPDATE_USER_DATA, data: { ...userData, gridData } });
+    }
+    updateInitialState();
   }, [])
 
   // return state and dispatch
