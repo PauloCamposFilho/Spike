@@ -17,7 +17,15 @@ class Player < ApplicationRecord
   end
 
   def matches_played
-    matches.distinct
+    # matches.distinct
+    matches.distinct.order(created_at: :desc).map do |match|
+      match.as_json.merge(
+        winner_team_name: match.winner_team.name,
+        other_team_name: match.other_team.name,
+        play_area_name: match.play_area.name,
+        created_at: match.created_at.strftime('%Y-%m-%d')
+      )
+    end
   end
 
   def most_played_play_area_with_count
