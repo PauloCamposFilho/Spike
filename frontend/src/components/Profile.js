@@ -11,6 +11,7 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  TableFooter,
 } from "@material-ui/core";
 import {
   Stack,
@@ -51,6 +52,17 @@ export default function Profile() {
     setOpenMenu(false);
     setOpenLocation(false);
     setAnchorEl(null);
+  };
+  const getEloRatingColor = () => {
+    if (playerData.elo_rating > 1900) {
+      return "orange";
+    } else if (playerData.elo_rating >= 1500 && playerData.elo_rating <= 1900) {
+      return "#C2F26E";
+    } else if (playerData.elo_rating >= 1100 && playerData.elo_rating < 1500) {
+      return "#5ce647";
+    } else {
+      return "#1ea4a0";
+    }
   };
 
   return (
@@ -178,7 +190,7 @@ export default function Profile() {
             <TableContainer component={Paper}>
               <Table style={{ width: "700px" }} aria-label="simple table">
                 <TableHead className="table-header">
-                  <TableRow className="table-row">
+                  <TableRow >
                     <TableCell>First Name</TableCell>
                     <TableCell>Last Name</TableCell>
                   </TableRow>
@@ -195,9 +207,9 @@ export default function Profile() {
             </TableContainer>
             <TableContainer component={Paper} style={ {"margin-top": "30px"} }>
               <Table style={{ width: "700px" }} aria-label="simple table">
-                  <TableHead className="table-header">
+                  <TableHead>
                   <TableRow key="elo" sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-                    <TableCell component="th" scope="row" ><h3>Current Elo Rating: { playerData.elo_rating}</h3></TableCell>
+                    <TableCell component="th" scope="row" ><h3 style={{color: getEloRatingColor(), alignItems: "center", justifyContent: "center", display: "flex"}}>Current Elo Rating: { playerData.elo_rating}</h3></TableCell>
                   </TableRow>
                   </TableHead>
                 </Table>
@@ -222,11 +234,11 @@ export default function Profile() {
 
             <TableContainer component={Paper} style={ { "margin-top": "30px" } }>
               <Table style={{ width: "700px" }} aria-label="simple table">
-                <TableHead className="table-header">
+                <TableHead>
                   <TableRow>
                     <TableCell colSpan={5} align="center"><h2>Recent Matches</h2></TableCell>
                   </TableRow>
-                  <TableRow >
+                  <TableRow className="table-header">
                     <TableCell  style={{"width": "110px"}}  align="left"><h4>Team</h4></TableCell>
                     <TableCell><h4></h4></TableCell>
                     <TableCell style={{ "width": "110px"}} align="left"><h4>Team</h4></TableCell>
