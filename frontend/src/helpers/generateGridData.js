@@ -8,4 +8,4 @@ const generateGridData = (player_current_teams) => {
   return gridData;
 };
 
-export default generateGridData
+export { generateGridData };

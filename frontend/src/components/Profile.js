@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import SportsVolleyballIcon from "@mui/icons-material/SportsVolleyball";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -29,6 +29,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { UserContext } from "../contexts/userContext";
 function createData(name, value) {
   return { name, value };
 }
@@ -44,6 +45,11 @@ export default function Profile() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [openMenu, setOpenMenu] = useState(null);
   const [openLocation, setOpenLocation] = useState(null);
+  const { state } = useContext(UserContext);
+  const playerData = state.userData.playerData;
+
+  console.log("playerData", playerData);
+
   const open = Boolean(anchorEl);
   const handleClick = (event, setOpen) => {
     console.log(event);
@@ -173,30 +179,56 @@ export default function Profile() {
               <Avatar
                 sx={{ width: 200, height: 200 }}
                 alt="Remy Sharp"
-                src="https://i.pinimg.com/736x/33/06/b8/3306b8156653fea183b5406151c74ded.jpg"
+                // src="https://i.pinimg.com/736x/33/06/b8/3306b8156653fea183b5406151c74ded.jpg"
+                src={playerData.avatar_picture}
               />
             </Stack>
           </div>
           <div>
             <TableContainer component={Paper}>
-              <Table style={{ width: "650px", height: "750px" }} aria-label="simple table">
+              <Table style={{ width: "650px" }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Name</TableCell>
-                    <TableCell>Value</TableCell>
+                    <TableCell>First Name</TableCell>
+                    <TableCell>Last Name</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.map((row, index) => (
-                    <TableRow key={index} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-                      <TableCell component="th" scope="row">
-                        {row.name}
-                      </TableCell>
-                      <TableCell align="left">{row.value}</TableCell>
-                    </TableRow>
-                  ))}
+                  <TableRow key="name" sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                    <TableCell component="th" scope="row">
+                      {playerData.first_name}
+                    </TableCell>
+                    <TableCell align="left">{playerData.last_name}</TableCell>
+                  </TableRow>
                 </TableBody>
               </Table>
+            </TableContainer>
+
+            <TableContainer component={Paper} style={ {"margin-top": "30px"} }>
+              <Table style={{ width: "650px" }} aria-label="simple table">
+                  <TableHead>
+                  <TableRow key="elo" sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                    <TableCell component="th" scope="row" ><h2>Current Elo Rating: {playerData.elo_rating}</h2></TableCell>
+                  </TableRow>
+                  </TableHead>
+                </Table>
+            </TableContainer>
+
+            <TableContainer component={Paper} style={ {"margin-top": "30px"} }>
+              <Table style={{ width: "650px" }} aria-label="simple table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell colSpan={2} align="center">Description</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <TableRow key="bio" sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                        <TableCell component="th" scope="row">
+                          {playerData.description}
+                        </TableCell>
+                      </TableRow>
+                  </TableBody>
+                </Table>
             </TableContainer>
           </div>
         </div>
