@@ -46,9 +46,7 @@ export default function Profile() {
   const [openMenu, setOpenMenu] = useState(null);
   const [openLocation, setOpenLocation] = useState(null);
   const { state } = useContext(UserContext);
-  const playerData = state.userData.playerData;
-
-  console.log("playerData", playerData);
+  const { playerData, matchesData } = state.userData;
 
   const open = Boolean(anchorEl);
   const handleClick = (event, setOpen) => {
@@ -208,7 +206,7 @@ export default function Profile() {
               <Table style={{ width: "650px" }} aria-label="simple table">
                   <TableHead>
                   <TableRow key="elo" sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-                    <TableCell component="th" scope="row" ><h2>Current Elo Rating: {playerData.elo_rating}</h2></TableCell>
+                    <TableCell component="th" scope="row" ><h3>Current Elo Rating: {playerData.elo_rating}</h3></TableCell>
                   </TableRow>
                   </TableHead>
                 </Table>
@@ -229,6 +227,37 @@ export default function Profile() {
                       </TableRow>
                   </TableBody>
                 </Table>
+            </TableContainer>
+
+            <TableContainer component={Paper} style={ { "margin-top": "30px" } }>
+              <Table style={{ width: "650px" }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell colSpan={4} align="center"><h2>Recent Matches</h2></TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell style={{ "width": "110px"}} align="left"><h4>Team</h4></TableCell>
+                    <TableCell><h4></h4></TableCell>
+                    <TableCell style={{ "width": "110px"}} align="left"><h4>Team</h4></TableCell>
+                    <TableCell align="left"><h4>Location</h4></TableCell>
+                    <TableCell align="left"><h4>Date</h4></TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                    {matchesData.map((item, index) => {
+                      return (
+                        <TableRow key={item.id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                          <TableCell align="left">{item.winner_team_name}</TableCell>
+                          <TableCell><strong>defeats</strong></TableCell>
+                          <TableCell align="left">{item.other_team_name}</TableCell>
+                          <TableCell align="left">{item.play_area_name}</TableCell>
+                          <TableCell align="left">{item.created_at}</TableCell>
+                        </TableRow>
+                      )
+                    })}
+                    {state.matchesData}
+                </TableBody>
+              </Table>
             </TableContainer>
           </div>
         </div>
