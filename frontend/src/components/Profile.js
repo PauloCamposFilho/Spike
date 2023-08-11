@@ -30,7 +30,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { UserContext } from "../contexts/userContext";
-
+import "../style/Profile.css"
 
 export default function Profile() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -52,6 +52,7 @@ export default function Profile() {
     setOpenLocation(false);
     setAnchorEl(null);
   };
+
   return (
     <div style={{display:"flex",justifyContent:"center"}}>
       <AppBar>
@@ -173,17 +174,17 @@ export default function Profile() {
               />
             </Stack>
           </div>
-          <div>
+          <div className="table-section">
             <TableContainer component={Paper}>
-              <Table style={{ width: "650px" }} aria-label="simple table">
-                <TableHead>
-                  <TableRow>
+              <Table style={{ width: "700px" }} aria-label="simple table">
+                <TableHead className="table-header">
+                  <TableRow className="table-row">
                     <TableCell>First Name</TableCell>
                     <TableCell>Last Name</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  <TableRow key="name" sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                  <TableRow className="table-row" key="name" sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                     <TableCell component="th" scope="row">
                       {playerData.first_name}
                     </TableCell>
@@ -192,27 +193,26 @@ export default function Profile() {
                 </TableBody>
               </Table>
             </TableContainer>
-
             <TableContainer component={Paper} style={ {"margin-top": "30px"} }>
-              <Table style={{ width: "650px" }} aria-label="simple table">
-                  <TableHead>
+              <Table style={{ width: "700px" }} aria-label="simple table">
+                  <TableHead className="table-header">
                   <TableRow key="elo" sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-                    <TableCell component="th" scope="row" ><h3>Current Elo Rating: {playerData.elo_rating}</h3></TableCell>
+                    <TableCell component="th" scope="row" ><h3>Current Elo Rating: { playerData.elo_rating}</h3></TableCell>
                   </TableRow>
                   </TableHead>
                 </Table>
             </TableContainer>
 
             <TableContainer component={Paper} style={ {"margin-top": "30px"} }>
-              <Table style={{ width: "650px" }} aria-label="simple table">
-                  <TableHead>
+              <Table style={{ width: "700px" }} aria-label="simple table">
+                  <TableHead className="table-header">
                     <TableRow>
-                      <TableCell colSpan={2} align="center">Description</TableCell>
+                      <TableCell colSpan={5} align="center">Description</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     <TableRow key="bio" sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-                        <TableCell component="th" scope="row">
+                        <TableCell className="table-row" colSpan={5} component="th" scope="row">
                           {playerData.description}
                         </TableCell>
                       </TableRow>
@@ -221,23 +221,23 @@ export default function Profile() {
             </TableContainer>
 
             <TableContainer component={Paper} style={ { "margin-top": "30px" } }>
-              <Table style={{ width: "650px" }} aria-label="simple table">
-                <TableHead>
+              <Table style={{ width: "700px" }} aria-label="simple table">
+                <TableHead className="table-header">
                   <TableRow>
-                    <TableCell colSpan={4} align="center"><h2>Recent Matches</h2></TableCell>
+                    <TableCell colSpan={5} align="center"><h2>Recent Matches</h2></TableCell>
                   </TableRow>
-                  <TableRow>
-                    <TableCell style={{ "width": "110px"}} align="left"><h4>Team</h4></TableCell>
+                  <TableRow >
+                    <TableCell  style={{"width": "110px"}}  align="left"><h4>Team</h4></TableCell>
                     <TableCell><h4></h4></TableCell>
                     <TableCell style={{ "width": "110px"}} align="left"><h4>Team</h4></TableCell>
                     <TableCell align="left"><h4>Location</h4></TableCell>
                     <TableCell align="left"><h4>Date</h4></TableCell>
                   </TableRow>
                 </TableHead>
-                <TableBody>
+                <TableBody >
                     {matchesData.map((item, index) => {
                       return (
-                        <TableRow key={item.id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                        <TableRow className="table-row" key={item.id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                           <TableCell align="left">{item.winner_team_name}</TableCell>
                           <TableCell><strong>defeats</strong></TableCell>
                           <TableCell align="left">{item.other_team_name}</TableCell>
@@ -246,7 +246,6 @@ export default function Profile() {
                         </TableRow>
                       )
                     })}
-                    {state.matchesData}
                 </TableBody>
               </Table>
             </TableContainer>
