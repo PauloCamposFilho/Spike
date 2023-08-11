@@ -30,17 +30,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { UserContext } from "../contexts/userContext";
-function createData(name, value) {
-  return { name, value };
-}
 
-const rows = [
-  createData("Full name", "Player Full Name"),
-  createData("Description", "Repudiandae quis et. Vel dolorem corporis. Aperiam earum animi."),
-  createData("elo_rating", 2011),
-  createData("Create at", "2023-08-11T02:10:14.175z"),
-  createData("Updated at", "2023-08-11T02:10:14.175z"),
-];
+
 export default function Profile() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [openMenu, setOpenMenu] = useState(null);
