@@ -203,7 +203,7 @@ export default function Profile() {
             </div>
             <div className="table-section">
               <TableContainer component={Paper}>
-                <Table style={{ width: "100%" }} aria-label="simple table">
+                <Table style={{ width: "700px" }} aria-label="simple table">
                   <TableHead className="table-header">
                     <TableRow>
                       <TableCell>First Name</TableCell>
@@ -285,7 +285,7 @@ export default function Profile() {
                 component={Paper}
                 style={{ "margin-top": "30px", border: "2px solid green" }}
               >
-                <Table style={{ width: "700px" }} aria-label="simple table">
+                <Table style={{ width: "100%" }} aria-label="simple table">
                   <TableHead>
                     <TableRow>
                       <TableCell colSpan={5} align="center">
