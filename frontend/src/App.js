@@ -16,7 +16,7 @@ import { UserContext } from './contexts/userContext';
 function App() {
   // Custom hook manages all global state through action suite, and fetches data relevant to user on initial pageload
   const { state, dispatch } = useUserData();
-
+  console.log(state)
   const setPlayArea = (playAreaId) => {
     // Clear current play area in case of falsey input from toggle
     if (!playAreaId) {

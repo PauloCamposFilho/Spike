@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 // import Typography from '@material-ui/core/Typography'
 // when we try to use the icon tools make sure we install @material-ui/core and @mui/icons-material
@@ -37,56 +37,16 @@ import Paper from "@mui/material/Paper";
 import { DataGrid } from "@mui/x-data-grid";
 import MenuIcon from "@mui/icons-material/Menu";
 import { QRCodeGenerator } from "./QRCode";
+import { UserContext } from "../contexts/userContext";
+import columns from "../constants/GRID_DATA_COLUMNS";
 
-const columns = [
-  { field: "id", headerName: "ID", width: 70 },
-  { field: "firstName", headerName: "First name", width: 130 },
-  { field: "lastName", headerName: "Last name", width: 130 },
-  {
-    field: "Team",
-    headerName: "Team",
-    type: "string",
-    width: 90,
-  },
-  {
-    field: "fullName",
-    headerName: "Full name",
-    description: "This column has a value getter and is not sortable.",
-    sortable: false,
-    width: 160,
-    valueGetter: (params) =>
-      `${params.row.firstName || ""} ${params.row.lastName || ""}`,
-  },
-];
-
-const tablerows = [
-  { id: 1, lastName: "Snow", firstName: "Jon", Team: "kitsilano" },
-  { id: 2, lastName: "Lannister", firstName: "Cersei", Team: "kitsilano" },
-  { id: 3, lastName: "Lannister", firstName: "Jaime", Team: "kitsilano" },
-  { id: 4, lastName: "Stark", firstName: "Arya", Team: "kitsilano" },
-  { id: 5, lastName: "Targaryen", firstName: "Daenerys", Team: "kitsilano" },
-  { id: 6, lastName: "Melisandre", firstName: "Andrew", Team: "kitsilano" },
-  { id: 7, lastName: "Clifford", firstName: "Ferrara", Team: "kitsilano" },
-  { id: 8, lastName: "Frances", firstName: "Rossini", Team: "kitsilano" },
-  { id: 9, lastName: "Roxie", firstName: "Harvey", Team: "kitsilano" },
-];
-
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData("Kistlino Team 1", "NorthVan Team 2", "18:25", "L", "2023/08/09"),
-  createData("Kistlino Team 4", "NorthVan Team 1", "25:16", "W", "2023/08/09"),
-  createData("Kistlino Team 5", "Richmond Team 1", "19:25", "L", "2023/08/09"),
-  createData("Kistlino Team 2", "Coquitlam Team 2", "25:14", "W", "2023/08/09"),
-  createData("Kistlino Team 3", "Richmond Team 3", "25:20", "W", "2023/08/09"),
-];
 
 export default function Homepage() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [openMenu, setOpenMenu] = useState(null);
   const [openLocation, setOpenLocation] = useState(null);
+  const { state } = useContext(UserContext);
+
   const open = Boolean(anchorEl);
   const handleClick = (event, setOpen) => {
     console.log(event);
@@ -221,7 +181,7 @@ export default function Homepage() {
         <div style={{ border: "1px solid green", width: "100%" }}>
           <div style={{ height: 400, width: "100%" }}>
             <DataGrid
-              rows={tablerows}
+              rows={state.userData.gridData}
               columns={columns}
               initialState={{
                 pagination: {
@@ -229,7 +189,7 @@ export default function Homepage() {
                 },
               }}
               pageSizeOptions={[5, 10]}
-              checkboxSelection
+              // checkboxSelection
             />
           </div>
         </div>
@@ -240,25 +200,25 @@ export default function Homepage() {
             <TableHead>
               <TableRow>
                 <TableCell></TableCell>
-                <TableCell align="right">Oppenent</TableCell>
-                <TableCell align="right">Score</TableCell>
-                <TableCell align="right">Result</TableCell>
+                <TableCell align="right"></TableCell>
+                <TableCell></TableCell>
                 <TableCell align="right">Date</TableCell>
+                {/* <TableCell align="right">Result</TableCell>
+                <TableCell align="right">Date</TableCell> */}
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
+              {state.userData.teamsMatchesData.map((row) => (
                 <TableRow
-                  key={row.name}
+                  key={row.id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  <TableCell component="th" scope="row">
-                    {row.name}
-                  </TableCell>
-                  <TableCell align="right">{row.calories}</TableCell>
-                  <TableCell align="right">{row.fat}</TableCell>
-                  <TableCell align="right">{row.carbs}</TableCell>
-                  <TableCell align="right">{row.protein}</TableCell>
+                  <TableCell component="th" scope="row">{row.winner_team_name}</TableCell>
+                  <TableCell align="right"><strong>defeats</strong></TableCell>
+                  <TableCell align="right">{row.other_team_name}</TableCell>
+                  <TableCell align="right">{row.created_at}</TableCell>
+                  {/* <TableCell align="right">{row.carbs}</TableCell>
+                  <TableCell align="right">{row.protein}</TableCell> */}
                 </TableRow>
               ))}
             </TableBody>

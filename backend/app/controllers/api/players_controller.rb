@@ -53,19 +53,6 @@ module Api
       render json: @match_history
     end
 
-    # def player_teams
-    #   @player_id = params[:id]
-    #   @Player = Player.find_by_id(@player_id)
-    #   @teams_current = @Player.teams_current
-    #   @teams_history = @Player.teams_history
-    #   response_data = {
-    #     teams_current: @teams_current,
-    #     teams_history: @teams_history
-    #   }
-
-    #   render json: response_data
-    # end
-
     def player_teams
       @player_id = params[:id]
       @Player = Player.find_by_id(@player_id)
@@ -81,8 +68,26 @@ module Api
         teams_current: @teams_current_with_rosters,
         teams_history: @teams_history
       }
-    
+
       render json: response_data
+    end
+
+    def player_teams_matches
+      @player_id = params[:id]
+      @Player = Player.find_by_id(@player_id)
+      @matches_history = @Player.teams.flat_map(&:matches_played).uniq
+      matches_with_team_names = @matches_history.map do |match|
+        match.as_json.merge(
+          winner_team_name: match.winner_team.name,
+          other_team_name: match.other_team.name,
+          created_at: match.created_at.strftime('%Y-%m-%d')
+        )
+      end
+      # response_data = {
+      #   matches_played: matches_with_team_names
+      # }
+
+      render json: matches_with_team_names
     end
 
     def player_playarea_favorite

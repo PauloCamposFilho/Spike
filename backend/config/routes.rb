@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       member do
         get 'matches', to: 'players#player_matches'
         get 'teams', to: 'players#player_teams'
+        get 'teams/matches', to: 'players#player_teams_matches'
         get 'playarea/favorite', to: 'players#player_playarea_favorite'
       end
       collection do
