@@ -59,7 +59,7 @@ module Api
       @teams_current = @Player.teams_current
       @teams_current_with_rosters = @teams_current.map do |team|
         {
-          team: team,
+          team: team.as_json.merge(elo_rating: team.average_elo_rating, created_at: team.created_at.strftime('%Y-%m-%d')),
           roster: team.roster_records.where(left_at: nil).map(&:player)
         }
       end
