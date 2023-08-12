@@ -1,9 +1,4 @@
 import React, { useContext, useState } from "react";
-
-
-import { Typography } from "@material-ui/core";
-import { Stack, Avatar } from "@mui/material";
-
 import { Link } from "react-router-dom";
 import SportsVolleyballIcon from "@mui/icons-material/SportsVolleyball";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -38,10 +33,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
 import SpikeNavBar from "./AppBar";
-
-function createData(name, value) {
-  return { name, value };
-}import { UserContext } from "../contexts/UserContext";
+import { UserContext } from "../contexts/UserContext";
 
 import { QRCodeGenerator } from "./QRcode";
 import "../style/Profile.css";

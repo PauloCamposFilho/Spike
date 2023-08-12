@@ -1,6 +1,4 @@
-
-import React, { useState } from "react";
-import { Typography } from "@material-ui/core";
+import React, { useContext } from "react";
 import SpikeNavBar from "./AppBar";
 
 import { Link } from "react-router-dom";
