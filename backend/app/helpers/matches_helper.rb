@@ -15,4 +15,11 @@ module MatchesHelper
     player_id = session[:user_id]
     match.created_by_id == player_id && !match.is_validated
   end
+
+  def match_with_play_area_name(match)
+    match.as_json.merge(
+      play_area_name: match.play_area.name,
+      play_area_id: match.play_area.id
+    )
+  end
 end
