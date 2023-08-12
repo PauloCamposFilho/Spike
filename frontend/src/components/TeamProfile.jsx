@@ -33,6 +33,7 @@ import Paper from "@mui/material/Paper";
 import { UserContext } from "../contexts/UserContext";
 import { fetchTeamData } from "../helpers/fetchTeamData";
 import ProfileDetails from "./ProfileDetails";
+import PlayerList from "./PlayerList";
 
 export default function TeamProfile () {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -70,7 +71,6 @@ export default function TeamProfile () {
   
   const { teamData } = state;
 
-  console.log("team name exists:", teamData)
   return (
     <div style={{display:"flex",justifyContent:"center"}}>
       <AppBar>
@@ -169,33 +169,29 @@ export default function TeamProfile () {
         <Typography variant="h4" component="h2" color="inherit" paddingbottom="10px">
           {teamData.teamInfoData.name}
         </Typography>
-        <div
-          style={{
-            direction: "row",
-            display: "flex",
-            height: "800px",
-            paddingTop: "40px"
-          }}
-        >
-          <div
-            style={{
-              margin:"30px"
-            }}
-          >
-            <Stack direction="row" spacing={2}>
-              <Avatar
-                sx={{ width: 200, height: 200 }}
-                alt="Remy Sharp"
-                src={teamData.teamInfoData.picture}
-              />
-            </Stack>
-            <ProfileDetails
-            name={teamData.teamInfoData.name}
-            elo={teamData.teamInfoData.average_elo_rating}
-            description={teamData.teamInfoData.description}
-            />
-          </div>
-        </div>
+        <Stack direction="row" spacing={2}>
+          <Avatar
+            sx={{ width: 200, height: 200 }}
+            alt="Remy Sharp"
+            src={teamData.teamInfoData.picture}
+          />
+        </Stack>
+
+        <ProfileDetails
+        name={teamData.teamInfoData.name}
+        elo={teamData.teamInfoData.average_elo_rating}
+        description={teamData.teamInfoData.description}
+        />
+        <PlayerList
+        title={"Active Roster"}
+        players={teamData.teamCurrentRosterData}
+        captainId={teamData.teamInfoData.captain_id}
+        />
+        <PlayerList
+        title={"Retired Players"}
+        players={teamData.teamPastPlayersData}
+        captainId={teamData.teamInfoData.captain_id}
+        />
       </div>
     </div>
   );
