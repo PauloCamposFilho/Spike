@@ -98,6 +98,11 @@ module Api
       render json: @favorite_playarea
     end
 
+    def players_rankings
+      @Players = Player.all.order(elo_rating: :desc)
+      render json: @Players
+    end
+
     private
 
     def player_params

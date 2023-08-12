@@ -73,5 +73,15 @@ module Api
       @players_history = @Team.players_history
       render json: @players_history
     end
+
+    def teams_rankings
+      @Teams = Team.all.sort_by { |team| -team.average_elo_rating }
+      teams_ranked = @Teams.map do |team|
+        team.as_json.merge(
+          elo_rating: team.average_elo_rating
+        )
+      end
+      render json: teams_ranked
+    end
   end
 end

@@ -23,13 +23,18 @@ const initialState = {
       teams_history: [],
     },
     gridData: [],
-    teamsMatchesData: []
+    teamsMatchesData: [],
+    rankings: {
+      teams: [],
+      playerRankings: []
+    }
   },
   teamData: {
     teamInfoData: {},
     teamMatchesData: [],
     teamCurrentRosterData: [],
     teamPastPlayersData: [],
+
   }
 }
 
