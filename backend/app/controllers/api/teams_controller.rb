@@ -1,5 +1,7 @@
 module Api
   class TeamsController < ApplicationController
+    include TeamsHelper
+
     def show
       @team_id = params[:id]
       @Team = Team.find_by_id(@team_id)
@@ -51,11 +53,13 @@ module Api
       @matches_played = @Team.matches_played
       @matches_won = @Team.matches_as_winner
       @matches_lost = @Team.matches_as_other_team
+
       response_data = {
-        matches: @matches_played,
-        wins: @matches_won,
-        losses: @matches_lost
+        matches: add_play_area_name(@matches_played),
+        wins: add_play_area_name(@matches_won),
+        losses: add_play_area_name(@matches_lost)
       }
+
       render json: response_data
     end
 
