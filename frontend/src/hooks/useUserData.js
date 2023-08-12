@@ -40,8 +40,8 @@ const useUserData = () => {
     // assume default user for now
     const updateInitialState = async () => {
       const userData = await fetchCurrentUserData(1);
-      const gridData = generateGridData(userData.teamsData.teams_current);
-      dispatch({ type: ACTIONS.UPDATE_USER_DATA, data: { ...userData, gridData } });
+      // const gridData = generateGridData(userData.teamsData.teams_current);
+      dispatch({ type: ACTIONS.UPDATE_USER_DATA, data: userData });
     }
     updateInitialState();
   }, [])

@@ -32,7 +32,7 @@ export default function PlayerList (props) {
               return (
                 <PlayerListItem
                 id={player.id}
-                picture={player.avatar_picture}
+                picture={player.avatar_picture + `?id=${player.id}`}
                 firstName={player.first_name}
                 lastName={player.last_name}
                 elo={player.elo_rating}
