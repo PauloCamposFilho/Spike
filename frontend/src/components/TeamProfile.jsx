@@ -32,6 +32,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { UserContext } from "../contexts/UserContext";
 import { fetchTeamData } from "../helpers/fetchTeamData";
+import ProfileDetails from "./ProfileDetails";
 
 export default function TeamProfile () {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -188,6 +189,11 @@ export default function TeamProfile () {
                 src={teamData.teamInfoData.picture}
               />
             </Stack>
+            <ProfileDetails
+            name={teamData.teamInfoData.name}
+            elo={teamData.teamInfoData.average_elo_rating}
+            description={teamData.teamInfoData.description}
+            />
           </div>
         </div>
       </div>
