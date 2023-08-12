@@ -1,12 +1,9 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom"
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import {
   Stack,
   Avatar,
 } from "@mui/material";
-import { UserContext } from "../contexts/UserContext";
 
 export default function PlayerListItem (props) {
   const { id, picture, firstName, lastName, elo, isCaptain } = props

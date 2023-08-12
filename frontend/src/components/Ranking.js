@@ -1,36 +1,16 @@
 import React, { useContext } from "react";
 import SpikeNavBar from "./AppBar";
-
-import { Link } from "react-router-dom";
 import {
-  AppBar,
-  IconButton,
-  Toolbar,
   Typography,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
   TableCell,
-  Paper,
 } from "@material-ui/core";
 import {
-  Stack,
-  Button,
-  ImageList,
-  ImageListItem,
-  Menu,
-  MenuItem,
-  Data,
   Table,
-  TableContainer,
   TableHead,
   TableBody,
   TableRow,
   Avatar
 } from "@mui/material";
-import SportsVolleyballIcon from "@mui/icons-material/SportsVolleyball";
-import MenuIcon from "@mui/icons-material/Menu";
 import { UserContext } from "../contexts/UserContext";
 
 export default function Ranking() {

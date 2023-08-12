@@ -1,12 +1,7 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom"
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
-import {
-  Stack,
-  Avatar,
-} from "@mui/material";
-import { UserContext } from "../contexts/UserContext";
+import { Stack, Avatar } from "@mui/material";
 
 export default function WidgetTeam (props) {
   const { team, playerData } = props
