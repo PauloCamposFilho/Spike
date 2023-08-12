@@ -29,7 +29,7 @@ import {
 } from "@mui/material";
 import SportsVolleyballIcon from "@mui/icons-material/SportsVolleyball";
 import MenuIcon from "@mui/icons-material/Menu";
-import { UserContext } from "../contexts/userContext";
+import { UserContext } from "../contexts/UserContext";
 
 export default function Ranking() {
   const { state } = useContext(UserContext)
