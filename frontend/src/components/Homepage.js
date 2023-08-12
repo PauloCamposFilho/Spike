@@ -1,5 +1,4 @@
-import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
 // import Typography from '@material-ui/core/Typography'
 // when we try to use the icon tools make sure we install @material-ui/core and @mui/icons-material
 import { IconButton } from "@material-ui/core";
@@ -11,10 +10,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { DataGrid } from "@mui/x-data-grid";
 import { QRCodeGenerator } from "./QRcode";
 import { UserContext } from "../contexts/UserContext";
-import columns from "../constants/GRID_DATA_COLUMNS";
 import SpikeNavBar from "./AppBar";
 import WidgetListOfTeams from "./WidgetListOfTeams";
 
