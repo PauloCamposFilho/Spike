@@ -13,10 +13,10 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { DataGrid } from "@mui/x-data-grid";
 import { QRCodeGenerator } from "./QRcode";
-import { UserContext } from "../contexts/userContext";
+import { UserContext } from "../contexts/UserContext";
 import columns from "../constants/GRID_DATA_COLUMNS";
 import SpikeNavBar from "./AppBar";
-
+import WidgetListOfTeams from "./WidgetListOfTeams";
 
 export default function Homepage() {
   const { state } = useContext(UserContext);
@@ -47,19 +47,7 @@ export default function Homepage() {
         </div>
 
         <div style={{ border: "1px solid green", width: "100%" }}>
-          <div style={{ height: 400, width: "100%" }}>
-            <DataGrid
-              rows={state.userData.gridData}
-              columns={columns}
-              initialState={{
-                pagination: {
-                  paginationModel: { page: 0, pageSize: 5 },
-                },
-              }}
-              pageSizeOptions={[5, 10]}
-              // checkboxSelection
-            />
-          </div>
+          < WidgetListOfTeams/>
         </div>
       </div>
       <div style={{ border: "1px solid yallow", width: "100%" }}>

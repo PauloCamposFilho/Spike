@@ -59,7 +59,7 @@ module Api
       @teams_current = @Player.teams_current
       @teams_current_with_rosters = @teams_current.map do |team|
         {
-          team: team,
+          team: team.as_json.merge(elo_rating: team.average_elo_rating, created_at: team.created_at.strftime('%Y-%m-%d')),
           roster: team.roster_records.where(left_at: nil).map(&:player)
         }
       end
@@ -96,6 +96,11 @@ module Api
       @favorite_playarea = @Player.most_played_play_area_with_count
 
       render json: @favorite_playarea
+    end
+
+    def players_rankings
+      @Players = Player.all.order(elo_rating: :desc)
+      render json: @Players
     end
 
     private
