@@ -80,7 +80,8 @@ module Api
         match.as_json.merge(
           winner_team_name: match.winner_team.name,
           other_team_name: match.other_team.name,
-          created_at: match.created_at.strftime('%Y-%m-%d')
+          created_at: match.created_at.strftime('%Y-%m-%d'),
+          play_area_name: match.play_area.name
         )
       end
       # response_data = {
