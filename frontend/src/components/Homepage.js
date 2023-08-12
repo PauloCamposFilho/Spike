@@ -2,30 +2,8 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 // import Typography from '@material-ui/core/Typography'
 // when we try to use the icon tools make sure we install @material-ui/core and @mui/icons-material
-import {
-  AppBar,
-  IconButton,
-  Toolbar,
-  Typography,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-} from "@material-ui/core";
-import {
-  Stack,
-  Button,
-  ImageList,
-  ImageListItem,
-  Menu,
-  MenuItem,
-  Data,
-} from "@mui/material";
-// when we try to implement the icon in the script we need to import the icon and all the refences can find by this web https://mui.com/material-ui/material-icons/?query=voll
-import SportsVolleyballIcon from "@mui/icons-material/SportsVolleyball";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
+import { IconButton } from "@material-ui/core";
+
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -34,127 +12,17 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { DataGrid } from "@mui/x-data-grid";
-import MenuIcon from "@mui/icons-material/Menu";
 import { QRCodeGenerator } from "./QRcode";
 import { UserContext } from "../contexts/UserContext";
 import columns from "../constants/GRID_DATA_COLUMNS";
+import SpikeNavBar from "./AppBar";
 import WidgetListOfTeams from "./WidgetListOfTeams";
 
-
 export default function Homepage() {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [openMenu, setOpenMenu] = useState(null);
-  const [openLocation, setOpenLocation] = useState(null);
   const { state } = useContext(UserContext);
-
-  const open = Boolean(anchorEl);
-  const handleClick = (event, setOpen) => {
-    console.log(event);
-    setOpenMenu(false);
-    setOpenLocation(false);
-    setAnchorEl(event.target);
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpenMenu(false);
-    setOpenLocation(false);
-    setAnchorEl(null);
-  };
   return (
     <div>
-      <AppBar>
-        <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <IconButton
-              size="medium"
-              edge="start"
-              color="inherit"
-              aria-label="logo"
-              component={Link}
-              to="/"
-            >
-              <SportsVolleyballIcon />
-            </IconButton>
-            <Typography
-              variant="h6"
-              component="h2"
-              color="inherit"
-              sx={{ marginLeft: "8px" }}
-            >
-              SPIKE!
-            </Typography>
-            {/* #### line 31 to 46 still been testing  */}
-          </div>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <Stack direction="row" spcing={2}>
-              <Button color="inherit" component={Link} to="/profile">
-                Profile
-              </Button>
-              <Button color="inherit" component={Link} to="/matches">
-                Matches
-              </Button>
-              <Button
-                id="location-button"
-                color="inherit"
-                onClick={(event) => handleClick(event, setOpenLocation)}
-                aria-controls={open ? "location-resources" : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? "true" : undefined}
-              >
-                Location
-              </Button>
-              <Button color="inherit" component={Link} to="ranking">
-                Ranking
-              </Button>
-              {/* we can add authentication after the data retrievment test is done */}
-            </Stack>
-            {anchorEl && (
-              <Menu
-                id="location-resources"
-                anchorEl={anchorEl}
-                open={openLocation}
-                onClose={handleClose}
-                MenuListProps={{
-                  "aria-labelledby": "location-button",
-                }}
-              >
-                <MenuItem onClick={handleClose} component={Link} to="/location">
-                  Corts
-                </MenuItem>
-                <MenuItem onClick={handleClose} component={Link} to="/location">
-                  Maps
-                </MenuItem>
-              </Menu>
-            )}
-            <IconButton
-              id="nav-menu"
-              style={{ marginRight: "8px" }}
-              color="inherit"
-              onClick={(event) => handleClick(event, setOpenMenu)}
-              aria-controls={open ? "menu-resources" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-            >
-              <MenuIcon />
-            </IconButton>
-            {anchorEl && (
-              <Menu
-                id="menu-resources"
-                anchorEl={anchorEl}
-                open={openMenu}
-                onClose={handleClose}
-                MenuListProps={{
-                  "aria-labelledby2": "nav-menu",
-                }}
-              >
-                <MenuItem onClick={handleClose} component={Link} to="/login">
-                  Login 123
-                </MenuItem>
-              </Menu>
-            )}
-          </div>
-        </Toolbar>
-      </AppBar>
+      <SpikeNavBar/>
       {/* the iframe src hasn't put into the right api to render the google map */}
       <div
         style={{
