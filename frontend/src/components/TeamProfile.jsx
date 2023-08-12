@@ -1,7 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-// import Typography from '@material-ui/core/Typography'
-// when we try to use the icon tools make sure we install @material-ui/core and @mui/icons-material
+import { useParams } from 'react-router-dom';
+import SportsVolleyballIcon from "@mui/icons-material/SportsVolleyball";
+import MenuIcon from "@mui/icons-material/Menu";
 import {
   AppBar,
   IconButton,
@@ -20,12 +21,8 @@ import {
   Menu,
   MenuItem,
   Data,
+  Avatar,
 } from "@mui/material";
-// when we try to implement the icon in the script we need to import the icon and all the refences can find by this web https://mui.com/material-ui/material-icons/?query=voll
-import SportsVolleyballIcon from "@mui/icons-material/SportsVolleyball";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -33,19 +30,15 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { DataGrid } from "@mui/x-data-grid";
-import MenuIcon from "@mui/icons-material/Menu";
-import { QRCodeGenerator } from "./QRcode";
 import { UserContext } from "../contexts/UserContext";
-import columns from "../constants/GRID_DATA_COLUMNS";
-import WidgetListOfTeams from "./WidgetListOfTeams";
+import { fetchTeamData } from "../helpers/fetchTeamData";
+import ProfileDetails from "./ProfileDetails";
+import PlayerList from "./PlayerList";
 
-
-export default function Homepage() {
+export default function TeamProfile () {
   const [anchorEl, setAnchorEl] = useState(null);
   const [openMenu, setOpenMenu] = useState(null);
   const [openLocation, setOpenLocation] = useState(null);
-  const { state } = useContext(UserContext);
 
   const open = Boolean(anchorEl);
   const handleClick = (event, setOpen) => {
@@ -60,8 +53,26 @@ export default function Homepage() {
     setOpenLocation(false);
     setAnchorEl(null);
   };
+
+  const { state, updateTeamData } = useContext(UserContext);
+  const { id } = useParams();
+
+  useEffect(() => {
+    fetchTeamData(id)
+      .then(res => {
+        updateTeamData(res)
+      })
+      .catch(error => {
+        console.error('Error fetching team data:', error)
+      })
+  }, [id]);
+
+  console.log("teams page state:", state);
+  
+  const { teamData } = state;
+
   return (
-    <div>
+    <div style={{display:"flex",justifyContent:"center"}}>
       <AppBar>
         <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center" }}>
@@ -83,7 +94,6 @@ export default function Homepage() {
             >
               SPIKE!
             </Typography>
-            {/* #### line 31 to 46 still been testing  */}
           </div>
           <div style={{ display: "flex", alignItems: "center" }}>
             <Stack direction="row" spcing={2}>
@@ -155,80 +165,34 @@ export default function Homepage() {
           </div>
         </Toolbar>
       </AppBar>
-      {/* the iframe src hasn't put into the right api to render the google map */}
-      <div
-        style={{
-          // border:"2px solid yellow",
-          width: "100%",
-          height: "500px",
-          marginTop: "64px",
-          display: "flex",
-          flexDirection: "row",
-          padding: "40px",
-          gap: "80px",
-        }}
-      >
-        <div style={{ border: "1px solid red", width: "100%" }}>
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2602.332284251036!2d-122.94344676087555!3d49.289048300000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x548679f393721d0f%3A0x361aacc5ca2c032d!2sVolleyball%20BC!5e0!3m2!1sen!2sca!4v1691617114859!5m2!1sen!2sca"
-            style={{ border: 0, height: "100%", width: "100%" }}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title="googlemap-volleyball-court"
-          ></iframe>
-        </div>
+      <div style={{ padding: "80px"}}>
+        <Typography variant="h4" component="h2" color="inherit" paddingbottom="10px">
+          {teamData.teamInfoData.name}
+        </Typography>
+        <Stack direction="row" spacing={2}>
+          <Avatar
+            sx={{ width: 200, height: 200 }}
+            alt="Remy Sharp"
+            src={teamData.teamInfoData.picture}
+          />
+        </Stack>
 
-        <div style={{ border: "1px solid green", width: "100%" }}>
-          < WidgetListOfTeams/>
-        </div>
-      </div>
-      <div style={{ border: "1px solid yallow", width: "100%" }}>
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-            <TableHead>
-              <TableRow>
-                <TableCell></TableCell>
-                <TableCell align="right"></TableCell>
-                <TableCell></TableCell>
-                <TableCell align="right">Date</TableCell>
-                {/* <TableCell align="right">Result</TableCell>
-                <TableCell align="right">Date</TableCell> */}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {state.userData.teamsMatchesData.map((row) => (
-                <TableRow
-                  key={row.id}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">{row.winner_team_name}</TableCell>
-                  <TableCell align="right"><strong>defeats</strong></TableCell>
-                  <TableCell align="right">{row.other_team_name}</TableCell>
-                  <TableCell align="right">{row.created_at}</TableCell>
-                  {/* <TableCell align="right">{row.carbs}</TableCell>
-                  <TableCell align="right">{row.protein}</TableCell> */}
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "flex-end",
-            padding: "16px",
-          }}
-        >
-          <IconButton
-            size="medium"
-            edge="start"
-            color="inherit"
-            aria-label="logo"
-          >
-            <QRCodeGenerator />
-          </IconButton>
-        </div>
+        <ProfileDetails
+        name={teamData.teamInfoData.name}
+        elo={teamData.teamInfoData.average_elo_rating}
+        description={teamData.teamInfoData.description}
+        />
+        <PlayerList
+        title={"Active Roster"}
+        players={teamData.teamCurrentRosterData}
+        captainId={teamData.teamInfoData.captain_id}
+        />
+        <PlayerList
+        title={"Retired Players"}
+        players={teamData.teamPastPlayersData}
+        captainId={teamData.teamInfoData.captain_id}
+        />
       </div>
     </div>
   );
-}
+};

@@ -18,14 +18,23 @@ const initialState = {
     matchesData: [],
     playerAreaData: {},
     playerData: {},
-    teams_current: {},
-    teams_history: {},
+    teamsData: {
+      teams_current: [],
+      teams_history: [],
+    },
     gridData: [],
     teamsMatchesData: [],
     rankings: {
       teams: [],
       playerRankings: []
     }
+  },
+  teamData: {
+    teamInfoData: {},
+    teamMatchesData: [],
+    teamCurrentRosterData: [],
+    teamPastPlayersData: [],
+
   }
 }
 
@@ -36,10 +45,8 @@ const useUserData = () => {
     // assume default user for now
     const updateInitialState = async () => {
       const userData = await fetchCurrentUserData(1);
-      const gridData = generateGridData(userData.teamsData.teams_current);
-      console.log("dataDATA", userData);
-
-      dispatch({ type: ACTIONS.UPDATE_USER_DATA, data: { ...userData, gridData } });
+      // const gridData = generateGridData(userData.teamsData.teams_current);
+      dispatch({ type: ACTIONS.UPDATE_USER_DATA, data: userData });
     }
     updateInitialState();
   }, [])

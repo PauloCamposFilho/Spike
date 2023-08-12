@@ -5,12 +5,14 @@ import Matches from './components/Matches.js';
 import Location from './components/Location';
 import Homepage from './components/Homepage';
 import Ranking from './components/Ranking';
+import TeamProfile from './components/TeamProfile';
 
 // Manage State
 import { useUserData } from './hooks/useUserData';
 import { ACTIONS } from './constants/ACTIONS';
 import { setPlayArea, openQR, closeModal } from './helpers/dispatch';
-import { UserContext } from './contexts/userContext';
+import { UserContext } from './contexts/UserContext';
+import { fetchTeamData } from './helpers/fetchTeamData';
 
 
 function App() {
@@ -33,8 +35,12 @@ function App() {
     return dispatch({ type: ACTIONS.CLOSE_MODAL })
   };
 
+  const updateTeamData = async (teamData) => {
+    return dispatch({ type: ACTIONS.UPDATE_TEAM_DATA, data: teamData })
+  }
+
   return (
-    <UserContext.Provider value={{ state, dispatch, openQR}}>
+    <UserContext.Provider value={{ state, dispatch, openQR, updateTeamData}}>
       <Router>
         <Switch>
           <Route exact path="/">
@@ -51,6 +57,9 @@ function App() {
           </Route>
           <Route path="/ranking">
             <Ranking />
+          </Route>
+          <Route path="/teams/:id">
+            <TeamProfile />
           </Route>
         </Switch>
       </Router>

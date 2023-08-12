@@ -30,9 +30,12 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { UserContext } from "../contexts/userContext";
+
+import { UserContext } from "../contexts/UserContext";
+
 import { QRCodeGenerator } from "./QRcode";
 import "../style/Profile.css";
+
 
 export default function Profile() {
   const [anchorEl, setAnchorEl] = useState(null);
