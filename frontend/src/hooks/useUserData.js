@@ -5,43 +5,43 @@ import { useEffect, useReducer } from "react";
 import { ACTIONS } from "../constants/ACTIONS";
 import { generateGridData } from "../helpers/generateGridData";
 
-const initialState = {
-  currentPlayArea: null,
-  qrModal: {
-    isOpen: false,
-    qrDetails: {
-      label: '',
-      endpoint: '',
-    },
-  },
-  userData: {
-    matchesData: [],
-    playerAreaData: {},
-    playerData: {},
-    teamsData: {
-      teams_current: [],
-      teams_history: [],
-    },
-    gridData: [],
-    teamsMatchesData: [],
-    rankings: {
-      teams: [],
-      playerRankings: []
-    }
-  },
-  teamData: {
-    teamInfoData: {},
-    teamMatchesData: {
-      matches: []
-    },
-    teamCurrentRosterData: [],
-    teamPastPlayersData: [],
+// const initialState = {
+//   currentPlayArea: null,
+//   qrModal: {
+//     isOpen: false,
+//     qrDetails: {
+//       label: '',
+//       endpoint: '',
+//     },
+//   },
+//   userData: {
+//     matchesData: [],
+//     playerAreaData: {},
+//     playerData: {},
+//     teamsData: {
+//       teams_current: [],
+//       teams_history: [],
+//     },
+//     gridData: [],
+//     teamsMatchesData: [],
+//     rankings: {
+//       teams: [],
+//       playerRankings: []
+//     }
+//   },
+//   teamData: {
+//     teamInfoData: {},
+//     teamMatchesData: {
+//       matches: []
+//     },
+//     teamCurrentRosterData: [],
+//     teamPastPlayersData: [],
 
-  }
-}
+//   }
+// }
 
 const useUserData = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, {});
 
   useEffect(() => {
     // assume default user for now
