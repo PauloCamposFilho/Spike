@@ -7,6 +7,7 @@ import { fetchTeamData } from "../helpers/fetchTeamData";
 import ProfileDetails from "./ProfileDetails";
 import PlayerList from "./PlayerList";
 import SpikeNavBar from "./AppBar";
+import MatchList from "./MatchList";
 
 export default function TeamProfile () {
   const { state, updateTeamData } = useContext(UserContext);
@@ -25,6 +26,7 @@ export default function TeamProfile () {
   console.log("teams page state:", state);
   
   const { teamData } = state;
+  const homeTeamIds = { id }
 
   return (
     <div style={{display:"flex",justifyContent:"center"}}>
@@ -55,6 +57,11 @@ export default function TeamProfile () {
         title={"Retired Players"}
         players={teamData.teamPastPlayersData}
         captainId={teamData.teamInfoData.captain_id}
+        />
+        <MatchList
+        title={"Matches"}
+        homeTeamIds={homeTeamIds}
+        matches={teamData.teamMatchesData}
         />
       </div>
     </div>

@@ -19,7 +19,7 @@ import Paper from "@mui/material/Paper";
 import SpikeNavBar from "./AppBar";
 import { UserContext } from "../contexts/UserContext";
 
-import { QRCodeGenerator } from "./QRcode";
+import { QRCodeGenerator } from "./QRCode";
 import "../style/Profile.css";
 
 

@@ -31,7 +31,7 @@ const initialState = {
   },
   teamData: {
     teamInfoData: {},
-    teamMatchesData: [],
+    teamMatchesData: {},
     teamCurrentRosterData: [],
     teamPastPlayersData: [],
 

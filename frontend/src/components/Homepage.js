@@ -10,7 +10,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { QRCodeGenerator } from "./QRcode";
+import { QRCodeGenerator } from "./QRCode";
 import { UserContext } from "../contexts/UserContext";
 import SpikeNavBar from "./AppBar";
 import WidgetListOfTeams from "./WidgetListOfTeams";
