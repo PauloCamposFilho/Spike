@@ -7,36 +7,31 @@ import Select from '@mui/material/Select';
 import { UserContext } from '../contexts/UserContext';
 
 export default function TeamSelect(props) {
-  const { state } = React.useContext(UserContext)
-  const [team, setTeam] = React.useState('');
-  const { teamType } = props
+  const [teamSelection, setTeamSelection] = React.useState('');
+  const { teamType, teams } = props
+  console.log("teams selection", teams)
   
   const handleChange = (event) => {
-    setTeam(event.target.value);
+    setTeamSelection(event.target.value);
   };
-
-  let teams;
-  if (teamType === "home") {
-    teams = state.userData.teamsData.teams_current;
-  } else {
-    teams = null;
-  }
-  console.log("modal teams", teams)
 
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">{teamType === "home" ? "Home Team" : "Away Team"}</InputLabel>
+        <InputLabel id="demo-simple-select-label">{teamType}</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={team}
-          label={teamType === "home" ? "Home Team" : "Away Team"}
+          value={teamSelection}
+          label={teamType}
           onChange={handleChange}
         >
         {teams.map((team, index) => {
           return (
+            teamType === 'Home Team' ?
             <MenuItem value={team.team.name}>{team.team.name}</MenuItem>
+            :
+            <MenuItem value={team.name}>{team.name}</MenuItem>
           )
         })}
         </Select>
