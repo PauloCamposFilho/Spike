@@ -12,12 +12,17 @@ import MatchList from "./MatchList";
 export default function TeamProfile () {
   const { state, updateTeamData } = useContext(UserContext);
   const { id } = useParams();
+  let timerRes = false;
 
   useEffect(() => {
     fetchTeamData(id)
       .then(res => {
         updateTeamData(res)
       })
+      .then(setTimeout(() => {
+        timerRes = true
+        console.log("timer finished")
+      }, "500"))
       .catch(error => {
         console.error('Error fetching team data:', error)
       })
@@ -26,7 +31,6 @@ export default function TeamProfile () {
   console.log("teams page state:", state);
   
   const { teamData } = state;
-  const homeTeamIds = { id }
 
   return (
     <div style={{display:"flex",justifyContent:"center"}}>
@@ -60,8 +64,8 @@ export default function TeamProfile () {
         />
         <MatchList
         title={"Matches"}
-        homeTeamIds={homeTeamIds}
-        matches={teamData.teamMatchesData}
+        homeTeamId={Number(id)}
+        matches={teamData.teamMatchesData.matches}
         />
       </div>
     </div>
