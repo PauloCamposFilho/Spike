@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 // import Typography from '@material-ui/core/Typography'
 // when we try to use the icon tools make sure we install @material-ui/core and @mui/icons-material
 import { IconButton } from "@material-ui/core";
@@ -10,16 +10,38 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { QRCodeGenerator } from "./QRcode";
+import { QRCodeGenerator } from "./QRCode";
 import { UserContext } from "../contexts/UserContext";
 import SpikeNavBar from "./AppBar";
 import WidgetListOfTeams from "./WidgetListOfTeams";
+import QRScanner, { Test } from "./QRSCanner";
+import Scanner from "./QRSCanner";
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
 
 export default function Homepage() {
   const { state } = useContext(UserContext);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+
   return (
     <div>
-      <SpikeNavBar/>
+      <SpikeNavBar />
       {/* the iframe src hasn't put into the right api to render the google map */}
       <div
         style={{
@@ -44,7 +66,7 @@ export default function Homepage() {
         </div>
 
         <div style={{ border: "1px solid green", width: "100%" }}>
-          < WidgetListOfTeams/>
+          < WidgetListOfTeams />
         </div>
       </div>
       <div style={{ border: "1px solid yallow", width: "100%" }}>
@@ -84,16 +106,25 @@ export default function Homepage() {
             padding: "16px",
           }}
         >
-          <IconButton
-            size="medium"
-            edge="start"
-            color="inherit"
-            aria-label="logo"
-          >
-            <QRCodeGenerator />
-          </IconButton>
+        <Button onClick={handleOpen}> Open modal</Button>
+
         </div>
       </div>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Text in a modal
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          </Typography>
+        </Box>
+      </Modal>
     </div>
   );
 }
