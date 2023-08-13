@@ -15,7 +15,7 @@ export default function MatchListItem (props) {
           <Avatar
             sx={{ width: 56, height: 56 }}
             alt="Remy Sharp"
-            src={homeTeam.picture}
+            src={homeTeam.picture + `?id=${homeTeam.id}`}
           />
         </Stack>
       </TableCell>
@@ -25,7 +25,7 @@ export default function MatchListItem (props) {
           <Avatar
             sx={{ width: 56, height: 56 }}
             alt="Remy Sharp"
-            src={awayTeam.picture}
+            src={awayTeam.picture + `?id=${awayTeam.id}`}
           />
         </Stack>
       </TableCell>

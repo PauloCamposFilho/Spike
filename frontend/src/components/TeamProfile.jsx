@@ -12,24 +12,19 @@ import MatchList from "./MatchList";
 export default function TeamProfile () {
   const { state, updateTeamData } = useContext(UserContext);
   const { id } = useParams();
-  let timerRes = false;
 
   useEffect(() => {
     fetchTeamData(id)
       .then(res => {
         updateTeamData(res)
       })
-      .then(setTimeout(() => {
-        timerRes = true
-        console.log("timer finished")
-      }, "500"))
       .catch(error => {
         console.error('Error fetching team data:', error)
       })
   }, [id]);
 
   console.log("teams page state:", state);
-  
+
   const { teamData } = state;
 
   return (
