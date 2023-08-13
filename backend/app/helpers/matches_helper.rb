@@ -15,4 +15,14 @@ module MatchesHelper
     player_id = session[:user_id]
     match.created_by_id == player_id && !match.is_validated
   end
+
+  def match_with_play_area_name(match)
+    winner_team_average_elo = match.winner_team.average_elo_rating
+    other_team_average_elo = match.other_team.average_elo_rating
+    match.as_json.merge(
+      play_area: match.play_area,
+      winner_team: match.winner_team.as_json.merge(average_elo_rating: winner_team_average_elo),
+      other_team: match.other_team.as_json.merge(average_elo_rating: other_team_average_elo)
+    )
+  end
 end

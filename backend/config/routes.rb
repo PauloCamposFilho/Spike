@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       end
       collection do
         post 'edit'
+        get 'rankings', to: 'players#players_rankings'
       end
     end
 
@@ -23,6 +24,9 @@ Rails.application.routes.draw do
         get 'matches', to: 'teams#team_matches'
         get 'players/current', to: 'teams#players_current'
         get 'players/history', to: 'teams#players_history'
+      end
+      collection do
+        get 'rankings', to: "teams#teams_rankings"
       end
     end
 

@@ -1,5 +1,7 @@
 module Api
   class TeamsController < ApplicationController
+    include TeamsHelper
+
     def show
       @team_id = params[:id]
       @Team = Team.find_by_id(@team_id)
@@ -51,11 +53,13 @@ module Api
       @matches_played = @Team.matches_played
       @matches_won = @Team.matches_as_winner
       @matches_lost = @Team.matches_as_other_team
+
       response_data = {
-        matches: @matches_played,
-        wins: @matches_won,
-        losses: @matches_lost
+        matches: add_play_area_name(@matches_played),
+        wins: add_play_area_name(@matches_won),
+        losses: add_play_area_name(@matches_lost)
       }
+
       render json: response_data
     end
 
@@ -72,6 +76,16 @@ module Api
       @Team = Team.find_by_id(@team_id)
       @players_history = @Team.players_history
       render json: @players_history
+    end
+
+    def teams_rankings
+      @Teams = Team.all.sort_by { |team| -team.average_elo_rating }
+      teams_ranked = @Teams.map do |team|
+        team.as_json.merge(
+          elo_rating: team.average_elo_rating
+        )
+      end
+      render json: teams_ranked
     end
   end
 end

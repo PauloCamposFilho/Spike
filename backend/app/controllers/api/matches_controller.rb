@@ -4,13 +4,15 @@ module Api
     include MatchesHelper
     def show
       @match_id = params[:id]
-      @Match = Match.find_by_id(@match_id)
+      @Match = Match.includes(:play_area).find_by_id(@match_id)
 
-      render json: @Match
+      render json: match_with_play_area_name(@Match)
     end
 
     def index
-      render json: Match.all
+      @Matches = Match.includes(:play_area).all
+
+      render json: @Matches.map { |match| match_with_play_area_name(match) }
     end
 
     def create
