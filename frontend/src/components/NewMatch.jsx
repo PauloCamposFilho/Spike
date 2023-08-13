@@ -8,39 +8,46 @@ import { Stack } from '@mui/material';
 import TeamSelect from './TeamSelect';
 import ResultSelect from './ResultSelect';
 import { UserContext } from '../contexts/UserContext';
+import { useNewMatch } from '../hooks/useNewMatch';
+import { NewMatchContext } from '../contexts/NewMatchContext';
+import { NEW_MATCH_ACTIONS } from '../constants/NEW_MATCH_ACTIONS';
 
 export default function NewMatch() {
+  const { newMatchState, dispatch } = useNewMatch();
+
+  const makeSelection = (selectionType, selection) => {
+    switch (selectionType) {
+      case "Home Team":
+        return dispatch({ type: NEW_MATCH_ACTIONS.SELECT_HOME_TEAM, data: selection});
+      case "Away Team":
+        return dispatch({ type: NEW_MATCH_ACTIONS.SELECT_AWAY_TEAM, data: selection});
+      case "Result":
+        return dispatch({ type: NEW_MATCH_ACTIONS.SELECT_RESULT, data: selection});
+      default:
+        return;
+    }
+  }
+
   const { state } = React.useContext(UserContext)
 
   const [allTeams, setAllTeams] = React.useState([]);
-
-  React.useEffect(() => {
-    const fetchAllTeamsData = async () => {
-      try {
-        const allTeamsRes = await fetch('/api/teams')
-        const allTeamsData = await allTeamsRes.json()
-        setAllTeams(allTeamsData);
-      } catch (error) {
-        console.error('Error fetching all teams data:', error)
-      }
-    }
-    fetchAllTeamsData();
-  }, [])
 
   const homeTeams = state.userData.teamsData.teams_current;
   const awayTeams = allTeams;
 
   return (
-    <Stack spacing={2}>
-      <TeamSelect
-        teamType={"Home Team"}
-        teams={homeTeams}
-      />
-      <TeamSelect
-        teamType={"Away Team"}
-        teams={awayTeams}
-      />
-      <ResultSelect/>
-    </Stack>
+    <NewMatchContext.Provider value={{ newMatchState, dispatch, makeSelection }}>
+      <Stack spacing={2}>
+        <TeamSelect
+          teamType={"Home Team"}
+          teams={homeTeams}
+        />
+        <TeamSelect
+          teamType={"Away Team"}
+          teams={awayTeams}
+        />
+        <ResultSelect/>
+      </Stack>
+    </NewMatchContext.Provider>
   );
 }

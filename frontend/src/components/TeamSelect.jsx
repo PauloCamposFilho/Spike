@@ -9,10 +9,10 @@ import { UserContext } from '../contexts/UserContext';
 export default function TeamSelect(props) {
   const [teamSelection, setTeamSelection] = React.useState('');
   const { teamType, teams } = props
-  console.log("teams selection", teams)
   
   const handleChange = (event) => {
     setTeamSelection(event.target.value);
+    console.log("selected value", teamSelection);
   };
 
   return (
@@ -29,9 +29,9 @@ export default function TeamSelect(props) {
         {teams.map((team, index) => {
           return (
             teamType === 'Home Team' ?
-            <MenuItem value={team.team.name}>{team.team.name}</MenuItem>
+            <MenuItem value={team.team.id}>{team.team.name}</MenuItem>
             :
-            <MenuItem value={team.name}>{team.name}</MenuItem>
+            <MenuItem value={team.id}>{team.name}</MenuItem>
           )
         })}
         </Select>
