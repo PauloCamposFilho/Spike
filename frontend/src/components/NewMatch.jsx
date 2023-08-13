@@ -13,8 +13,12 @@ export default function NewMatch() {
 
   return (
     <Stack spacing={2}>
-      <TeamSelect/>
-      <TeamSelect/>
+      <TeamSelect
+        teamType={"home"}
+      />
+      <TeamSelect
+        teamType={"home"}
+      />
       <ResultSelect/>
     </Stack>
   );
