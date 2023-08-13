@@ -30,10 +30,9 @@ export default function NewMatch() {
 
   const { state } = React.useContext(UserContext)
 
-  const [allTeams, setAllTeams] = React.useState([]);
-
   const homeTeams = state.userData.teamsData.teams_current;
-  const awayTeams = allTeams;
+  const awayTeams = newMatchState.allTeams;
+  console.log("new match state", newMatchState);
 
   return (
     <NewMatchContext.Provider value={{ newMatchState, dispatch, makeSelection }}>
@@ -46,7 +45,9 @@ export default function NewMatch() {
           teamType={"Away Team"}
           teams={awayTeams}
         />
-        <ResultSelect/>
+        <ResultSelect
+          selectionType={"Result"}
+        />
       </Stack>
     </NewMatchContext.Provider>
   );

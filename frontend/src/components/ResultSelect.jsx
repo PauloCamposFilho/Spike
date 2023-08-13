@@ -4,12 +4,13 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { NewMatchContext } from '../contexts/NewMatchContext';
 
 export default function ResultSelect() {
-  const [result, setResult] = React.useState('');
+  const { newMatchState, dispatch, makeSelection } = React.useContext(NewMatchContext)
 
   const handleChange = (event) => {
-    setResult(event.target.value);
+    makeSelection("Result", event.target.value);
   };
 
   return (
@@ -19,7 +20,7 @@ export default function ResultSelect() {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={result}
+          value={newMatchState.resultSelection}
           label="Result"
           onChange={handleChange}
         >

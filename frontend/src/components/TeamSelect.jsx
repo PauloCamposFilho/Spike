@@ -5,14 +5,17 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { UserContext } from '../contexts/UserContext';
+import { NewMatchContext } from '../contexts/NewMatchContext';
 
 export default function TeamSelect(props) {
-  const [teamSelection, setTeamSelection] = React.useState('');
+  const { newMatchState, dispatch, makeSelection } = React.useContext(NewMatchContext)
   const { teamType, teams } = props
   
   const handleChange = (event) => {
-    setTeamSelection(event.target.value);
-    console.log("selected value", teamSelection);
+    makeSelection(teamType, event.target.value);
+    teamType === "Home Team" ?
+    console.log("home selected value", newMatchState.homeTeamSelection)
+    : console.log("away selected value", newMatchState.awayTeamSelection);
   };
 
   return (
@@ -22,7 +25,7 @@ export default function TeamSelect(props) {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={teamSelection}
+          value={teamType === "Home Team" ? newMatchState.homeTeamSelection : newMatchState.awayTeamSelection}
           label={teamType}
           onChange={handleChange}
         >

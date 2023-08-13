@@ -4,7 +4,7 @@ import { reducer } from "../helpers/newMatchReducer"
 import { NEW_MATCH_ACTIONS } from "../constants/NEW_MATCH_ACTIONS"
 
 const initialNewMatchState = {
-  allTeams: {},
+  allTeams: [],
   homeTeamSelection: '',
   awayTeamSelection: '',
   resultSelection: '',
