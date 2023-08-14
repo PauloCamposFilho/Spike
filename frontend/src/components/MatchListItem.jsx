@@ -4,10 +4,11 @@ import TableRow from "@mui/material/TableRow";
 import {
   Stack,
   Avatar,
+  Button
 } from "@mui/material";
 
-export default function MatchListItem (props) {
-  const { id, homeTeam, awayTeam, result, playArea } = props
+export default function MatchListItem(props) {
+  const { id, homeTeam, awayTeam, result, playArea, showDetailsButton } = props
 
   return (
     <TableRow key={id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
@@ -33,6 +34,11 @@ export default function MatchListItem (props) {
       <TableCell align="left" component={Link} to={`/teams/${awayTeam.id}`}>{awayTeam.name}</TableCell>
       <TableCell align="left">{result}</TableCell>
       <TableCell align="left">{playArea.name}</TableCell>
+      {showDetailsButton &&
+        <TableCell align="left">
+          <Button variant="contained" component={Link} to={`/matches/${id}`} >Details</Button>
+        </TableCell>
+      }
     </TableRow>
   )
 }
