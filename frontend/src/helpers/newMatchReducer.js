@@ -8,6 +8,13 @@ const reducer = (state, action) => {
         allTeams: action.data
       }
       return allTeamsDataAfterUpdate;
+
+    case NEW_MATCH_ACTIONS.UPDATE_ALL_COURTS_DATA:
+      const allCourtsAfterUpdate = {
+        ... state, 
+        allCourts: action.data
+      }
+      return allCourtsAfterUpdate;
     
     case NEW_MATCH_ACTIONS.SELECT_HOME_TEAM:
       const homeTeamAfterSelection = {
@@ -29,6 +36,14 @@ const reducer = (state, action) => {
         resultSelection: action.data
       }
       return resultAfterSelection
+      
+      case NEW_MATCH_ACTIONS.SELECT_COURT:
+      const courtAfterSelection = {
+        ... state,
+        courtSelection: action.data
+      }
+      return courtAfterSelection
+
     default:
       return state;
   }

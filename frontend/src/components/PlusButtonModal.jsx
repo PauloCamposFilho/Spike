@@ -22,49 +22,31 @@ export default function PlusButtonModal(props) {
         return dispatch({ type: NEW_MATCH_ACTIONS.SELECT_AWAY_TEAM, data: selection });
       case "Result":
         return dispatch({ type: NEW_MATCH_ACTIONS.SELECT_RESULT, data: selection });
+      case "Court":
+        return dispatch({ type: NEW_MATCH_ACTIONS.SELECT_COURT, data: selection });
       default:
         return;
     }
   }
 
-  const handleMatchSubmit = async (event) => {
-    console.log("THIS IS RUNNING")
-    event.preventDefault();
-
-    let winnerTeamId;
-    let otherTeamId;
-    newMatchState.resultSelection === 'W' ? [winnerTeamId, otherTeamId] = [newMatchState.homeTeamSelection, newMatchState.awayTeamSelection]
-      : [otherTeamId, winnerTeamId] = [newMatchState.homeTeamSelection, newMatchState.awayTeamSelection];
-
-    try {
-      const response = await fetch(`/api/matches/create/${winnerTeamId}/${otherTeamId}/1`, {
-        method: 'GET',
-      });
-
-      if (response.ok) {
-        console.log('Success!!!')
-      } else {
-        console.error('Error when logging match result');
-      }
-    } catch (error) {
-      console.error('Error when logging match result', error);
-    }
-  };
-
   return (
-    <NewMatchContext.Provider value={{ newMatchState, dispatch, makeSelection }}>
-      <Dialog open={open} onClose={onClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
-          <DialogTitle>What would you like to make?</DialogTitle>
-          <DialogContent>
-            <Box width={400}></Box>
-              <Stack spacing={2}>
-                <Button variant="contained" size="large" onClick={chooseNewMatchModal}>New Match</Button>
-                <Button variant="contained" size="large">Create Team</Button>
-              </Stack>
-              </Box>
-            </DialogContent>
-        {modalType === 'Match' && <NewMatch />}
-      </Dialog>
-    </NewMatchContext.Provider>
+    <Dialog open={open} onClose={onClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+      {!modalType &&
+          <>
+            <DialogTitle>What would you like to make?</DialogTitle>
+            <DialogContent>
+              <Box width={400}>
+                <Stack spacing={2}>
+                  <Button variant="contained" size="large" onClick={chooseNewMatchModal}>New Match</Button>
+                  <Button variant="contained" size="large">Create Team</Button>
+                </Stack>
+                </Box>
+              </DialogContent>
+          </>}
+      {modalType === 'Match' &&
+        <NewMatchContext.Provider value={{ newMatchState, dispatch, makeSelection, onClose }}>
+          <NewMatch />
+        </NewMatchContext.Provider>}
+    </Dialog>
   )
 }
