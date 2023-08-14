@@ -117,7 +117,7 @@ export default function Profile() {
                 component={Paper}
                 style={{ "margin-top": "30px" }}
               >
-                <Table style={{ width: "700px" }} aria-label="simple table">
+                <Table style={{ width: "100%" }} aria-label="simple table">
                   <TableHead>
                     <TableRow
                       key="elo"
@@ -144,7 +144,7 @@ export default function Profile() {
                 component={Paper}
                 style={{ "margin-top": "30px" }}
               >
-                <Table style={{ width: "700px" }} aria-label="simple table">
+                <Table style={{ width: "100%" }} aria-label="simple table">
                   <TableHead className="table-header">
                     <TableRow>
                       <TableCell colSpan={5} align="center">
@@ -174,7 +174,7 @@ export default function Profile() {
                 component={Paper}
                 style={{ "margin-top": "30px", border: "2px solid green" }}
               >
-                <Table style={{ width: "700px" }} aria-label="simple table">
+                <Table style={{ width: "100%" }} aria-label="simple table">
                   <TableHead>
                     <TableRow>
                       <TableCell colSpan={5} align="center">

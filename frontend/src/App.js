@@ -2,10 +2,11 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Profile from './components/Profile';
 import Matches from './components/Matches.js';
-import Location from './components/Location';
+import Location from './components/PlayArea';
 import Homepage from './components/Homepage';
 import Ranking from './components/Ranking';
 import TeamProfile from './components/TeamProfile';
+import PlayAreaList from './components/PlayAreaList';
 
 // Manage State
 import { useUserData } from './hooks/useUserData';
@@ -65,8 +66,11 @@ function App() {
             <Matches />
           </Route>
           <Route path="/location">
-            <Location />
+            <PlayAreaList />
           </Route>
+          {/* <Route path="/location/:id">
+            <PlayArea />
+          </Route> */}
           <Route path="/ranking">
             <Ranking />
           </Route>
