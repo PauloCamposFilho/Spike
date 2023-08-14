@@ -27,40 +27,54 @@ module Api
       other_team = Team.find_by_id(other_team_id)
       play_area = PlayArea.find_by_id(play_area_id)
 
-      return render json: { message: 'Winner team not found.' }, status: :not_found if winner_team.nil?
-      return render json: { message: 'Other team not found.' }, status: :not_found if other_team.nil?
-      return render json: { message: 'PlayArea not found. '}, status: :not_found if play_area.nil?
-
-      # Find active players for both teams
-      winner_team_players = winner_team.players_current
-      other_team_players = other_team.players_current
-
-      unless authorized_to_create?(player_id, winner_team, other_team)
+      if winner_team.nil?
+        render json: { message: 'Winner team not found.' }, status: :not_found
+      elsif other_team.nil?
+        render json: { message: 'Other team not found.' }, status: :not_found
+      elsif play_area.nil?
+        render json: { message: 'PlayArea not found. '}, status: :not_found
+      elsif !authorized_to_create?(player_id, winner_team, other_team)
         render json: { message: 'Unauthorized. You must be a player of either team.'}, status: :unauthorized
-      end
-
-      match = Match.new(
-        winner_team: winner_team,
-        other_team: other_team,
-        created_by: Player.find_by_id(session[:user_id]),
-        play_area: play_area,
-        is_validated: false
-      )
-
-      if match.save
-        # Create MatchRoster records for winner_team players
-        winner_team_players.each do |player|
-          MatchRoster.create(match: match, team: winner_team, player: player)
-        end
-
-        # Create MatchRoster records for other_team players
-        other_team_players.each do |player|
-          MatchRoster.create(match: match, team: other_team, player: player)
-        end
-
-        render json: { message: 'Match created successfully.', match_id: Match.id }
       else
-        render json: { message: 'Failed to create match.' }, status: :unprocessable_entity
+        match = Match.new(
+          winner_team: winner_team,
+          other_team: other_team,
+          created_by: Player.find_by_id(session[:user_id]),
+          play_area: play_area,
+          is_validated: false
+        )
+
+
+        # Find active players for both teams
+        winner_team_players = winner_team.players_current
+        other_team_players = other_team.players_current
+
+        unless authorized_to_create?(player_id, winner_team, other_team)
+          render json: { message: 'Unauthorized. You must be a player of either team.'}, status: :unauthorized
+        end
+
+        match = Match.new(
+          winner_team: winner_team,
+          other_team: other_team,
+          created_by: Player.find_by_id(session[:user_id]),
+          play_area: play_area,
+          is_validated: false
+        )
+
+        if match.save
+          # Create MatchRoster records for winner_team players
+          winner_team_players.each do |player|
+            MatchRoster.create(match: match, team: winner_team, player: player)
+          end
+
+          # Create MatchRoster records for other_team players
+          other_team_players.each do |player|
+            MatchRoster.create(match: match, team: other_team, player: player)
+          end
+          render json: { message: 'Match created successfully.', match_id: match.id }
+        else
+          render json: { message: 'Failed to create match.' }, status: :unprocessable_entity
+        end
       end
     end
 
