@@ -74,7 +74,7 @@ function App() {
             <Route path="/location">
               <PlayAreaList />
             </Route>
-            <Route path="/location/:id">
+            <Route path="/playarea/:id">
               <PlayArea />
             </Route>
             <Route path="/ranking">
