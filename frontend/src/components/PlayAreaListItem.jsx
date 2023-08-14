@@ -23,8 +23,8 @@ export default function PlayAreaListItem(props) {
       <TableCell align="left">
         <Button variant="contained" component={Link} to={`/playarea/${id}`} >Details</Button>
       </TableCell>
-      <TableCell align="left">{latitude}</TableCell>
-      <TableCell align="left">{longitude}</TableCell>
+      {/* <TableCell align="left">{latitude}</TableCell>
+      <TableCell align="left">{longitude}</TableCell> */}
     </TableRow>
   );
 }
