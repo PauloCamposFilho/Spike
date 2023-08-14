@@ -1,9 +1,16 @@
 import { ACTIONS } from "../constants/ACTIONS";
 
-const { SET_CURRENT_PLAY_AREA, OPEN_QR, CLOSE_MODAL, UPDATE_USER_DATA, UPDATE_TEAM_DATA, UPDATE_USER_PAGE_LOADING_STATUS, UPDATE_TEAMWIDGET_LOADING_STATUS } = ACTIONS;
+const { SET_CURRENT_PLAY_AREA, OPEN_QR, CLOSE_MODAL, UPDATE_USER_DATA, UPDATE_TEAM_DATA, UPDATE_USER_PAGE_LOADING_STATUS, UPDATE_TEAMWIDGET_LOADING_STATUS, UPDATE_RANKING_DATA } = ACTIONS;
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case UPDATE_RANKING_DATA:
+      const RankingData = {
+        ...state,
+        userData: {...state.userData, rankings: action.data }
+      };
+      console.log("RANKING DATA: ", RankingData)
+      return RankingData;
     case UPDATE_TEAMWIDGET_LOADING_STATUS:
       const WidgetTeamLoadingState = {
         ...state,

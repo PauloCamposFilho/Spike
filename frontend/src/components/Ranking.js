@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import SpikeNavBar from "./AppBar";
 import {
   Typography,
   TableCell,
+  CircularProgress,
 } from "@material-ui/core";
 import {
   Table,
@@ -12,12 +13,23 @@ import {
   Avatar
 } from "@mui/material";
 import { UserContext } from "../contexts/UserContext";
+import { fetchRankingData } from "../helpers/fetchRankingData";
 import SpikeTable from "./SpikeTable";
 import SpikeTableItem from "./SpikeTableItem"
 
 export default function Ranking() {
-  const { state } = useContext(UserContext)
+  const { state, updateRankingState } = useContext(UserContext)
   const { teams, playerRankings } = state.userData.rankings;
+  const [isLoading, setLoading] = useState(true);
+  useEffect(() => {
+    const updateRanking = async () => {
+      setLoading(true);
+      const rankingData = await fetchRankingData();
+      updateRankingState(rankingData);
+      setLoading(false);
+    }
+    updateRanking();
+  },[])
   const playerArray = playerRankings.map((player, index) => {
     return (
       <SpikeTableItem item={player} key={index} componentLink={`/player/${player.id}`}>
@@ -62,8 +74,13 @@ export default function Ranking() {
         </Typography>
         <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-around", marginTop: "50px" }}>
 
-          <SpikeTable specialText="Players" headers={playerTableHeaders} children={playerArray} />
-          <SpikeTable specialText="Teams" headers={teamTableHeaders} children={teamsArray} />          
+          {!isLoading &&
+            <>
+              <SpikeTable specialText="Players" headers={playerTableHeaders} children={playerArray} />
+              <SpikeTable specialText="Teams" headers={teamTableHeaders} children={teamsArray} />
+            </>
+          }
+          {isLoading && <CircularProgress/>}
 
         </div>
       </div>

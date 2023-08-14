@@ -1,6 +1,6 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
-import { Typography } from "@material-ui/core";
+import { CircularProgress, Typography } from "@material-ui/core";
 import { Stack, Avatar } from "@mui/material";
 import { UserContext } from "../contexts/UserContext";
 import { fetchTeamData } from "../helpers/fetchTeamData";
@@ -12,14 +12,19 @@ import MatchList from "./MatchList";
 export default function TeamProfile () {
   const { state, updateTeamData } = useContext(UserContext);
   const { id } = useParams();
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     fetchTeamData(id)
       .then(res => {
-        updateTeamData(res)
+        updateTeamData(res);
       })
       .catch(error => {
         console.error('Error fetching team data:', error)
+      })
+      .finally(() => {
+        setLoading(false);
       })
   }, [id]);
 
@@ -28,12 +33,14 @@ export default function TeamProfile () {
   const { teamData } = state;
 
   return (
-    <div style={{display:"flex",justifyContent:"center"}}>
+    <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
       <SpikeNavBar/>
       <div style={{ padding: "80px"}}>
         <Typography variant="h4" component="h2" color="inherit" paddingbottom="10px">
           {teamData.teamInfoData.name}
         </Typography>
+        {!isLoading &&
+        <>
         <Stack direction="row" spacing={2}>
           <Avatar
             sx={{ width: 200, height: 200 }}
@@ -62,6 +69,9 @@ export default function TeamProfile () {
         homeTeamId={Number(id)}
         matches={teamData.teamMatchesData.matches}
         />
+        </>
+        }
+        {isLoading && <CircularProgress size={300}/>}
       </div>
     </div>
   );
