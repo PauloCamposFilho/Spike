@@ -6,11 +6,13 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import PlayerListItem from "./PlayerListItem";
 import PlayAreaListItem from "./PlayAreaListItem";
 import { fetchPlayAreaData } from "../helpers/fetchPlayAreaData";
 import SpikeNavBar from "./AppBar";
 import { Typography } from "@material-ui/core";
+import "../style/Playarea.css";
+import "../style/fonts.scss";
+
 export default function PlayAreaList() {
   const [playAreas, setPlayAreas] = useState([]);
 
@@ -29,45 +31,57 @@ export default function PlayAreaList() {
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <SpikeNavBar />
-      <div style={{ padding: "80px" }}>
+      <div
+        style={{
+          padding: "80px"
+        }}
+      >
         <Typography
           variant="h4"
           component="h2"
           color="inherit"
-          paddingbottom="10px"
+          style={{
+            paddingBottom: "10px",
+            background: "-webkit-linear-gradient(left, #3498db, #e91e63)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+          }}
         >
           Play Area List
         </Typography>
         <div
           style={{
-            padding: "40px",
+            padding: "20px",
             textAlign: "center",
             justifyContent: "center",
             display: "flex",
-            height: "90%",
-            width: "100%"
+            height: "100%",
+            width: "100%",
           }}
         >
-          <TableContainer component={Paper} style={{ "margin-top": "30px", borderRadius: "12px", boxShadow: "0px 3px 10px rgba(0, 0, 0, 0.1)"  }}>
+          <TableContainer
+            component={Paper}
+            style={{
+              "margin-top": "30px",
+              borderRadius: "12px",
+              boxShadow: "0px 3px 10px rgba(0, 0, 0, 0.1)",
+            }}
+          >
             <Table style={{ minWidth: "800px" }} aria-label="simple table">
-              <TableHead>
+              <TableHead className="table-header">
                 <TableRow>
-                  <TableCell style={{ width: "110px" }} align="left">
+                  <TableCell style={{ minWidth: "110px" }} align="left">
                     <h4>Image</h4>
                   </TableCell>
                   <TableCell style={{ width: "110px" }} align="left">
                     <h4>Name</h4>
                   </TableCell>
-                  {/* <TableCell style={{ width: "110px" }} align="left">
-                    <h4>Description</h4>
-                  </TableCell> */}
                   <TableCell align="left" colSpan={2}>
                     <h4>Number of Courts</h4>
                   </TableCell>
                   <TableCell align="left">
                     <h4>Actions</h4>
                   </TableCell>
-                  {/* <TableCell align="left"><h4>ELO</h4></TableCell> */}
                 </TableRow>
               </TableHead>
               <TableBody>

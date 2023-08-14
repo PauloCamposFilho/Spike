@@ -69,7 +69,17 @@ export default function Ranking() {
     <div>
       <SpikeNavBar />
       <div style={{ padding: "80px", "text-align": "center", "margin-top": "30px" }}>
-        <Typography variant="h4" component="h2" color="inherit">
+      <Typography
+          variant="h4"
+          component="h2"
+          color="inherit"
+          style={{
+            paddingBottom: "10px",
+            background: "-webkit-linear-gradient(left, #3498db, #e91e63)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+          }}
+        >
           Latest Rankings
         </Typography>
         <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-around", marginTop: "50px" }}>
