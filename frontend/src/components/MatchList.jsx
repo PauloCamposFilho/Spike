@@ -41,6 +41,7 @@ export default function MatchList(props) {
               awayTeam = match.winner_team;
               result = 'L'
             }
+            console.log("homeTeam:", homeTeam)
             return (
               <MatchListItem
                 id={match.id}
