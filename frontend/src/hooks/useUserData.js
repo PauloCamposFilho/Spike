@@ -27,7 +27,8 @@ const initialState = {
     rankings: {
       teams: [],
       playerRankings: []
-    }
+    },
+    isLoading: true
   },
   teamData: {
     teamInfoData: {},
@@ -36,7 +37,6 @@ const initialState = {
     },
     teamCurrentRosterData: [],
     teamPastPlayersData: [],
-
   }
 }
 
@@ -56,7 +56,7 @@ const useUserData = () => {
   // return state and dispatch
   return {
     state,
-    dispatch,
+    dispatch
   }
 }
 

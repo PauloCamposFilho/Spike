@@ -1,9 +1,16 @@
 import { ACTIONS } from "../constants/ACTIONS";
 
-const { SET_CURRENT_PLAY_AREA, OPEN_QR, CLOSE_MODAL, UPDATE_USER_DATA, UPDATE_TEAM_DATA } = ACTIONS;
+const { SET_CURRENT_PLAY_AREA, OPEN_QR, CLOSE_MODAL, UPDATE_USER_DATA, UPDATE_TEAM_DATA, UPDATE_USER_PAGE_LOADING_STATUS } = ACTIONS;
 
 const reducer = (state, action) => {
   switch (action.type) {
+    // Update Player Profile Page Loading state
+    case UPDATE_USER_PAGE_LOADING_STATUS:
+      const profilePageState = {
+        ...state,
+        userData: {...state.userData, isLoading: action.data}
+      }
+      return profilePageState;
     // Update a user's current play area
     case SET_CURRENT_PLAY_AREA:
       const currentPlayAreaAfterUpdate = {
