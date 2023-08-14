@@ -8,8 +8,10 @@ import Ranking from './components/Ranking';
 import TeamProfile from './components/TeamProfile';
 import PlayAreaList from './components/PlayAreaList';
 import PlayArea from './components/PlayArea.jsx';
+
 import { theme } from "./components/Theme";
 import { ThemeProvider } from "@emotion/react";
+
 
 // Manage State
 import { useUserData } from './hooks/useUserData';

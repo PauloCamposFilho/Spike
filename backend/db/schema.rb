@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_10_010439) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_14_204109) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -53,6 +53,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_10_010439) do
     t.boolean "is_public"
     t.boolean "has_rentals"
     t.boolean "has_restrooms"
+    t.string "embedLink"
   end
 
   create_table "players", force: :cascade do |t|

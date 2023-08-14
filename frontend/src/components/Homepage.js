@@ -38,10 +38,10 @@ export default function Homepage() {
   console.log("theme.palette.secondary.light", theme.palette.secondary.light);
 
   return (
-
     <div className="home-page">
       <SpikeNavBar />
       {/* the iframe src hasn't put into the right api to render the google map */}
+
       <div
         style={{
           // border:"2px solid yellow",

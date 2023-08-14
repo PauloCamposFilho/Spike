@@ -65,7 +65,7 @@ export default function SpikeNavBar() {
         </div>
         <div style={{ display: "flex", alignItems: "center" }}>
           <Stack direction="row" spcing={2}>
-            <Button color="inherit" component={Link} to="/player/1">
+            <Button color="inherit" component={Link} to="/player/1" >
               Profile
             </Button>
             <Button color="inherit" component={Link} to="/matches">

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import {
@@ -10,7 +11,7 @@ export default function MatchListItem (props) {
 
   return (
     <TableRow key={id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-      <TableCell align="left">
+      <TableCell align="left" component={Link} to={`/teams/${homeTeam.id}`}>
         <Stack direction="row" spacing={2}>
           <Avatar
             sx={{ width: 56, height: 56 }}
@@ -19,8 +20,8 @@ export default function MatchListItem (props) {
           />
         </Stack>
       </TableCell>
-      <TableCell align="left">{homeTeam.name}</TableCell>
-      <TableCell align="left">
+      <TableCell align="left" component={Link} to={`/teams/${homeTeam.id}`}>{homeTeam.name}</TableCell>
+      <TableCell align="left" component={Link} to={`/teams/${awayTeam.id}`}>
         <Stack direction="row" spacing={2}>
           <Avatar
             sx={{ width: 56, height: 56 }}
@@ -29,7 +30,7 @@ export default function MatchListItem (props) {
           />
         </Stack>
       </TableCell>
-      <TableCell align="left">{awayTeam.name}</TableCell>
+      <TableCell align="left" component={Link} to={`/teams/${awayTeam.id}`}>{awayTeam.name}</TableCell>
       <TableCell align="left">{result}</TableCell>
       <TableCell align="left">{playArea.name}</TableCell>
     </TableRow>
