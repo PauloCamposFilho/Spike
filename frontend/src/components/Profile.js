@@ -25,7 +25,7 @@ import "../style/Profile.css";
 
 
 export default function Profile() {
-  const { state, updatePlayerData, updateInitialState, updateProfileLoadingState } = useContext(UserContext);
+  const { state, updatePlayerData, updateProfileLoadingState } = useContext(UserContext);
   const { id } = useParams();
   const { playerData, matchesData, isLoading } = state.userData;
 
@@ -36,9 +36,6 @@ export default function Profile() {
       console.log("Loading profile:", id)
       updatePlayerData(userData);
       updateProfileLoadingState(false);
-      // if (id) { //
-      // }
-      // updateInitialState();
     };
     getPlayerData()
   }, [id]);
