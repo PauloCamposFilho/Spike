@@ -26,7 +26,7 @@ const fetchCurrentUserData = async (playerId) => {
       rankings: {
         teams: teamRankings,
         playerRankings: playerRankings
-      }
+      }      
     };
     return currentUserData;
   }

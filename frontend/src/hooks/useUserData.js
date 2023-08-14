@@ -27,7 +27,8 @@ const initialState = {
     rankings: {
       teams: [],
       playerRankings: []
-    }
+    },
+    isLoading: true
   },
   teamData: {
     teamInfoData: {},
@@ -36,20 +37,20 @@ const initialState = {
     },
     teamCurrentRosterData: [],
     teamPastPlayersData: [],
-
   }
 }
 
 const useUserData = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const updateInitialState = async () => {
+    console.log("Updating with default initial state.");
+    const userData = await fetchCurrentUserData(1);
+    // const gridData = generateGridData(userData.teamsData.teams_current);
+    dispatch({ type: ACTIONS.UPDATE_USER_DATA, data: userData });
+  }
 
   useEffect(() => {
     // assume default user for now
-    const updateInitialState = async () => {
-      const userData = await fetchCurrentUserData(1);
-      // const gridData = generateGridData(userData.teamsData.teams_current);
-      dispatch({ type: ACTIONS.UPDATE_USER_DATA, data: userData });
-    }
     updateInitialState();
   }, [])
 
@@ -57,6 +58,7 @@ const useUserData = () => {
   return {
     state,
     dispatch,
+    updateInitialState
   }
 }
 

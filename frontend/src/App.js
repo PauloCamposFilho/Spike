@@ -17,7 +17,7 @@ import { fetchTeamData } from './helpers/fetchTeamData';
 
 function App() {
   // Custom hook manages all global state through action suite, and fetches data relevant to user on initial pageload
-  const { state, dispatch } = useUserData();
+  const { state, dispatch, updateInitialState } = useUserData();
   const setPlayArea = (playAreaId) => {
     // Clear current play area in case of falsey input from toggle
     if (!playAreaId) {
@@ -39,16 +39,24 @@ function App() {
     return dispatch({ type: ACTIONS.UPDATE_TEAM_DATA, data: teamData })
   }
 
+  const updatePlayerData = async (playerData) => {
+    return dispatch({ type: ACTIONS.UPDATE_USER_DATA, data: playerData });
+  }
+
+  const updateProfileLoadingState = (isLoading) => {
+    return dispatch({ type: ACTIONS.UPDATE_USER_PAGE_LOADING_STATUS, data: isLoading });
+  }
+
   return (
-    <UserContext.Provider value={{ state, dispatch, openQR, updateTeamData}}>
+    <UserContext.Provider value={{ state, dispatch, openQR, updateTeamData, updatePlayerData, updateInitialState, updateProfileLoadingState }}>
       <Router>
         <Switch>
           <Route exact path="/">
             <Homepage />
           </Route>
-          <Route path="/Profile">
+          {/* <Route path="/profile">
             <Profile />
-          </Route>
+          </Route> */}
           <Route path="/matches">
             <Matches />
           </Route>
@@ -60,6 +68,9 @@ function App() {
           </Route>
           <Route path="/teams/:id">
             <TeamProfile />
+          </Route>
+          <Route path="/player/:id">
+            <Profile />
           </Route>
         </Switch>
       </Router>
