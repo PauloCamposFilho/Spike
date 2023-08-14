@@ -72,7 +72,7 @@ export default function SpikeNavBar() {
               aria-haspopup="true"
               aria-expanded={open ? "true" : undefined}
             >
-              Location
+              Play Areas
             </Button>
             <Button color="inherit" component={Link} to="/ranking">
               Ranking

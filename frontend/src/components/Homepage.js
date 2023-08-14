@@ -20,7 +20,6 @@ export default function Homepage() {
   return (
     <div>
       <SpikeNavBar/>
-      {/* the iframe src hasn't put into the right api to render the google map */}
       <div
         style={{
           // border:"2px solid yellow",
