@@ -7,6 +7,7 @@ import Homepage from './components/Homepage';
 import Ranking from './components/Ranking';
 import TeamProfile from './components/TeamProfile';
 import PlayAreaList from './components/PlayAreaList';
+import PlayArea from './components/PlayArea.jsx';
 
 // Manage State
 import { useUserData } from './hooks/useUserData';
@@ -68,9 +69,9 @@ function App() {
           <Route path="/location">
             <PlayAreaList />
           </Route>
-          {/* <Route path="/location/:id">
+          <Route path="/playarea/:id">
             <PlayArea />
-          </Route> */}
+          </Route>
           <Route path="/ranking">
             <Ranking />
           </Route>
