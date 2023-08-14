@@ -53,37 +53,17 @@ export default function PlusButtonModal(props) {
 
   return (
     <NewMatchContext.Provider value={{ newMatchState, dispatch, makeSelection }}>
-      <Dialog
-        open={open}
-        onClose={onClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        {!modalType &&
-          <DialogTitle>What would you like to make?</DialogTitle>}
-        {modalType === 'Match' &&
-          <DialogTitle>Log Match Result</DialogTitle>}
-        <form onSubmit={handleMatchSubmit}>
+      <Dialog open={open} onClose={onClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+          <DialogTitle>What would you like to make?</DialogTitle>
           <DialogContent>
-            <Box width={400} onSubmit={handleMatchSubmit}>
-              {!modalType &&
-                <Stack spacing={2}>
-                  <Button variant="contained" size="large" onClick={chooseNewMatchModal}>New Match</Button>
-                  <Button variant="contained" size="large">Create Team</Button>
-                </Stack>}
-              {modalType === 'Match' &&
-                <NewMatch />
-              }
-            </Box>
-
-          </DialogContent>
-          {modalType === 'Match' &&
-            <DialogActions>
-              <Button onClick={onClose}>Cancel</Button>
-              <Button type="submit" onClick={onClose}>Ok</Button>
-            </DialogActions>}
-        </form>
-
+            <Box width={400}></Box>
+              <Stack spacing={2}>
+                <Button variant="contained" size="large" onClick={chooseNewMatchModal}>New Match</Button>
+                <Button variant="contained" size="large">Create Team</Button>
+              </Stack>
+              </Box>
+            </DialogContent>
+        {modalType === 'Match' && <NewMatch />}
       </Dialog>
     </NewMatchContext.Provider>
   )

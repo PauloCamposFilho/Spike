@@ -19,7 +19,6 @@ import Paper from "@mui/material/Paper";
 import SpikeNavBar from "./AppBar";
 import { UserContext } from "../contexts/UserContext";
 
-import { QRCodeGenerator } from "./QRCode";
 import "../style/Profile.css";
 
 
@@ -227,7 +226,6 @@ export default function Profile() {
                   color="inherit"
                   aria-label="logo"
                 >
-                  <QRCodeGenerator />
                 </IconButton>
               </div>
             </div>

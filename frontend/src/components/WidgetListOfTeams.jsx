@@ -13,8 +13,8 @@ export default function WidgetListOfTeams () {
   const { state } = useContext(UserContext);
   const playerData = state.userData.playerData;
   const teamsCurrentData = state.userData.teamsData.teams_current;
-  console.log(playerData)
-  console.log(teamsCurrentData)
+  console.log("widget", teamsCurrentData)
+  console.log("full user data in widget", state)
 
   return (
     <TableContainer component={Paper} style={ { "margin-top": "30px" } }>
