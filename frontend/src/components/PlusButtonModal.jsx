@@ -10,7 +10,7 @@ import { NewMatchContext } from '../contexts/NewMatchContext';
 import { NEW_MATCH_ACTIONS } from '../constants/NEW_MATCH_ACTIONS';
 
 export default function PlusButtonModal(props) {
-  const { chooseNewMatchModal, modalType, open, onClose } = props
+  const { open, onClose } = props
 
   const { newMatchState, dispatch } = useNewMatch();
 
@@ -29,22 +29,31 @@ export default function PlusButtonModal(props) {
     }
   }
 
+  const setModalTypeToMatch = () => {
+    return dispatch({ type: NEW_MATCH_ACTIONS.SET_MODAL_TYPE, data: 'Match'})
+  }
+
+  const resetMatchState = () => {
+    onClose()
+    return dispatch({ type: NEW_MATCH_ACTIONS.RESET_SELECT_STATE })
+  }
+
   return (
     <Dialog open={open} onClose={onClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
-      {!modalType &&
+      {!newMatchState.modalType &&
           <>
             <DialogTitle>What would you like to make?</DialogTitle>
             <DialogContent>
               <Box width={400}>
                 <Stack spacing={2}>
-                  <Button variant="contained" size="large" onClick={chooseNewMatchModal}>New Match</Button>
+                  <Button variant="contained" size="large" onClick={setModalTypeToMatch}>New Match</Button>
                   <Button variant="contained" size="large">Create Team</Button>
                 </Stack>
                 </Box>
               </DialogContent>
           </>}
-      {modalType === 'Match' &&
-        <NewMatchContext.Provider value={{ newMatchState, dispatch, makeSelection, onClose }}>
+      {newMatchState.modalType === 'Match' &&
+        <NewMatchContext.Provider value={{ newMatchState, dispatch, makeSelection, resetMatchState }}>
           <NewMatch />
         </NewMatchContext.Provider>}
     </Dialog>

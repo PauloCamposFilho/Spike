@@ -10,6 +10,7 @@ const initialNewMatchState = {
   awayTeamSelection: '',
   resultSelection: '',
   courtSelection: '',
+  modalType: '',
 }
 
 const useNewMatch = () => {
@@ -44,4 +45,4 @@ const useNewMatch = () => {
   }
 }
 
-export { useNewMatch }
+export { initialNewMatchState, useNewMatch }

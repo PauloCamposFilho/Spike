@@ -15,6 +15,13 @@ const reducer = (state, action) => {
         allCourts: action.data
       }
       return allCourtsAfterUpdate;
+
+    case NEW_MATCH_ACTIONS.SET_MODAL_TYPE:
+      const modalTypeAfterUpdate = {
+        ... state, 
+        modalType: action.data
+      }
+      return modalTypeAfterUpdate;
     
     case NEW_MATCH_ACTIONS.SELECT_HOME_TEAM:
       const homeTeamAfterSelection = {
@@ -43,6 +50,17 @@ const reducer = (state, action) => {
         courtSelection: action.data
       }
       return courtAfterSelection
+
+      case NEW_MATCH_ACTIONS.RESET_SELECT_STATE:
+      const stateAfterReset = {
+        ... state,
+        homeTeamSelection: '',
+        awayTeamSelection: '',
+        resultSelection: '',
+        courtSelection: '',
+        modalType: '',
+      }
+      return stateAfterReset
 
     default:
       return state;
