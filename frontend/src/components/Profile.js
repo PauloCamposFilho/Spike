@@ -21,7 +21,6 @@ import { fetchCurrentUserData } from "../helpers/fetchCurrentUserData";
 import SpikeNavBar from "./AppBar";
 import { UserContext } from "../contexts/UserContext";
 
-import { QRCodeGenerator } from "./QRcode";
 import "../style/Profile.css";
 
 
@@ -246,7 +245,6 @@ export default function Profile() {
                   color="inherit"
                   aria-label="logo"
                 >
-                  <QRCodeGenerator />
                 </IconButton>
               </div>
             </div>

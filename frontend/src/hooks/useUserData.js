@@ -51,6 +51,11 @@ const useUserData = () => {
 
   useEffect(() => {
     // assume default user for now
+    const updateInitialState = async () => {
+      const userData = await fetchCurrentUserData(8);
+      // const gridData = generateGridData(userData.teamsData.teams_current);
+      dispatch({ type: ACTIONS.UPDATE_USER_DATA, data: userData });
+    }
     updateInitialState();
   }, [])
 
