@@ -3,10 +3,8 @@ import { Typography } from "@material-ui/core";
 import { useParams } from 'react-router-dom';
 import { Stack, Avatar } from "@mui/material";
 import { UserContext } from "../contexts/UserContext";
-import { fetchPlayAreaData } from "../helpers/fetchPlayAreaData"
-import ProfileDetails from "./ProfileDetails";
-import PlayerList from "./PlayerList";
 import SpikeNavBar from "./AppBar";
+import { fetchCurrentPlayAreaData } from "../helpers/fetchPlayAreaData";
 
 export default function PlayArea() {
   const { state } = useContext(UserContext);
@@ -41,10 +39,27 @@ export default function PlayArea() {
         </div>
         </Typography>
         <Typography variant="h6" component="h2" color="inherit">
-          Corts near me
           {playAreaData.name}
         </Typography>
-
+        {/* try to render the play area details by using the table  */}
+        <TableRow
+      key={id}
+      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+    >
+      <TableCell align="left">
+        <Stack direction="row" spacing={2}>
+          <Avatar sx={{ width: 56, height: 56 }} alt="Remy Sharp" src={playAreaData.image} />
+        </Stack>
+      </TableCell>
+      <TableCell align="left">{playAreaData.name}</TableCell>
+      <TableCell align="left">{playAreaData.description}</TableCell>
+      <TableCell align="left">{playAreaData.courtsNumber}</TableCell>
+      <TableCell align="left">
+        <Button variant="contained" component={Link} to={`/playarea/${id}`} >Details</Button>
+      </TableCell>
+      <TableCell align="left">{playAreaData.latitude}</TableCell>
+      <TableCell align="left">{playAreaData.longitude}</TableCell>
+    </TableRow>
       </div>
     </div>
   );

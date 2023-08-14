@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { Stack, Avatar, TableRow } from "@mui/material";
 import { UserContext } from "../contexts/UserContext";
 import { fetchPlayAreaData } from "../helpers/fetchPlayAreaData";
-import ProfileDetails from "./ProfileDetails";
+import ProfileDetails from "./ProfileDetail";
 import PlayerList from "./PlayerList";
 import SpikeNavBar from "./AppBar";
 import Table from "@mui/material/Table";

@@ -4,7 +4,7 @@ import { CircularProgress, Typography } from "@material-ui/core";
 import { Stack, Avatar } from "@mui/material";
 import { UserContext } from "../contexts/UserContext";
 import { fetchTeamData } from "../helpers/fetchTeamData";
-import ProfileDetails from "./ProfileDetails";
+import ProfileDetails from "./ProfileDetail";
 import PlayerList from "./PlayerList";
 import SpikeNavBar from "./AppBar";
 import MatchList from "./MatchList";
