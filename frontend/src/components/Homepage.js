@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 // import Typography from '@material-ui/core/Typography'
 // when we try to use the icon tools make sure we install @material-ui/core and @mui/icons-material
-import { IconButton } from "@material-ui/core";
+import { CircularProgress, IconButton } from "@material-ui/core";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -24,6 +24,7 @@ import PlusButtonModal from "./PlusButtonModal";
 
 export default function Homepage() {
   const { state } = useContext(UserContext);
+  const { isLoading } = state.userData.teamsData;
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -54,11 +55,13 @@ export default function Homepage() {
           ></iframe>
         </div>
 
-        <div style={{ border: "1px solid green", width: "100%" }}>
+        <div style={{ border: "1px solid green", width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
           < WidgetListOfTeams />
         </div>
       </div>
-      <div style={{ border: "1px solid yallow", width: "100%" }}>
+      <div style={{ border: "1px solid green", width: "100%", minHeight: 200, display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
+        {!isLoading &&
+        <>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
             <TableHead>
@@ -91,13 +94,17 @@ export default function Homepage() {
         <div
           style={{
             display: "flex",
-            justifyContent: "flex-end",
+            width: "100%",
+            justifyContent: "right",
             padding: "16px",
           }}
         >
         <PlusButton handleOpen={handleOpen} />
 
         </div>
+        </>
+        }
+        {isLoading && <CircularProgress/>}
       </div>
 
       <PlusButtonModal 

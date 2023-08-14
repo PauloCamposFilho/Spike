@@ -19,6 +19,7 @@ const initialState = {
     playerAreaData: {},
     playerData: {},
     teamsData: {
+      isLoading: true,
       teams_current: [],
       teams_history: [],
     },
@@ -49,6 +50,7 @@ const useUserData = () => {
       const userData = await fetchCurrentUserData(8);
       // const gridData = generateGridData(userData.teamsData.teams_current);
       dispatch({ type: ACTIONS.UPDATE_USER_DATA, data: userData });
+      dispatch({ type: ACTIONS.UPDATE_TEAMWIDGET_LOADING_STATUS, data: false});
     }
     updateInitialState();
   }, [])

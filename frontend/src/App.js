@@ -47,8 +47,12 @@ function App() {
     return dispatch({ type: ACTIONS.UPDATE_USER_PAGE_LOADING_STATUS, data: isLoading });
   }
 
+  const updateRankingState = async (rankingData) => {
+    return dispatch( {type: ACTIONS.UPDATE_RANKING_DATA, data: rankingData });
+  };
+
   return (
-    <UserContext.Provider value={{ state, dispatch, openQR, updateTeamData, updatePlayerData, updateInitialState, updateProfileLoadingState }}>
+    <UserContext.Provider value={{ state, dispatch, openQR, updateTeamData, updatePlayerData, updateProfileLoadingState, updateRankingState }}>
       <Router>
         <Switch>
           <Route exact path="/">
