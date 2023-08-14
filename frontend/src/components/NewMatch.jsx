@@ -13,7 +13,7 @@ import { NEW_MATCH_ACTIONS } from '../constants/NEW_MATCH_ACTIONS';
 import NewMatchSelect from './NewMatchSelect';
 
 export default function NewMatch() {
-  const { newMatchState, onClose } = React.useContext(NewMatchContext)
+  const { newMatchState, resetMatchState } = React.useContext(NewMatchContext)
   const { state } = React.useContext(UserContext)
 
   const homeTeams = state.userData.teamsData.teams_current;
@@ -79,8 +79,8 @@ export default function NewMatch() {
 
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
-        <Button type="submit" onClick={onClose}>Ok</Button>
+        <Button onClick={resetMatchState}>Cancel</Button>
+        <Button type="submit" onClick={resetMatchState}>Ok</Button>
       </DialogActions>
     </form>
   );
