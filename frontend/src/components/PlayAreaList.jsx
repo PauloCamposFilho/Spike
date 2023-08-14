@@ -48,8 +48,8 @@ export default function PlayAreaList() {
             width: "100%"
           }}
         >
-          <TableContainer component={Paper} style={{ "margin-top": "30px" }}>
-            <Table style={{ width: "100%" }} aria-label="simple table">
+          <TableContainer component={Paper} style={{ "margin-top": "30px", borderRadius: "12px", boxShadow: "0px 3px 10px rgba(0, 0, 0, 0.1)"  }}>
+            <Table style={{ minWidth: "800px" }} aria-label="simple table">
               <TableHead>
                 <TableRow>
                   <TableCell style={{ width: "110px" }} align="left">
