@@ -7,6 +7,7 @@ import { fetchPlayAreaData } from "../helpers/fetchPlayAreaData"
 import ProfileDetails from "./ProfileDetails";
 import PlayerList from "./PlayerList";
 import SpikeNavBar from "./AppBar";
+import { fetchCurrentPlayAreaData } from "../helpers/fetchPlayAreaData";
 
 export default function PlayArea() {
   const { state } = useContext(UserContext);

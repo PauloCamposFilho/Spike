@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 // import Typography from '@material-ui/core/Typography'
 // when we try to use the icon tools make sure we install @material-ui/core and @mui/icons-material
-import { CircularProgress, IconButton } from "@material-ui/core";
+import { CircularProgress, Grid, IconButton } from "@material-ui/core";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -21,6 +21,11 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import PlusButton from "./HomepagePlusButton";
 import PlusButtonModal from "./PlusButtonModal";
+import { Stack, LinearProgress } from "@mui/material";
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import { useTheme } from "@emotion/react";
+import '../style/fonts.scss'
+
 
 export default function Homepage() {
   const { state } = useContext(UserContext);
@@ -28,20 +33,20 @@ export default function Homepage() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const theme = useTheme();
+  console.log("theme.palette", theme.palette);
+  console.log("theme.palette.secondary.light", theme.palette.secondary.light);
 
   return (
-    <div>
-<<<<<<< HEAD
-      <SpikeNavBar/>
-=======
+
+    <div className="home-page">
       <SpikeNavBar />
       {/* the iframe src hasn't put into the right api to render the google map */}
->>>>>>> master
       <div
         style={{
           // border:"2px solid yellow",
           width: "100%",
-          height: "500px",
+          height: "50%",
           marginTop: "64px",
           display: "flex",
           flexDirection: "row",
@@ -49,69 +54,105 @@ export default function Homepage() {
           gap: "80px",
         }}
       >
-        <div style={{ border: "1px solid red", width: "100%" }}>
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2602.332284251036!2d-122.94344676087555!3d49.289048300000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x548679f393721d0f%3A0x361aacc5ca2c032d!2sVolleyball%20BC!5e0!3m2!1sen!2sca!4v1691617114859!5m2!1sen!2sca"
-            style={{ border: 0, height: "100%", width: "100%" }}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title="googlemap-volleyball-court"
-          ></iframe>
-        </div>
-
+        <Box style={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          padding: "1%",
+          alignItems: "center",
+        }} component={Paper} elevation={2}>
+          <Grid container style={{ width: "90%" }} spacing={0}>
+            <Grid item container xs={12}>
+              <Grid item xs={12}>
+                <Typography variant={"h4"} style={{ color: '#7b7b7b' }}>
+                  <HomeRoundedIcon fontSize="medium" /> Home Court
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid item container xs={12} spacing={2}><Grid item xs={12}>
+              <Typography variant={"h3"}>
+                Rogers Arena
+                {/* {state.userData.playAreaData.play_area.name} */}
+              </Typography>
+            </Grid>
+              <Grid item xs={12} style={{ height: "75%" }}>
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2602.332284251036!2d-122.94344676087555!3d49.289048300000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x548679f393721d0f%3A0x361aacc5ca2c032d!2sVolleyball%20BC!5e0!3m2!1sen!2sca!4v1691617114859!5m2!1sen!2sca"
+                  style={{ border: 0, height: "100%", width: "100%", borderRadius: "5px", }}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="googlemap-volleyball-court"
+                ></iframe>
+              </Grid>
+              <Grid container item xs={12} spacing={0} style={{ padding: 0 }}>
+                <Grid item xs={10} alignItems="flex-end">
+                  <Typography variant="caption">Activity Level</Typography>
+                </Grid>
+                <Grid container item xs={12} alignItems="center" spacing={2} style={{ padding: 0 }}>
+                  <Grid item xs={10}>
+                    <LinearProgress style={{ height: 10, borderRadius: 5, border: 'solid', background: theme.palette.primary.light }} color='primary' variant="determinate" value={80} />
+                  </Grid>
+                  <Grid item xs={2} style={{ padding: 0 }}>
+                    <Typography style={{ fontFamily: 'Bangers', fontSize: "1.4rem" }}>Jammin!!</Typography>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Box>
         <div style={{ border: "1px solid green", width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
           < WidgetListOfTeams />
         </div>
       </div>
-      <div style={{ border: "1px solid green", width: "100%", minHeight: 200, display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
+      <div style={{ border: "1px solid green", width: "100%", minHeight: 100, display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
         {!isLoading &&
-        <>
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-            <TableHead>
-              <TableRow>
-                <TableCell></TableCell>
-                <TableCell align="right"></TableCell>
-                <TableCell></TableCell>
-                <TableCell align="right">Date</TableCell>
-                {/* <TableCell align="right">Result</TableCell>
-                <TableCell align="right">Date</TableCell> */}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {state.userData.teamsMatchesData.map((row) => (
-                <TableRow
-                  key={row.id}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">{row.winner_team_name}</TableCell>
-                  <TableCell align="right"><strong>defeats</strong></TableCell>
-                  <TableCell align="right">{row.other_team_name}</TableCell>
-                  <TableCell align="right">{row.created_at}</TableCell>
-                  {/* <TableCell align="right">{row.carbs}</TableCell>
-                  <TableCell align="right">{row.protein}</TableCell> */}
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <div
-          style={{
-            display: "flex",
-            width: "100%",
-            justifyContent: "right",
-            padding: "16px",
-          }}
-        >
-        <PlusButton handleOpen={handleOpen} />
+          <>
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell></TableCell>
+                    <TableCell align="right"></TableCell>
+                    <TableCell></TableCell>
+                    <TableCell align="right">Date</TableCell>
+                    {/* <TableCell align="right">Result</TableCell>
+                  <TableCell align="right">Date</TableCell> */}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {state.userData.teamsMatchesData.map((row) => (
+                    <TableRow
+                      key={row.id}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">{row.winner_team_name}</TableCell>
+                      <TableCell align="right"><strong>defeats</strong></TableCell>
+                      <TableCell align="right">{row.other_team_name}</TableCell>
+                      <TableCell align="right">{row.created_at}</TableCell>
+                      {/* <TableCell align="right">{row.carbs}</TableCell>
+                    <TableCell align="right">{row.protein}</TableCell> */}
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <div
+              style={{
+                display: "flex",
+                width: "100%",
+                justifyContent: "right",
+                padding: "16px",
+              }}
+            >
+              <PlusButton handleOpen={handleOpen} />
 
-        </div>
-        </>
+            </div>
+          </>
         }
-        {isLoading && <CircularProgress/>}
+        {isLoading && <CircularProgress />}
       </div>
 
-      <PlusButtonModal 
+      <PlusButtonModal
         open={open}
         onClose={handleClose}
       />

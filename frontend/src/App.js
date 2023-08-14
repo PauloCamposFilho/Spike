@@ -7,6 +7,9 @@ import Homepage from './components/Homepage';
 import Ranking from './components/Ranking';
 import TeamProfile from './components/TeamProfile';
 import PlayAreaList from './components/PlayAreaList';
+import PlayArea from './components/PlayArea.jsx';
+import { theme } from "./components/Theme";
+import { ThemeProvider } from "@emotion/react";
 
 // Manage State
 import { useUserData } from './hooks/useUserData';
@@ -53,36 +56,38 @@ function App() {
   };
 
   return (
-    <UserContext.Provider value={{ state, dispatch, openQR, updateTeamData, updatePlayerData, updateProfileLoadingState, updateRankingState }}>
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            <Homepage />
-          </Route>
-          {/* <Route path="/profile">
-            <Profile />
-          </Route> */}
-          <Route path="/matches">
-            <Matches />
-          </Route>
-          <Route path="/location">
-            <PlayAreaList />
-          </Route>
-          {/* <Route path="/location/:id">
-            <PlayArea />
-          </Route> */}
-          <Route path="/ranking">
-            <Ranking />
-          </Route>
-          <Route path="/teams/:id">
-            <TeamProfile />
-          </Route>
-          <Route path="/player/:id">
-            <Profile />
-          </Route>
-        </Switch>
-      </Router>
-    </UserContext.Provider>
+    <ThemeProvider theme={theme}>  
+      <UserContext.Provider value={{ state, dispatch, openQR, updateTeamData, updatePlayerData, updateProfileLoadingState, updateRankingState }}>
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <Homepage />
+            </Route>
+            <Route path="/profile">
+              <Profile />
+            </Route>
+            <Route path="/matches">
+              <Matches />
+            </Route>
+            <Route path="/location">
+              <PlayAreaList />
+            </Route>
+            <Route path="/location/:id">
+              <PlayArea />
+            </Route>
+            <Route path="/ranking">
+              <Ranking />
+            </Route>
+            <Route path="/teams/:id">
+              <TeamProfile />
+            </Route>
+            <Route path="/player/:id">
+              <Profile />
+            </Route>
+          </Switch>
+        </Router>
+      </UserContext.Provider>
+    </ThemeProvider>
   );
 }
 
