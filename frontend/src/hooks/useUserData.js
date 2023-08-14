@@ -19,6 +19,7 @@ const initialState = {
     playerAreaData: {},
     playerData: {},
     teamsData: {
+      isLoading: true,
       teams_current: [],
       teams_history: [],
     },
@@ -27,7 +28,8 @@ const initialState = {
     rankings: {
       teams: [],
       playerRankings: []
-    }
+    },
+    isLoading: true
   },
   teamData: {
     teamInfoData: {},
@@ -36,7 +38,6 @@ const initialState = {
     },
     teamCurrentRosterData: [],
     teamPastPlayersData: [],
-
   }
 }
 
@@ -46,9 +47,10 @@ const useUserData = () => {
   useEffect(() => {
     // assume default user for now
     const updateInitialState = async () => {
-      const userData = await fetchCurrentUserData(1);
+      const userData = await fetchCurrentUserData(8);
       // const gridData = generateGridData(userData.teamsData.teams_current);
       dispatch({ type: ACTIONS.UPDATE_USER_DATA, data: userData });
+      dispatch({ type: ACTIONS.UPDATE_TEAMWIDGET_LOADING_STATUS, data: false});
     }
     updateInitialState();
   }, [])
@@ -56,7 +58,7 @@ const useUserData = () => {
   // return state and dispatch
   return {
     state,
-    dispatch,
+    dispatch
   }
 }
 

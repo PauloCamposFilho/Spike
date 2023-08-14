@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import SpikeNavBar from "./AppBar";
 import {
   Typography,
   TableCell,
+  CircularProgress,
 } from "@material-ui/core";
 import {
   Table,
@@ -12,82 +13,74 @@ import {
   Avatar
 } from "@mui/material";
 import { UserContext } from "../contexts/UserContext";
+import { fetchRankingData } from "../helpers/fetchRankingData";
+import SpikeTable from "./SpikeTable";
+import SpikeTableItem from "./SpikeTableItem"
 
 export default function Ranking() {
-  const { state } = useContext(UserContext)
-  const { teams, playerRankings } = state.userData.rankings;  
+  const { state, updateRankingState } = useContext(UserContext)
+  const { teams, playerRankings } = state.userData.rankings;
+  const [isLoading, setLoading] = useState(true);
+  useEffect(() => {
+    const updateRanking = async () => {
+      setLoading(true);
+      const rankingData = await fetchRankingData();
+      updateRankingState(rankingData);
+      setLoading(false);
+    }
+    updateRanking();
+  },[])
+  const playerArray = playerRankings.map((player, index) => {
+    return (
+      <SpikeTableItem item={player} key={index} componentLink={`/player/${player.id}`}>
+        <TableCell>
+          <Avatar
+            sx={{ width: 60, height: 60 }}
+            alt={`${player.first_name} ${player.last_name}`}
+            // src="https://i.pinimg.com/736x/33/06/b8/3306b8156653fea183b5406151c74ded.jpg"
+            src={player.avatar_picture + `?id=${player.id}`}
+          />
+        </TableCell>
+        <TableCell>{player.first_name}</TableCell>
+        <TableCell>{player.last_name}</TableCell>
+        <TableCell>{player.elo_rating}</TableCell>
+      </SpikeTableItem>
+    );
+  });
+  const teamsArray = teams.map((team, index) => {
+    return (
+      <SpikeTableItem item={team} key={index} componentLink={`/teams/${team.id}`}>
+        <TableCell>
+          <Avatar
+            sx={{ width: 60, height: 60 }}
+            alt={`${team.name}`}
+            // src="https://i.pinimg.com/736x/33/06/b8/3306b8156653fea183b5406151c74ded.jpg"
+            src={team.picture + `?id=${team.id}`}
+          />
+        </TableCell>
+        <TableCell>{team.name}</TableCell>
+        <TableCell>{team.elo_rating}</TableCell>
+      </SpikeTableItem>
+    );
+  });
+  const playerTableHeaders = ["", "First name", "Last name", "Elo Rating"];
+  const teamTableHeaders = ["", "Name", "Elo Rating"];
   return (
-    <div>     
-     <SpikeNavBar/>
+    <div>
+      <SpikeNavBar />
       <div style={{ padding: "80px", "text-align": "center", "margin-top": "30px" }}>
         <Typography variant="h4" component="h2" color="inherit">
           Latest Rankings
         </Typography>
         <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-around", marginTop: "50px" }}>
 
-          <Table sx={{ minWidth: 300, maxWidth: 800, display: "inline-table", border: "1px solid lightgrey" }} aria-label="a dense table">
-            <TableHead>
-              <TableRow>
-                <TableCell colSpan={4} align="center"><h2>Players</h2></TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell></TableCell>
-                <TableCell>First name</TableCell>
-                <TableCell>Last name</TableCell>
-                <TableCell>Elo Rating</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {playerRankings.map((player, index) => {
-                return (
-                  <TableRow key={index} data-id={player.id}>
-                    <TableCell>
-                      <Avatar
-                        sx={{ width: 60, height: 60 }}
-                        alt={`${player.first_name} ${player.last_name}`}
-                        // src="https://i.pinimg.com/736x/33/06/b8/3306b8156653fea183b5406151c74ded.jpg"
-                        src={player.avatar_picture + `?id=${player.id}`}
-                      />
-                    </TableCell>
-                    <TableCell>{player.first_name}</TableCell>
-                    <TableCell>{player.last_name}</TableCell>
-                    <TableCell>{player.elo_rating}</TableCell>
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-
-          <Table sx={{ minWidth: 300, maxWidth: 800, display: "inline-table", border: "1px solid lightgrey" }} aria-label="a dense table">
-            <TableHead>
-              <TableRow>
-                <TableCell colSpan={3} align="center"><h2>Teams</h2></TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell></TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell>Elo Rating</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {teams.map((team, index) => {
-                return (
-                  <TableRow key={index} data-id={team.id}>
-                    <TableCell>
-                      <Avatar
-                        sx={{ width: 60, height: 60 }}
-                        alt={`${team.name}`}
-                        // src="https://i.pinimg.com/736x/33/06/b8/3306b8156653fea183b5406151c74ded.jpg"
-                        src={team.picture + `?id=${team.id}`}
-                      />
-                    </TableCell>
-                    <TableCell>{team.name}</TableCell>
-                    <TableCell>{team.elo_rating}</TableCell>
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
+          {!isLoading &&
+            <>
+              <SpikeTable specialText="Players" headers={playerTableHeaders} children={playerArray} />
+              <SpikeTable specialText="Teams" headers={teamTableHeaders} children={teamsArray} />
+            </>
+          }
+          {isLoading && <CircularProgress/>}
 
         </div>
       </div>

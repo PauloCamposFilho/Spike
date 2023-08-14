@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   IconButton,
   Typography,
@@ -6,6 +6,7 @@ import {
 import {
   Stack,
   Avatar,
+  CircularProgress,
 } from "@mui/material";
 
 import Table from "@mui/material/Table";
@@ -15,17 +16,29 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { fetchCurrentUserData } from "../helpers/fetchCurrentUserData";
 import SpikeNavBar from "./AppBar";
 import { UserContext } from "../contexts/UserContext";
 
-import { QRCodeGenerator } from "./QRcode";
 import "../style/Profile.css";
 
 
 export default function Profile() {
-  const { state } = useContext(UserContext);
-  const { playerData, matchesData } = state.userData;
+  const { state, updatePlayerData, updateProfileLoadingState } = useContext(UserContext);
+  const { id } = useParams();
+  const { playerData, matchesData, isLoading } = state.userData;
+
+  useEffect(() => {
+    const getPlayerData = async () => {
+      updateProfileLoadingState(true);
+      const userData = await fetchCurrentUserData(id);
+      console.log("Loading profile:", id)
+      updatePlayerData(userData);
+      updateProfileLoadingState(false);
+    };
+    getPlayerData()
+  }, [id]);
 
   const getEloRatingColor = () => {
     if (playerData.elo_rating > 1900) {
@@ -42,7 +55,7 @@ export default function Profile() {
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <div>
-        <SpikeNavBar/>
+        <SpikeNavBar />
         <div style={{ padding: "80px" }}>
           <Typography
             variant="h4"
@@ -61,6 +74,8 @@ export default function Profile() {
             }}
           >
             {/* use border: "1px solid red" for the frame of <div> or different element */}
+            {!isLoading &&
+            <>
             <div
               style={{
                 margin: "30px",
@@ -227,10 +242,12 @@ export default function Profile() {
                   color="inherit"
                   aria-label="logo"
                 >
-                  <QRCodeGenerator />
                 </IconButton>
               </div>
             </div>
+            </>
+            }
+            {isLoading && <CircularProgress size={600}/> }
           </div>
         </div>
       </div>
