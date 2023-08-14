@@ -42,7 +42,7 @@ export default function PlayArea() {
           {playAreaData.name}
         </Typography>
         {/* try to render the play area details by using the table  */}
-        <TableRow
+        {/* <TableRow
       key={id}
       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
     >
@@ -59,7 +59,7 @@ export default function PlayArea() {
       </TableCell>
       <TableCell align="left">{playAreaData.latitude}</TableCell>
       <TableCell align="left">{playAreaData.longitude}</TableCell>
-    </TableRow>
+    </TableRow> */}
       </div>
     </div>
   );
