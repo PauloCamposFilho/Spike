@@ -53,13 +53,19 @@ export default function PlayAreaList() {
               <TableHead>
                 <TableRow>
                   <TableCell style={{ width: "110px" }} align="left">
-                    <h4>Name</h4>
+                    <h4>Image</h4>
                   </TableCell>
                   <TableCell style={{ width: "110px" }} align="left">
+                    <h4>Name</h4>
+                  </TableCell>
+                  {/* <TableCell style={{ width: "110px" }} align="left">
                     <h4>Description</h4>
+                  </TableCell> */}
+                  <TableCell align="left" colSpan={2}>
+                    <h4>Number of Courts</h4>
                   </TableCell>
                   <TableCell align="left">
-                    <h4>Number of Courts</h4>
+                    <h4>Actions</h4>
                   </TableCell>
                   {/* <TableCell align="left"><h4>ELO</h4></TableCell> */}
                 </TableRow>
@@ -69,8 +75,8 @@ export default function PlayAreaList() {
                   return (
                     <PlayAreaListItem
                       id={playArea.id}
+                      image={playArea.image}
                       name={playArea.name}
-                      description={playArea.description}
                       courtsNumber={playArea.num_courts}
                     />
                   );
