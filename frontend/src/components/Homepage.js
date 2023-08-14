@@ -27,11 +27,6 @@ export default function Homepage() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [modalType, setModalType] = useState('')
-  const chooseNewMatchModal = () => {
-    console.log("new match")
-    setModalType('Match');
-  }
 
   return (
     <div>
@@ -108,8 +103,6 @@ export default function Homepage() {
       <PlusButtonModal 
         open={open}
         onClose={handleClose}
-        modalType={modalType}
-        chooseNewMatchModal={chooseNewMatchModal}
       />
 
     </div>
