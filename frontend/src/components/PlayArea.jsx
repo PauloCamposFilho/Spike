@@ -1,4 +1,4 @@
-import React,{useContext, useEffect} from "react";
+import React,{useContext, useEffect, useState} from "react";
 import { Typography } from "@material-ui/core";
 import { useParams } from 'react-router-dom';
 import { Stack, Avatar } from "@mui/material";
@@ -9,20 +9,19 @@ import PlayerList from "./PlayerList";
 import SpikeNavBar from "./AppBar";
 
 export default function PlayArea() {
-  const { state, updatePlayAreaData } = useContext(UserContext);
+  const { state } = useContext(UserContext);
+  const [ playAreaData, setPlayAreaData ] = useState({})
   const { id } = useParams();
 
   useEffect(() => {
-    fetchPlayAreaData()
+    fetchCurrentPlayAreaData(id)
       .then(res => {
-        updatePlayAreaData(res)
+        setPlayAreaData(res)
       })
       .catch(error => {
         console.error('Error fetching team data:', error)
       })
   }, [id]);
-
-  console.log("teams page state:", state);
   
   const { teamData } = state;
   return (
@@ -43,6 +42,7 @@ export default function PlayArea() {
         </Typography>
         <Typography variant="h6" component="h2" color="inherit">
           Corts near me
+          {playAreaData.name}
         </Typography>
 
       </div>

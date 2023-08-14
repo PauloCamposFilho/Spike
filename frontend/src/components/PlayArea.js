@@ -19,8 +19,7 @@ export default function PlayArea() {
   const { id } = useParams();
   const play_areas_data = state.userData.play_areas_data;
   
-
-
+ 
   // console.log("playarea", state);
 
   const { fetchPlayAreaData } = state;

@@ -1,4 +1,4 @@
-const fetchPlayAreaData = async (play_area_id) => {
+const fetchCurrentPlayAreaData = async (play_area_id) => {
   try {
     // Fetch data
     const play_area = await fetch(`/api/play_areas/${play_area_id}`);
@@ -17,13 +17,12 @@ const fetchPlayAreaData = async (play_area_id) => {
   }
 };
 
-const fetchCurrentPlayAreaData =async () => {
+const fetchPlayAreaData =async () => {
   const play_area_list = await fetch('/api/play_areas');
   const play_areas_data = await play_area_list.json();
-  const playAreaListData ={
-    play_areas_data
-  }
-  return play_areas_data;
+  const playAreaListData = play_areas_data
+  
+  return playAreaListData;
 }
 
 export { fetchPlayAreaData , fetchCurrentPlayAreaData };
