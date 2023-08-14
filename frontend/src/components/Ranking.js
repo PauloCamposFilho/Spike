@@ -20,7 +20,7 @@ export default function Ranking() {
   const { teams, playerRankings } = state.userData.rankings;
   const playerArray = playerRankings.map((player, index) => {
     return (
-      <SpikeTableItem item={player} key={index} componentLink={`/players/${player.id}`}>
+      <SpikeTableItem item={player} key={index} componentLink={`/player/${player.id}`}>
         <TableCell>
           <Avatar
             sx={{ width: 60, height: 60 }}

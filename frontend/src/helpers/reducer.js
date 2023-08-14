@@ -4,6 +4,12 @@ const { SET_CURRENT_PLAY_AREA, OPEN_QR, CLOSE_MODAL, UPDATE_USER_DATA, UPDATE_TE
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case UPDATE_USER_PAGE_LOADING_STATUS:
+      const WidgetTeamLoadingState = {
+        ...state,
+        teamsData: { ...state.teamsData, isLoading: action.data }       
+      }
+      return WidgetTeamLoadingState;
     // Update Player Profile Page Loading state
     case UPDATE_USER_PAGE_LOADING_STATUS:
       const profilePageState = {
