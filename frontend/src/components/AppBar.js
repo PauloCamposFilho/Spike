@@ -15,11 +15,16 @@ import {
   Menu,
   MenuItem,
 } from "@mui/material";
+import { useTheme } from "@emotion/react";
+import '../style/fonts.scss'
 
 export default function SpikeNavBar() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [openMenu, setOpenMenu] = useState(null);
   const [openLocation, setOpenLocation] = useState(null);
+  const theme = useTheme();
+
+  
   const open = Boolean(anchorEl);
   const handleClick = (event, setOpen) => {
     console.log(event);
@@ -34,7 +39,8 @@ export default function SpikeNavBar() {
     setAnchorEl(null);
   };
   return (
-    <AppBar>
+    <AppBar
+    style={{background: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.secondary.light})`}}>
       <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
         <div style={{ display: "flex", alignItems: "center" }}>
           <IconButton
@@ -51,7 +57,8 @@ export default function SpikeNavBar() {
             variant="h6"
             component="h2"
             color="inherit"
-            sx={{ marginLeft: "8px" }}
+            sx={{ marginLeft: "8px"}}
+            style={{ fontFamily: 'Faster One', fontSize: "2.4rem"}}
           >
             SPIKE!
           </Typography>

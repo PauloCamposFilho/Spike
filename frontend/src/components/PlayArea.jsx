@@ -8,6 +8,7 @@ import { fetchCurrentPlayAreaData } from "../helpers/fetchPlayAreaData";
 import { TableCell, TableRow, Button } from "@material-ui/core";
 import MatchList from "./MatchList";
 
+
 export default function PlayArea() {
   const { state } = useContext(UserContext);
   const [playAreaData, setPlayAreaData] = useState({
