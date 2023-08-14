@@ -99,9 +99,6 @@ export default function SpikeNavBar() {
               <MenuItem onClick={handleClose} component={Link} to="/location">
                 Corts
               </MenuItem>
-              <MenuItem onClick={handleClose} component={Link} to="/location">
-                Maps
-              </MenuItem>
             </Menu>
           )}
           <IconButton
@@ -126,7 +123,7 @@ export default function SpikeNavBar() {
               }}
             >
               <MenuItem onClick={handleClose} component={Link} to="/login">
-                Login 123
+                Login
               </MenuItem>
             </Menu>
           )}
