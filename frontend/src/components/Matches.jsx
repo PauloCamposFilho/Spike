@@ -3,6 +3,7 @@ import { CircularProgress, Typography } from "@material-ui/core";
 import SpikeNavBar from "./AppBar";
 import { fetchMatchesData } from "../helpers/fetchMatchesData";
 import MatchList from "./MatchList";
+import { Grid } from "@mui/material";
 
 export default function Matches() {
   const [matches, setMatches] = useState([]);
@@ -24,15 +25,19 @@ export default function Matches() {
     <div>
       <SpikeNavBar />
       <div style={{ padding: "80px" }}>
-        <Typography variant="h6" component="h2" color="inherit">
-          Recent Matches
-        </Typography>
         {!isLoading &&
-          <MatchList
-            title={"Matches Near You"}
-            matches={matches}
-            showDetailsButton={true}
-          />
+        <Grid container style={{
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}>
+          <Grid item xs={12}>
+            <MatchList
+              title={"Matches Near You"}
+              matches={matches}
+              showDetailsButton={true}
+            />
+          </Grid>
+        </Grid>
         }
         {isLoading && <CircularProgress size={300} />}
       </div>

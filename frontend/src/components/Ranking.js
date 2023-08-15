@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import SpikeNavBar from "./AppBar";
 import {
-  Typography,
   TableCell,
   CircularProgress,
 } from "@material-ui/core";
@@ -16,6 +15,7 @@ import { UserContext } from "../contexts/UserContext";
 import { fetchRankingData } from "../helpers/fetchRankingData";
 import SpikeTable from "./SpikeTable";
 import SpikeTableItem from "./SpikeTableItem"
+import Typography from '@mui/material/Typography';
 
 export default function Ranking() {
   const { state, updateRankingState } = useContext(UserContext)
@@ -70,7 +70,7 @@ export default function Ranking() {
       <SpikeNavBar />
       <div style={{ padding: "80px", "text-align": "center", "margin-top": "30px" }}>
         <Typography variant="h4" component="h2" color="inherit">
-          Latest Rankings
+          Leaderboard
         </Typography>
         <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-around", marginTop: "50px" }}>
 

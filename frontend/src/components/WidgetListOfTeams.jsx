@@ -9,6 +9,7 @@ import Paper from "@mui/material/Paper";
 import { UserContext } from "../contexts/UserContext";
 import WidgetTeam from "./WidgetTeam";
 import { CircularProgress } from "@material-ui/core";
+import Typography from '@mui/material/Typography';
 
 export default function WidgetListOfTeams () {
   const { state } = useContext(UserContext);
