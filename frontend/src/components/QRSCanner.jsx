@@ -28,12 +28,15 @@
 
 import { Grid } from "@mui/material";
 import React, {
+  useContext,
   useState
 } from "react";
 import QrReader from "react-web-qr-reader";
+import { UserContext } from "../contexts/UserContext";
 
 const TestScanner = () => {
   const delay = 500;
+  const { state } = useContext(UserContext);
 
   const previewStyle = {
     height: 240,
@@ -43,10 +46,23 @@ const TestScanner = () => {
 
   const [result, setResult] = useState("No result");
 
-  const handleScan = (result) => {
+  const handleScan = async (result) => {
     if (result) {
       console.log(result)
       setResult(result.data);
+    try {
+      const response = await fetch(`/api/matches/create/1/2/1`, {
+        method: 'GET',
+      });
+
+      if (response.ok) {
+        console.log('Success!!!')
+      } else {
+        console.error('Error when logging match result');
+      }
+    } catch (error) {
+      console.error('Error when logging match result', error);
+    }
     }
   };
 
