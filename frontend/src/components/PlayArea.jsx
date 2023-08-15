@@ -70,7 +70,7 @@ export default function PlayArea(props) {
           {/* <TableCell align="left">{playAreaData.latitude}</TableCell>
           <TableCell align="left">{playAreaData.longitude}</TableCell> */}
         </TableRow>
-        {!props.dontShowMatchList &&
+        {!props.dontShowMatchList && playAreaData.area_matches_data.length > 0 &&
         <MatchList
           title={"Matches"}
           homeTeamId={Number(id)}

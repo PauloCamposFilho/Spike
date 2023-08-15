@@ -13,7 +13,6 @@ import Paper from "@mui/material/Paper";
 import { UserContext } from "../contexts/UserContext";
 import SpikeNavBar from "./AppBar";
 import WidgetListOfTeams from "./WidgetListOfTeams";
-import QRScanner, { Test } from "./QRSCanner";
 import Scanner from "./QRSCanner";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -28,6 +27,7 @@ import EmojiEventsRoundedIcon from '@mui/icons-material/EmojiEventsRounded';
 import { useTheme } from "@emotion/react";
 import '../style/fonts.scss'
 import MatchList from "./MatchList";
+import TestScanner from "./QRSCanner";
 
 
 export default function Homepage() {
@@ -163,15 +163,18 @@ export default function Homepage() {
           </Grid>
         </Grid>
         <div
-              style={{
-                position: 'fixed',
-                bottom: theme.spacing(6),
-                right: theme.spacing(6),
-              }}
-            >
-              <PlusButton handleOpen={handleOpen} />
+          style={{
+            position: 'fixed',
+            bottom: theme.spacing(6),
+            right: theme.spacing(6),
+          }}
+        >
+          <PlusButton handleOpen={handleOpen} />
 
-            </div>
+        </div>
+        {/* <Grid item xs={12} style={{height: "1000px", width: "1000px"}}>
+          <TestScanner/>
+        </Grid> */}
       </Grid>
       <PlusButtonModal
         open={open}
