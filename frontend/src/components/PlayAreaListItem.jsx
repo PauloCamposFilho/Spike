@@ -4,7 +4,7 @@ import { Stack, Avatar, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import "../style/Playarea.css";
 export default function PlayAreaListItem(props) {
-  const { id, image, name, description, courtsNumber, latitude, longitude } =
+  const { id, image, name, description, courtsNumber } =
     props;
 
   return (
