@@ -21,7 +21,12 @@ const fetchCurrentUserData = async (playerId) => {
     const currentUserData = {
       playerData,
       matchesData,
-      teamsData,
+      teamsData: {
+        ...teamsData,
+        checked_in_team: {
+          teamInfoData: {}
+        }
+      },
       teamsMatchesData,
       playAreaData,
       rankings: {

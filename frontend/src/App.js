@@ -65,9 +65,14 @@ function App() {
     return dispatch({ type: ACTIONS.SET_CURRENT_PLAY_AREA, data: playAreaData });
   };
 
+  const updateCurrentTeam = async (teamId) => {
+    const teamData = await fetchTeamData(teamId);
+    return dispatch({ type: ACTIONS.SET_CURRENT_TEAM, data: teamData });
+  }
+
   return (
     <ThemeProvider theme={theme}>
-      <UserContext.Provider value={{ state, dispatch, openQR, updateTeamData, updatePlayerData, updateProfileLoadingState, updateRankingState, updateCurrentPlayArea }}>
+      <UserContext.Provider value={{ state, dispatch, openQR, updateTeamData, updatePlayerData, updateProfileLoadingState, updateRankingState, updateCurrentPlayArea, updateCurrentTeam }}>
         <Router>
           <Switch>
             <Route exact path="/">
