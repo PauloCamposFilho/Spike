@@ -2,8 +2,9 @@ import { Link } from "react-router-dom"
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { Stack, Avatar } from "@mui/material";
+import Typography from '@mui/material/Typography';
 
-export default function WidgetTeam (props) {
+export default function WidgetTeam(props) {
   const { team, playerData } = props
 
   return (
@@ -17,10 +18,26 @@ export default function WidgetTeam (props) {
           />
         </Stack>
       </TableCell>
-      <TableCell align="left">{team.name}</TableCell>
-      <TableCell align="left">{team.elo_rating}</TableCell>
-      <TableCell align="left">{playerData.id === team.captain_id ? '👑' : ''}</TableCell>
-      <TableCell align="left">{team.created_at}</TableCell>
+      <TableCell align="left">
+        <Typography variant="body" style={{ textDecoration: 'none' }}>
+          {team.name}
+        </Typography>
+      </TableCell>
+      <TableCell align="left">
+        <Typography variant="body" style={{ textDecoration: 'none' }}>
+          {team.elo_rating}
+        </Typography>
+      </TableCell>
+      <TableCell align="left">
+        <Typography variant="body" style={{ textDecoration: 'none' }}>
+          {playerData.id === team.captain_id ? '👑' : ''}
+        </Typography>
+      </TableCell>
+      <TableCell align="left">
+        <Typography variant="body" style={{ textDecoration: 'none' }}>
+          {team.created_at}
+        </Typography>
+      </TableCell>
     </TableRow>
   )
 }

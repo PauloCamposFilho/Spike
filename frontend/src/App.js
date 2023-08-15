@@ -12,6 +12,7 @@ import PlayArea from './components/PlayArea.jsx';
 
 import { theme } from "./components/Theme";
 import { ThemeProvider } from "@emotion/react";
+import './style/App.scss'
 
 
 // Manage State
