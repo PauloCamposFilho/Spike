@@ -37,7 +37,8 @@ const TestScanner = () => {
 
   const previewStyle = {
     height: 240,
-    width: 320
+    width: 320, 
+    margin: "10px"
   };
 
   const [result, setResult] = useState("No result");
@@ -54,15 +55,16 @@ const TestScanner = () => {
   };
 
   return (
-    <Grid container item style={{flexDirection: "column"}} spacing={10}>
-      <Grid item xs={12}>
-        <QrReader
-          delay={delay}
-          style={previewStyle}
-          onError={handleError}
-          onScan={handleScan}
-        />
-      
+    <Grid container item style={{flexDirection: "column", justifyContent: "center", alignItems: "center", }} spacing={10}>
+      <Grid container item xs={12} style={{justifyContent: "center", alignItems: "center", paddingLeft: "100px"}}>
+        <Grid item xs={12}>
+          <QrReader
+            delay={delay}
+            style={previewStyle}
+            onError={handleError}
+            onScan={handleScan}
+          />
+        </Grid>
       </Grid>
       <Grid item xs={12}>
         <h3>{result}</h3>

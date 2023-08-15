@@ -172,9 +172,9 @@ export default function Homepage() {
           <PlusButton handleOpen={handleOpen} />
 
         </div>
-        <Grid item xs={12} style={{height: "1000px", width: "1000px"}}>
+        {/* <Grid item xs={12} style={{height: "1000px", width: "1000px"}}>
           <TestScanner/>
-        </Grid>
+        </Grid> */}
       </Grid>
       <PlusButtonModal
         open={open}
