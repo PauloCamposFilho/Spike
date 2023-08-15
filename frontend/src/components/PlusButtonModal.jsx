@@ -8,6 +8,8 @@ import { UserContext } from '../contexts/UserContext';
 import { useNewMatch } from '../hooks/useNewMatch';
 import { NewMatchContext } from '../contexts/NewMatchContext';
 import { NEW_MATCH_ACTIONS } from '../constants/NEW_MATCH_ACTIONS';
+import CreateRoundedIcon from '@mui/icons-material/CreateRounded';
+import QrCodeRoundedIcon from '@mui/icons-material/QrCodeRounded';
 import TestScanner from './QRSCanner';
 
 export default function PlusButtonModal(props) {
@@ -43,12 +45,20 @@ export default function PlusButtonModal(props) {
     <Dialog open={open} onClose={onClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
       {!newMatchState.modalType &&
           <>
-            <DialogTitle>What would you like to make?</DialogTitle>
+            <DialogTitle>
+              <Typography variant='h5'>
+                How would you like to record a match?
+              </Typography>
+            </DialogTitle>
             <DialogContent>
               <Box width={400}>
                 <Stack spacing={2}>
-                  <Button variant="contained" size="large" onClick={() => setModalTypeToMatch('Manual')}>Manual</Button>
-                  <Button variant="contained" size="large" onClick={() => setModalTypeToMatch('Scan')}>Scan</Button>
+                  <Button variant="contained" size="large" onClick={() => setModalTypeToMatch('Manual')} style={{color: "#F5F5F5"}}>
+                    <Typography variant='h4'><CreateRoundedIcon fontSize="medium" />&nbsp;Manual</Typography>
+                  </Button>
+                  <Button variant="contained" onClick={() => setModalTypeToMatch('Scan')} style={{color: "#F5F5F5"}}>
+                    <Typography variant='h4'><QrCodeRoundedIcon fontSize="medium" />&nbsp;QR Code</Typography>
+                  </Button>
                 </Stack>
                 </Box>
               </DialogContent>
