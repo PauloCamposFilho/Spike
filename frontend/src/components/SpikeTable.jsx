@@ -11,7 +11,6 @@ export default function SpikeTable(props) {
     <Table
       sx={{
         minWidth: 300,
-        maxWidth: 800,
         display: "inline-table",
         border: "1px solid lightgrey",
         borderRadius: "10px",
