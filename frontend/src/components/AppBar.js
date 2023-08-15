@@ -17,13 +17,15 @@ import {
 } from "@mui/material";
 import { useTheme } from "@emotion/react";
 import '../style/fonts.scss'
+import { UserContext } from "../contexts/UserContext";
 
 export default function SpikeNavBar() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [openMenu, setOpenMenu] = useState(null);
   const [openLocation, setOpenLocation] = useState(null);
   const theme = useTheme();
-
+  const { state } = useContext(UserContext)
+  const id = state.userData.playerData.id;
   
   const open = Boolean(anchorEl);
   const handleClick = (event, setOpen) => {
@@ -65,7 +67,7 @@ export default function SpikeNavBar() {
         </div>
         <div style={{ display: "flex", alignItems: "center" }}>
           <Stack direction="row" spcing={2}>
-            <Button color="inherit" component={Link} to="/player/1" >
+            <Button color="inherit" component={Link} to={`/player/${id}`} >
               Profile
             </Button>
             <Button color="inherit" component={Link} to="/matches">
