@@ -21,6 +21,7 @@ import { ACTIONS } from './constants/ACTIONS';
 import { setPlayArea, openQR, closeModal } from './helpers/dispatch';
 import { UserContext } from './contexts/UserContext';
 import { fetchTeamData } from './helpers/fetchTeamData';
+import { fetchCurrentPlayAreaData } from './helpers/fetchPlayAreaData';
 
 
 function App() {
@@ -59,9 +60,14 @@ function App() {
     return dispatch( {type: ACTIONS.UPDATE_RANKING_DATA, data: rankingData });
   };
 
+  const updateCurrentPlayArea = async (playAreaId) => {
+    const playAreaData = await fetchCurrentPlayAreaData(playAreaId);
+    return dispatch({ type: ACTIONS.SET_CURRENT_PLAY_AREA, data: playAreaData });
+  };
+
   return (
     <ThemeProvider theme={theme}>
-      <UserContext.Provider value={{ state, dispatch, openQR, updateTeamData, updatePlayerData, updateProfileLoadingState, updateRankingState }}>
+      <UserContext.Provider value={{ state, dispatch, openQR, updateTeamData, updatePlayerData, updateProfileLoadingState, updateRankingState, updateCurrentPlayArea }}>
         <Router>
           <Switch>
             <Route exact path="/">
