@@ -66,9 +66,7 @@ export default function PlayArea(props) {
           <TableCell align="left">{playAreaData.name}</TableCell>
           <TableCell align="left">{playAreaData.description}</TableCell>
           <TableCell align="left">{playAreaData.courtsNumber}</TableCell>
-          <TableCell align="left">
-            <Button variant="contained" component={Link} to={`/playarea/${id}`} >Details</Button>
-          </TableCell>
+          
           {/* <TableCell align="left">{playAreaData.latitude}</TableCell>
           <TableCell align="left">{playAreaData.longitude}</TableCell> */}
         </TableRow>
@@ -78,6 +76,7 @@ export default function PlayArea(props) {
           homeTeamId={Number(id)}
           showDetailsButton={true}
           matches={playAreaData.area_matches_data}
+          style={{display:"flex", justifyContent: 'center', alignItems: 'center'}}
         />
         }
       </div>
