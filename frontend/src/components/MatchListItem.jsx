@@ -36,7 +36,7 @@ export default function MatchListItem(props) {
       <TableCell align="left">{playArea.name}</TableCell>
       {showDetailsButton &&
         <TableCell align="left">
-          <Button variant="contained" component={Link} to={`/matches/${id}`} >Details</Button>
+          <Button variant="contained" component={Link} to={`/match/${id}`} >Details</Button>
         </TableCell>
       }
     </TableRow>

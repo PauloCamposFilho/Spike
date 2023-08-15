@@ -8,6 +8,7 @@ import ProfileDetails from "./ProfileDetail";
 import PlayerList from "./PlayerList";
 import SpikeNavBar from "./AppBar";
 import MatchList from "./MatchList";
+import '../style/fonts.scss'
 
 export default function TeamProfile () {
   const { state, updateTeamData } = useContext(UserContext);
@@ -66,6 +67,7 @@ export default function TeamProfile () {
         />
         <MatchList
         title={"Matches"}
+        showDetailsButton={true}
         homeTeamId={Number(id)}
         matches={teamData.teamMatchesData.matches}
         />

@@ -19,7 +19,7 @@ export default function Matches() {
       .finally(() => {
         setLoading(false);
       });
-  }, [matches]);
+  }, []);
   return (
     <div>
       <SpikeNavBar />
