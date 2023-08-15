@@ -51,12 +51,16 @@ export default function PlusButtonModal(props) {
       {!newMatchState.modalType &&
         <>
           <DialogTitle>
-            <Typography variant='h5'>
+            <Typography variant='h5' style={{ textAlign: "center" }}>
               How would you like to record a match?
             </Typography>
           </DialogTitle>
           <DialogContent>
-            <Box width={400}>
+            <Box width={400} style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
               <Stack spacing={2}>
                 <Button variant="contained" size="large" onClick={() => setModalTypeToMatch('Manual')} style={{ color: "#F5F5F5" }}>
                   <Typography variant='h4'><CreateRoundedIcon fontSize="medium" />&nbsp;Manual</Typography>
@@ -74,40 +78,96 @@ export default function PlusButtonModal(props) {
         </NewMatchContext.Provider>}
       {newMatchState.modalType === 'Scan' &&
         <NewMatchContext.Provider value={{ newMatchState, dispatch, makeSelection, resetMatchState }}>
-          <Grid container style={{ flexDirection: "column", justifyContent: "center", alignItems: "center", padding: "2%" }}>
-            {!scanOrGenerate ?
-              <>
-                <Grid item>
-                  <Typography variant="h4">Would you like to scan or generate?</Typography>
-                </Grid>
-                <ScanGenerateForQR
-                setScanOrGenerate={setScanOrGenerate} />
-              </>
-              : scanOrGenerate === 'Generate' ?
+          {!scanOrGenerate ?
+            <>
+              <DialogTitle>
+                <Typography variant="h4" style={{ textAlign: "center" }}>Would you like to scan or generate?</Typography>
+              </DialogTitle>
+              <DialogContent>
+                <Box width={400} style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                  <ScanGenerateForQR
+                    setScanOrGenerate={setScanOrGenerate}
+                  />
+                </Box>
+              </DialogContent>
+              <DialogActions>
+                <Button
+                  onClick={() => {
+                    resetMatchState();
+                    setScanOrGenerate('');
+                  }}>
+                  Cancel
+                </Button>
+              </DialogActions>
 
+            </>
+            : scanOrGenerate === 'Generate' ?
               !newMatchState.resultSelection ?
                 <>
-                  <Grid item>
-                    <Typography variant="h4">Record your result</Typography>
-                  </Grid>
-                  <WinLossForQR />
+                  <DialogTitle>
+                    <Typography variant="h4" style={{ textAlign: "center" }}>Record your result</Typography>
+                  </DialogTitle>
+                  <DialogContent>
+                    <Box width={400} style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                      <WinLossForQR />
+                    </Box>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button
+                      onClick={() => {
+                        resetMatchState();
+                        setScanOrGenerate('');
+                      }}>
+                      Cancel
+                    </Button>
+                  </DialogActions>
                 </>
                 :
-                <QRCodeGenerator 
-                homeTeamId={'1'}
-                playAreaId={state.userData.currentPlayArea.id}
-                result={newMatchState.resultSelection}
-                />
-              :
                 <>
+                  <DialogTitle>
+                    <Typography variant="h4" style={{ textAlign: "center" }}>QR Code</Typography>
+                  </DialogTitle>
+                  <DialogContent>
+                    <Box width={400} style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                      <QRCodeGenerator
+                        homeTeamId={'1'}
+                        playAreaId={state.userData.currentPlayArea.id}
+                        result={newMatchState.resultSelection}
+                      />
+                    </Box>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button
+                      onClick={() => {
+                        resetMatchState();
+                        setScanOrGenerate('');
+                      }}>
+                      Cancel
+                    </Button>
+                  </DialogActions>
+                </>
+              :
+              <>
+                <Grid container style={{ flexDirection: "column", justifyContent: "center", alignItems: "center", padding: "2%" }}>
                   <Grid item>
                     <Typography variant="h4">Scan your code!</Typography>
                   </Grid>
                   <TestScanner />
-                </>
-              }
-          </Grid>
+                </Grid>
+              </>}
         </NewMatchContext.Provider>}
-    </Dialog>
+    </Dialog >
   )
 }
