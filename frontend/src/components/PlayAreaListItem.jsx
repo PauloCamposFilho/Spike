@@ -4,7 +4,7 @@ import { Stack, Avatar, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import "../style/Playarea.css";
 export default function PlayAreaListItem(props) {
-  const { id, image, name, description, courtsNumber } =
+  const { id, image, name, description, courtsNumber, latitude, longitude } =
     props;
 
   return (
@@ -22,7 +22,6 @@ export default function PlayAreaListItem(props) {
       <TableCell align="left">{description}</TableCell>
       <TableCell align="left">{courtsNumber}</TableCell>
       <TableCell align="left">
-
         <Button variant="contained" component={Link} to={`/playarea/${id}`} >Details</Button>
       </TableCell>
       {/* <TableCell align="left">{latitude}</TableCell>
