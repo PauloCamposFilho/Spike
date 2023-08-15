@@ -49,7 +49,7 @@ const TestScanner = () => {
   const handleScan = async (result) => {
     if (result) {
       console.log(result)
-      setResult("Match result registered!");
+      setResult("Received");
     try {
       const response = await fetch(`/api/matches/create/1/2/1`, {
         method: 'GET',

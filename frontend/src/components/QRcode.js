@@ -7,14 +7,14 @@ import QrCodeIcon from '@mui/icons-material/QrCode';
 function QRCodeGenerator(props) {
   const { homeTeamId, playAreaId, result } = props
 
-  const payload = { 
+  let payload = { 
     playAreaId,
     winnerTeamId: '', 
     otherTeamId: '', 
   };
 
   result === '1' ? payload.winnerTeamId = homeTeamId : payload.otherTeamId = homeTeamId;
-
+  payload = JSON.stringify(payload);
   return (
     <QRCodeSVG
       value={payload}
