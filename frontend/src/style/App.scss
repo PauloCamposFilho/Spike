@@ -1,0 +1,13 @@
+body, p, h1, h2, h3, h4, h5, h6, a {
+  text-decoration: none;
+}
+
+/* Apply underlining on hover for links */
+
+a {
+  transition: font-weight 0.2s ease; /* Add a smooth transition effect */
+}
+
+a:hover {
+  font-weight: bold;
+}

@@ -10,7 +10,8 @@ import PlayerListItem from "./PlayerListItem";
 import PlayAreaListItem from "./PlayAreaListItem";
 import { fetchPlayAreaData } from "../helpers/fetchPlayAreaData";
 import SpikeNavBar from "./AppBar";
-import { Typography } from "@material-ui/core";
+import Typography from '@mui/material/Typography';
+
 export default function PlayAreaList() {
   const [playAreas, setPlayAreas] = useState([]);
 
@@ -75,7 +76,7 @@ export default function PlayAreaList() {
                   return (
                     <PlayAreaListItem
                       id={playArea.id}
-                      image={playArea.image + `?id=${playArea.id}`}
+                      image={playArea.image}
                       name={playArea.name}
                       courtsNumber={playArea.num_courts}
                     />

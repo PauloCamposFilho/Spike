@@ -17,7 +17,14 @@ const theme = createTheme({
       light: '#f98bcf',
       main: '#fe00a5',
     }
-  }
+  },
+  MuiLink: {
+    textDecoration: 'none', // Remove default underlining
+    color: 'blue', // Customize link color
+    '&:hover': {
+      textDecoration: 'underline', // Apply underlining on hover
+    },
+  },
 });
 
 export { theme }
