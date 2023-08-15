@@ -21,6 +21,9 @@ const initialState = {
       isLoading: true,
       teams_current: [],
       teams_history: [],
+      checked_in_team: {
+        teamInfoData: {}
+      }
     },
     gridData: [],
     teamsMatchesData: [],
