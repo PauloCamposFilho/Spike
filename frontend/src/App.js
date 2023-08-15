@@ -21,6 +21,7 @@ import { ACTIONS } from './constants/ACTIONS';
 import { setPlayArea, openQR, closeModal } from './helpers/dispatch';
 import { UserContext } from './contexts/UserContext';
 import { fetchTeamData } from './helpers/fetchTeamData';
+import { fetchCurrentUserData } from './helpers/fetchCurrentUserData';
 
 
 function App() {
@@ -59,9 +60,20 @@ function App() {
     return dispatch( {type: ACTIONS.UPDATE_RANKING_DATA, data: rankingData });
   };
 
+  const reloadUserData = async () => {
+    const updateInitialState = async () => {
+      const userData = await fetchCurrentUserData(8);
+      // const gridData = generateGridData(userData.teamsData.teams_current);
+      dispatch({ type: ACTIONS.UPDATE_USER_DATA, data: userData });
+      dispatch({ type: ACTIONS.UPDATE_TEAMWIDGET_LOADING_STATUS, data: false});
+    }
+    updateInitialState()
+    return null
+  }
+
   return (
     <ThemeProvider theme={theme}>  
-      <UserContext.Provider value={{ state, dispatch, openQR, updateTeamData, updatePlayerData, updateProfileLoadingState, updateRankingState }}>
+      <UserContext.Provider value={{ state, dispatch, openQR, updateTeamData, updatePlayerData, updateProfileLoadingState, updateRankingState, reloadUserData }}>
         <Router>
           <Switch>
             <Route exact path="/">

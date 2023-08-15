@@ -38,8 +38,10 @@ export default function NewMatch() {
       });
 
       if (response.ok) {
+        await resetMatchState(true)
         console.log('Success!!!')
       } else {
+        await resetMatchState(true)
         console.error('Error when logging match result');
       }
     } catch (error) {
@@ -79,8 +81,8 @@ export default function NewMatch() {
 
       </DialogContent>
       <DialogActions>
-        <Button onClick={resetMatchState}>Cancel</Button>
-        <Button type="submit" onClick={resetMatchState}>Ok</Button>
+        <Button onClick={() => resetMatchState(false)}>Cancel</Button>
+        <Button type="submit">Ok</Button>
       </DialogActions>
     </form>
   );

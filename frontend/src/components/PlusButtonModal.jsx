@@ -8,9 +8,11 @@ import { UserContext } from '../contexts/UserContext';
 import { useNewMatch } from '../hooks/useNewMatch';
 import { NewMatchContext } from '../contexts/NewMatchContext';
 import { NEW_MATCH_ACTIONS } from '../constants/NEW_MATCH_ACTIONS';
+import { useContext } from 'react';
 
 export default function PlusButtonModal(props) {
   const { open, onClose } = props
+  const { reloadUserData } = useContext(UserContext)
 
   const { newMatchState, dispatch } = useNewMatch();
 
@@ -27,14 +29,17 @@ export default function PlusButtonModal(props) {
       default:
         return;
     }
-  }
+  };
 
   const setModalTypeToMatch = () => {
     return dispatch({ type: NEW_MATCH_ACTIONS.SET_MODAL_TYPE, data: 'Match'})
-  }
+  };
 
-  const resetMatchState = () => {
-    onClose()
+  const resetMatchState = async (isFormSubmit) => {
+    if(isFormSubmit){
+      await reloadUserData();
+    }
+    onClose();
     return dispatch({ type: NEW_MATCH_ACTIONS.RESET_SELECT_STATE })
   }
 
