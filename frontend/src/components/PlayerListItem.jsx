@@ -5,6 +5,7 @@ import {
   Avatar,
 } from "@mui/material";
 
+
 export default function PlayerListItem (props) {
   const { id, picture, firstName, lastName, elo, isCaptain } = props
 

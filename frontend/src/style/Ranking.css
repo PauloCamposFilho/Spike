@@ -1,0 +1,17 @@
+.tableStyle{
+  border-collapse: "collapse";
+  width: "100%";
+  border: "1px solid #ddd";
+  border-radius: "10px";
+};
+
+.cellStyle {
+  padding: "10px";
+  text-align: center;
+  border: "1px solid #ddd";
+};
+
+.headerCellStyle{
+  background: "#f2f2f2";
+  font-weight: "bold",
+};
