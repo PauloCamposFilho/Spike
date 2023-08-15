@@ -3,7 +3,8 @@ import Typography from "@mui/material/Typography";
 
 export default function SpikeTable(props) {
   return (
-    <Table sx={{ minWidth: 300, maxWidth: 800, display: "inline-table", border: "1px solid lightgrey"}} aria-label="a dense table">
+    <Table sx={{ minWidth: 300, maxWidth: "100%", display: "inline-table", border: "1px solid lightgrey" }} aria-label="a dense table">
+
       <TableHead>
         {props.specialText &&
           <TableRow>
