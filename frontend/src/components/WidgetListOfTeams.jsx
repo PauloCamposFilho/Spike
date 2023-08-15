@@ -9,6 +9,7 @@ import Paper from "@mui/material/Paper";
 import { UserContext } from "../contexts/UserContext";
 import WidgetTeam from "./WidgetTeam";
 import { CircularProgress } from "@material-ui/core";
+import Typography from '@mui/material/Typography';
 
 export default function WidgetListOfTeams () {
   const { state } = useContext(UserContext);
@@ -22,17 +23,14 @@ export default function WidgetListOfTeams () {
   return (
     <>
     {!isLoading &&
-    <TableContainer component={Paper} style={ { "margin-top": "30px" } }>
-      <Table style={{ width: "80%" }} aria-label="simple table">
+    <TableContainer>
+      <Table style={{ width: "100%" }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell colSpan={5} align="center"><h2>Teams</h2></TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell colSpan={2} style={{ "width": "110px"}} align="left"><h4>Team</h4></TableCell>
-            <TableCell align="left"><h4>ELO</h4></TableCell>
-            <TableCell align="left"><h4>Captain</h4></TableCell>
-            <TableCell align="left"><h4>Formation</h4></TableCell>
+            <TableCell colSpan={2} style={{ "width": "110px"}} align="center"><h2>Team</h2></TableCell>
+            <TableCell align="center"><h2>ELO</h2></TableCell>
+            <TableCell align="center"><h2>Captain</h2></TableCell>
+            <TableCell align="center"><h2>Formation</h2></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

@@ -27,8 +27,7 @@ export default function NewMatchSelect(props) {
       >
         {options.map((option, index) => {
           return (
-            selectType === "Home Team" ? <MenuItem value={option.team.id}>{option.team.name}</MenuItem>
-            :  <MenuItem value={option.id}>{option.name}</MenuItem>
+            <MenuItem value={option.id}>{option.name}</MenuItem>
           )
         })}
       </Select>

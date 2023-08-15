@@ -4,13 +4,14 @@ import {
   Stack,
   Avatar,
 } from "@mui/material";
+import {Link} from "react-router-dom";
 
 
 export default function PlayerListItem (props) {
   const { id, picture, firstName, lastName, elo, isCaptain } = props
 
   return (
-    <TableRow key={id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+    <TableRow key={id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }} component={Link} to={`/player/${id}`}>
       <TableCell align="left">
         <Stack direction="row" spacing={2}>
           <Avatar

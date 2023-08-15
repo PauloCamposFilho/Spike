@@ -91,7 +91,7 @@ export default function PlayAreaList() {
                   return (
                     <PlayAreaListItem
                       id={playArea.id}
-                      image={playArea.image + `?id=${playArea.id}`}
+                      image={playArea.image + `${playArea.id}`}
                       name={playArea.name}
                       courtsNumber={playArea.num_courts}
                     />

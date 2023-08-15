@@ -19,17 +19,6 @@ module Api
       puts @matches.first.id
 
       response_data = @matches.map do |match|
-        # {
-        #   match: match,
-        #   winner: {
-        #     team: match.winner_team,
-        #     roster: match_roster_for_team(match, match.winner_team)
-        #   },
-        #   loser: {
-        #     team: match.other_team,
-        #     roster: match_roster_for_team(match, match.other_team)
-        #   }
-        # }
         match.as_json.merge(winner_team: match.winner_team.as_json.merge(roster: match_roster_for_team(match, match.winner_team)),
         other_team: match.other_team.as_json.merge(roster: match_roster_for_team(match,match.other_team)),
         play_area: @play_area
