@@ -42,9 +42,12 @@ export default function PlayAreaListItem(props) {
       <TableCell align="left">
         <Button variant="contained" component={Link} to={`/playarea/${id}`} style={{fontFamily: "Fredoka", color:"#FAFAFA"}}>Details</Button>
         {currentPlayArea.id !== id &&
-          <Button variant="contained" style={{marginLeft: "10px"}} onClick={checkInHandler}>Check-in</Button>
+          <Button variant="contained" style={{ marginLeft: "10px" }} onClick={checkInHandler}>Check-in</Button>
         }
-        {isLoading && <CircularProgress/>}
+        {currentPlayArea.id === id &&
+          <span style={{ color: "green", fontWeight: "bold", marginLeft: "50px" }}>✔</span>
+        }
+        {isLoading && <CircularProgress />}
       </TableCell>
       {/* <TableCell align="left">{latitude}</TableCell>
       <TableCell align="left">{longitude}</TableCell> */}

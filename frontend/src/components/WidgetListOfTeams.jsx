@@ -31,6 +31,7 @@ export default function WidgetListOfTeams () {
             <TableCell align="center"><h2>ELO</h2></TableCell>
             <TableCell align="center"><h2>Captain</h2></TableCell>
             <TableCell align="center"><h2>Formation</h2></TableCell>
+            <TableCell align="center">{/* space for check-in button */}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
