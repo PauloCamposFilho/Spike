@@ -47,7 +47,7 @@ const useUserData = () => {
   useEffect(() => {
     // assume default user for now
     const updateInitialState = async () => {
-      const userData = await fetchCurrentUserData(17);
+      const userData = await fetchCurrentUserData(2);
       // const gridData = generateGridData(userData.teamsData.teams_current);
       dispatch({ type: ACTIONS.UPDATE_USER_DATA, data: userData });
       dispatch({ type: ACTIONS.UPDATE_TEAMWIDGET_LOADING_STATUS, data: false});
