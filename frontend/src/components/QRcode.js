@@ -5,10 +5,19 @@ import { QRCodeSVG } from 'qrcode.react'
 import QrCodeIcon from '@mui/icons-material/QrCode';
 
 function QRCodeGenerator(props) {
+  const { homeTeamId, playAreaId, result } = props
+
+  const payload = { 
+    playAreaId,
+    winnerTeamId: '', 
+    otherTeamId: '', 
+  };
+
+  result === '1' ? payload.winnerTeamId = homeTeamId : payload.otherTeamId = homeTeamId;
 
   return (
     <QRCodeSVG
-      value={"http://localhost3000/api/matches/create/1/2/1"}
+      value={payload}
       size={128}
       bgColor={"#ffffff"}
       fgColor={"#000000"}
