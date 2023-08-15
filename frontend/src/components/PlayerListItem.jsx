@@ -6,6 +6,7 @@ import {
 } from "@mui/material";
 import {Link} from "react-router-dom";
 
+
 export default function PlayerListItem (props) {
   const { id, picture, firstName, lastName, elo, isCaptain } = props
 
