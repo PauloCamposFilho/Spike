@@ -18,11 +18,11 @@ export default function PlayArea(props) {
   })
   let { id } = useParams();
   console.log("id before error:", id);
+  if (props.id) {
+    id = props.id;
+  }
 
   useEffect(() => {
-    if (props.id) {
-      id = props.id;
-    }
     console.log("Did this even run?", id)
     fetchCurrentPlayAreaData(id)
       .then(res => {
