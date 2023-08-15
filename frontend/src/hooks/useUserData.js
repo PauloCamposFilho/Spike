@@ -6,7 +6,6 @@ import { ACTIONS } from "../constants/ACTIONS";
 import { generateGridData } from "../helpers/generateGridData";
 
 const initialState = {
-  currentPlayArea: null,
   qrModal: {
     isOpen: false,
     qrDetails: {
@@ -28,6 +27,8 @@ const initialState = {
     rankings: {
       teams: [],
       playerRankings: []
+    },
+    currentPlayArea: {
     },
     isLoading: true
   },
