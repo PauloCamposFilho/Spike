@@ -1,24 +1,34 @@
 import React, { useContext, useEffect, useState } from "react";
 import SpikeNavBar from "./AppBar";
-import {
-  TableCell,
-  CircularProgress,
-} from "@material-ui/core";
-import {
-  Table,
-  TableHead,
-  TableBody,
-  TableRow,
-  Avatar
-} from "@mui/material";
+import { Typography, TableCell, CircularProgress } from "@material-ui/core";
+import { Table, TableHead, TableBody, TableRow, Avatar } from "@mui/material";
 import { UserContext } from "../contexts/UserContext";
 import { fetchRankingData } from "../helpers/fetchRankingData";
 import SpikeTable from "./SpikeTable";
-import SpikeTableItem from "./SpikeTableItem"
-import Typography from '@mui/material/Typography';
+import SpikeTableItem from "./SpikeTableItem";
+import "../style/Ranking.css";
 
 export default function Ranking() {
-  const { state, updateRankingState } = useContext(UserContext)
+  const tableStyle = {
+    borderCollapse: "collapse",
+    width: "100%",
+    border: "1px solid #ddd",
+    borderRadius: "10px",
+  };
+
+  const cellStyle = {
+    padding: "10px",
+    textAlign: "center",
+    border: "1px solid #ddd",
+  };
+
+  const headerCellStyle = {
+    ...cellStyle,
+    background: "#f2f2f2",
+    fontWeight: "bold",
+  };
+
+  const { state, updateRankingState } = useContext(UserContext);
   const { teams, playerRankings } = state.userData.rankings;
   const [isLoading, setLoading] = useState(true);
   useEffect(() => {
@@ -27,12 +37,17 @@ export default function Ranking() {
       const rankingData = await fetchRankingData();
       updateRankingState(rankingData);
       setLoading(false);
-    }
+    };
     updateRanking();
-  },[])
+  }, []);
+
   const playerArray = playerRankings.map((player, index) => {
     return (
-      <SpikeTableItem item={player} key={index} componentLink={`/player/${player.id}`}>
+      <SpikeTableItem
+        item={player}
+        key={index}
+        componentLink={`/player/${player.id}`}
+      >
         <TableCell>
           <Avatar
             sx={{ width: 60, height: 60 }}
@@ -49,7 +64,11 @@ export default function Ranking() {
   });
   const teamsArray = teams.map((team, index) => {
     return (
-      <SpikeTableItem item={team} key={index} componentLink={`/teams/${team.id}`}>
+      <SpikeTableItem
+        item={team}
+        key={index}
+        componentLink={`/teams/${team.id}`}
+      >
         <TableCell>
           <Avatar
             sx={{ width: 60, height: 60 }}
@@ -65,25 +84,57 @@ export default function Ranking() {
   });
   const playerTableHeaders = ["", "First name", "Last name", "Elo Rating"];
   const teamTableHeaders = ["", "Name", "Elo Rating"];
+
   return (
     <div>
       <SpikeNavBar />
-      <div style={{ padding: "80px", "text-align": "center", "margin-top": "30px" }}>
-        <Typography variant="h4" component="h2" color="inherit">
-          Leaderboard
+      <div
+        style={{
+          padding: "80px",
+          "text-align": "center",
+          "margin-top": "30px",
+        }}
+      >
+        <Typography
+          variant="h4"
+          component="h2"
+          color="inherit"
+          style={{
+            paddingBottom: "10px",
+            background: "-webkit-linear-gradient(left, #3498db, #e91e63)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+          }}
+        >
+          Latest Rankings
         </Typography>
-        <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-around", marginTop: "50px" }}>
-
-          {!isLoading &&
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-around",
+            marginTop: "50px",
+          }}
+        >
+          {!isLoading && (
             <>
-              <SpikeTable specialText="Players" headers={playerTableHeaders} children={playerArray} />
-              <SpikeTable specialText="Teams" headers={teamTableHeaders} children={teamsArray} />
+              <SpikeTable
+                
+                specialText="Players"
+                headers={playerTableHeaders}
+                children={playerArray}
+              />
+              <SpikeTable
+                
+                specialText="Teams"
+                headers={teamTableHeaders}
+                children={teamsArray}
+              />
             </>
-          }
-          {isLoading && <CircularProgress/>}
-
+          )}
+          {isLoading && <CircularProgress />}
         </div>
       </div>
     </div>
-  )
+  );
 }
