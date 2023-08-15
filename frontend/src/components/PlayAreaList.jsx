@@ -12,10 +12,12 @@ import SpikeNavBar from "./AppBar";
 import { Typography } from "@material-ui/core";
 import "../style/Playarea.css";
 import "../style/fonts.scss";
+import { useTheme } from "@emotion/react";
+
 
 export default function PlayAreaList() {
   const [playAreas, setPlayAreas] = useState([]);
-
+  const theme = useTheme();
   useEffect(() => {
     fetchPlayAreaData()
       .then((res) => {
@@ -39,7 +41,7 @@ export default function PlayAreaList() {
         <Typography
           variant="h4"
           component="h2"
-          color="inherit"
+          color="-webkit-linear-gradient(left, #3498db, #e91e63)"
           style={{
             paddingBottom: "10px",
             background: "-webkit-linear-gradient(left, #3498db, #e91e63)",
@@ -68,7 +70,7 @@ export default function PlayAreaList() {
             }}
           >
             <Table style={{ minWidth: "800px" }} aria-label="simple table">
-              <TableHead className="table-header">
+              <TableHead className="table-header" style={{background: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.secondary.light})`}}>
                 <TableRow>
                   <TableCell style={{ minWidth: "110px" }} align="left">
                     <h4>Image</h4>
