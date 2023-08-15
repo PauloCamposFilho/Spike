@@ -75,6 +75,7 @@ export default function PlayArea(props) {
         </Typography>
         <TableRow
           key={id}
+          width="100%"
           sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
         >
           <TableCell align="left">

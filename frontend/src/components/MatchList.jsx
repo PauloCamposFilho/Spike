@@ -29,6 +29,7 @@ export default function MatchList(props) {
           background: "-webkit-linear-gradient(left, #3498db, #e91e63)",
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
+          fontFamily: "Fredoka"
         }}
       >
         {title}
@@ -37,16 +38,16 @@ export default function MatchList(props) {
         <Table style={{ width: "100%" }} aria-label="simple table">
           <TableHead style={{ background: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.secondary.light})`}}>
             <TableRow>
-              <TableCell colSpan={2} style={{ width: "110px", color:"white" }} align="left">
+              <TableCell colSpan={2} style={{ width: "110px", color:"#FaFaFa" }} align="left">
                 <h4>Home</h4>
               </TableCell>
-              <TableCell colSpan={2} style={{ width: "110px", color:"white" }} align="left">
+              <TableCell colSpan={2} style={{ width: "110px", color:"#FaFaFa" }} align="left">
                 <h4>Away</h4>
               </TableCell>
-              <TableCell color="white" align="left">
+              <TableCell color="#FaFaFa" align="left">
                 <h4>Result</h4>
               </TableCell>
-              <TableCell color="white" align="left">
+              <TableCell color="#FaFaFa" align="left">
                 <h4>Play Area</h4>
               </TableCell>
               {showDetailsButton && <TableCell align="left" />}

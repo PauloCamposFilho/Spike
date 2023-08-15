@@ -27,10 +27,12 @@ import "../style/Profile.css";
 import MatchList from "./MatchList";
 
 
+
 export default function Profile() {
   const { state, updatePlayerData, updateProfileLoadingState } = useContext(UserContext);
   const { id } = useParams();
   const { playerData, matchesData, teamsData, isLoading } = state.userData;
+  // const classes = useStyles();
   const theme = useTheme();
   useEffect(() => {
     const getPlayerData = async () => {
@@ -94,6 +96,7 @@ export default function Profile() {
                   backgroundImage: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.secondary.light})`,
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
+                  fontFamily: "Fredoka"
                 }}
               >
                 {`${playerData.first_name} ${playerData.last_name}`}
