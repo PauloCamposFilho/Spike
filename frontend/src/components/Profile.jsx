@@ -120,13 +120,13 @@ export default function Profile() {
                     />
                   </Stack>
                 </div>
-                <div className="table-section">
+                <div className="table-section" >
                   <TableContainer component={Paper}>
                     <Table aria-label="simple table">
                       <TableHead className="table-header">
-                        <TableRow>
-                          <TableCell>First Name</TableCell>
-                          <TableCell>Last Name</TableCell>
+                        <TableRow style={{ background: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.secondary.light})`}}>
+                          <TableCell color="white">First Name</TableCell>
+                          <TableCell color="white">Last Name</TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
@@ -176,8 +176,8 @@ export default function Profile() {
                   >
                     <Table style={{ width: "100%" }} aria-label="simple table">
                       <TableHead className="table-header">
-                        <TableRow>
-                          <TableCell colSpan={5} align="center">
+                        <TableRow style={{ background: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.secondary.light})`}}>
+                          <TableCell colSpan={5} color="white">
                             Description
                           </TableCell>
                         </TableRow>
