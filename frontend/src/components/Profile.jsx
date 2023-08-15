@@ -22,7 +22,7 @@ import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { fetchCurrentUserData } from "../helpers/fetchCurrentUserData";
 import SpikeNavBar from "./AppBar";
 import { UserContext } from "../contexts/UserContext";
-
+import { useTheme } from "@emotion/react";
 import "../style/Profile.css";
 import MatchList from "./MatchList";
 
@@ -31,7 +31,7 @@ export default function Profile() {
   const { state, updatePlayerData, updateProfileLoadingState } = useContext(UserContext);
   const { id } = useParams();
   const { playerData, matchesData, teamsData, isLoading } = state.userData;
-
+  const theme = useTheme();
   useEffect(() => {
     const getPlayerData = async () => {
       updateProfileLoadingState(true);
@@ -89,8 +89,12 @@ export default function Profile() {
               <Typography
                 variant="h4"
                 component="h2"
-                color="inherit"
                 paddingbottom="10px"
+                style={{
+                  backgroundImage: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.secondary.light})`,
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
               >
                 {`${playerData.first_name} ${playerData.last_name}`}
               </Typography>
