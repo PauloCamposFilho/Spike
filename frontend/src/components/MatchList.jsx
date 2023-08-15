@@ -30,7 +30,7 @@ export default function MatchList(props) {
         <TableBody>
           {matches.map((match, index) => {
             let homeTeam, awayTeam, result
-            console.log("hometeams", homeTeamId)
+            console.log("individual match", match)
             if (homeTeamId === match.winner_team_id) {
               homeTeam = match.winner_team;
               awayTeam = match.other_team;
