@@ -39,8 +39,10 @@ export default function NewMatch() {
 
       if (response.ok) {
         console.log('Success!!!')
+        resetMatchState()
       } else {
         console.error('Error when logging match result');
+        resetMatchState()
       }
     } catch (error) {
       console.error('Error when logging match result', error);
@@ -80,7 +82,7 @@ export default function NewMatch() {
       </DialogContent>
       <DialogActions>
         <Button onClick={resetMatchState}>Cancel</Button>
-        <Button type="submit" onClick={resetMatchState}>Ok</Button>
+        <Button type="submit">Ok</Button>
       </DialogActions>
     </form>
   );
