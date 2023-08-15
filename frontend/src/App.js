@@ -60,7 +60,7 @@ function App() {
   };
 
   return (
-    <ThemeProvider theme={theme}>  
+    <ThemeProvider theme={theme}>
       <UserContext.Provider value={{ state, dispatch, openQR, updateTeamData, updatePlayerData, updateProfileLoadingState, updateRankingState }}>
         <Router>
           <Switch>
