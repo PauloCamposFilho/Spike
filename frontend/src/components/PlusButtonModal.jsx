@@ -1,13 +1,14 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Stack } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Stack } from '@mui/material';
 import BasicSelect from './NewMatch';
 import NewMatch from './NewMatch';
 import { UserContext } from '../contexts/UserContext';
 import { useNewMatch } from '../hooks/useNewMatch';
 import { NewMatchContext } from '../contexts/NewMatchContext';
 import { NEW_MATCH_ACTIONS } from '../constants/NEW_MATCH_ACTIONS';
+import TestScanner from './QRSCanner';
 
 export default function PlusButtonModal(props) {
   const { open, onClose } = props
@@ -29,8 +30,8 @@ export default function PlusButtonModal(props) {
     }
   }
 
-  const setModalTypeToMatch = () => {
-    return dispatch({ type: NEW_MATCH_ACTIONS.SET_MODAL_TYPE, data: 'Match'})
+  const setModalTypeToMatch = (type) => {
+    return dispatch({ type: NEW_MATCH_ACTIONS.SET_MODAL_TYPE, data: type})
   }
 
   const resetMatchState = () => {
@@ -46,15 +47,24 @@ export default function PlusButtonModal(props) {
             <DialogContent>
               <Box width={400}>
                 <Stack spacing={2}>
-                  <Button variant="contained" size="large" onClick={setModalTypeToMatch}>New Match</Button>
-                  <Button variant="contained" size="large">Create Team</Button>
+                  <Button variant="contained" size="large" onClick={() => setModalTypeToMatch('Manual')}>Manual</Button>
+                  <Button variant="contained" size="large" onClick={() => setModalTypeToMatch('Scan')}>Scan</Button>
                 </Stack>
                 </Box>
               </DialogContent>
           </>}
-      {newMatchState.modalType === 'Match' &&
+      {newMatchState.modalType === 'Manual' &&
         <NewMatchContext.Provider value={{ newMatchState, dispatch, makeSelection, resetMatchState }}>
           <NewMatch />
+        </NewMatchContext.Provider>}
+      {newMatchState.modalType === 'Scan' &&
+        <NewMatchContext.Provider value={{ newMatchState, dispatch, makeSelection, resetMatchState }}>
+          <Grid container style={{flexDirection: "column", justifyContent: "center", alignItems: "center", padding: "2%"}}>
+            <Grid item>
+              <Typography variant="h4">Scan your code!</Typography>
+            </Grid>
+            <TestScanner />
+          </Grid>
         </NewMatchContext.Provider>}
     </Dialog>
   )

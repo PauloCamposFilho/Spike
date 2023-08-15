@@ -95,21 +95,15 @@ export default function PlayArea(props) {
           <TableCell align="left">{playAreaData.longitude}</TableCell> */}
         </TableRow>
         </div>
-        {/* try to render the play area details by using the table  */}
-        
-        {!props.dontShowMatchList && (
-          <MatchList
-            title={"Matches"}
-            homeTeamId={Number(id)}
-            showDetailsButton={true}
-            matches={playAreaData.area_matches_data}
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          />
-        )}
+        {!props.dontShowMatchList && playAreaData.area_matches_data.length > 0 &&
+        <MatchList
+          title={"Matches"}
+          homeTeamId={Number(id)}
+          showDetailsButton={true}
+          matches={playAreaData.area_matches_data}
+          style={{display:"flex", justifyContent: 'center', alignItems: 'center'}}
+        />
+        }
       </div>
     </div>
   );

@@ -29,7 +29,8 @@ const reducer = (state, action) => {
       const currentPlayAreaAfterUpdate = {
         ... state,
         // data should be a play area id, or empty string if untoggling
-        currentPlayArea: action.data
+        // currentPlayArea: action.data
+        userData: {...state.userData, currentPlayArea: action.data}
       };
       return currentPlayAreaAfterUpdate;
 
@@ -60,7 +61,8 @@ const reducer = (state, action) => {
     case UPDATE_USER_DATA:
       const userDataAfterUpdate = {
         ... state,
-        userData: action.data
+        // userData: action.data
+        userData: {...action.data, currentPlayArea: {}}
       }
       return userDataAfterUpdate;
     

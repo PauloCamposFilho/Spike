@@ -13,7 +13,6 @@ import Paper from "@mui/material/Paper";
 import { UserContext } from "../contexts/UserContext";
 import SpikeNavBar from "./AppBar";
 import WidgetListOfTeams from "./WidgetListOfTeams";
-import QRScanner, { Test } from "./QRSCanner";
 import Scanner from "./QRSCanner";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -29,6 +28,8 @@ import { useTheme } from "@emotion/react";
 import "../style/fonts.scss";
 import MatchList from "./MatchList";
 import { theme } from "./Theme";
+import TestScanner from "./QRSCanner";
+
 export default function Homepage() {
   const { state } = useContext(UserContext);
   // const { isLoading } = state.userData.isLoading;

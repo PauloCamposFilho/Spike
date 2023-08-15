@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   IconButton,
   Typography,
@@ -30,16 +30,36 @@ import MatchList from "./MatchList";
 
 export default function Profile() {
   const { state, updatePlayerData, updateProfileLoadingState } = useContext(UserContext);
+  const [ playerProfileState, setPlayerProfileState ] = useState({
+    matchesData: [],
+    playerAreaData: {},
+    playerData: {},
+    teamsData: {
+      isLoading: true,
+      teams_current: [],
+      teams_history: [],
+    },
+    gridData: [],
+    teamsMatchesData: [],
+    rankings: {
+      teams: [],
+      playerRankings: []
+    },
+    isLoading: true
+  });
   const { id } = useParams();
-  const { playerData, matchesData, teamsData, isLoading } = state.userData;
+  // const { playerData, matchesData, teamsData, isLoading } = state.userData;
   // const classes = useStyles();
   const theme = useTheme();
+  const { playerData, matchesData, teamsData, isLoading } = playerProfileState
+  console.log(playerProfileState);
+
   useEffect(() => {
     const getPlayerData = async () => {
       updateProfileLoadingState(true);
       const userData = await fetchCurrentUserData(id);
       console.log("Loading profile:", id)
-      updatePlayerData(userData);
+      setPlayerProfileState(userData);
       updateProfileLoadingState(false);
       console.log("the state of profile", state);
     };
