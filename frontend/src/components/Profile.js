@@ -223,7 +223,7 @@ export default function Profile() {
                   {formerTeamsArray.length > 0 &&
                     <SpikeTable specialText="Former Teams" headers={teamTableHeaders} children={formerTeamsArray} />
                   }
-                  <div
+                  {/* <div
                     style={{
                       display: "flex",
                       justifyContent: "flex-end",
@@ -238,7 +238,7 @@ export default function Profile() {
                       aria-label="logo"
                     >
                     </IconButton>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </>
