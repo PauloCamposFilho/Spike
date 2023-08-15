@@ -41,9 +41,11 @@ export default function Match() {
 
   return (
     <>
-    <div style={{ width: "100%" }}>
-        <PlayArea id={state.play_area.id} dontShowMatchList={true} />
-      </div>
+      {!isLoading &&
+        <div style={{ width: "100%" }}>
+          <PlayArea id={state.play_area.id} dontShowMatchList={true} />
+        </div>
+      }
       <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
         <SpikeNavBar />
         {!isLoading &&
@@ -112,7 +114,7 @@ export default function Match() {
           </>
         }
         {isLoading && <CircularProgress size={300} />}
-      </div>      
+      </div>
     </>
   );
 };

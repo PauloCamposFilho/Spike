@@ -23,7 +23,10 @@ class Player < ApplicationRecord
         winner_team_name: match.winner_team.name,
         other_team_name: match.other_team.name,
         play_area_name: match.play_area.name,
-        created_at: match.created_at.strftime('%Y-%m-%d')
+        created_at: match.created_at.strftime('%Y-%m-%d'),
+        play_area: match.play_area,
+        winner_team: match.winner_team,
+        other_team: match.other_team
       )
     end
   end

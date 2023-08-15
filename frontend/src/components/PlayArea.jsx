@@ -11,17 +11,16 @@ import MatchList from "./MatchList";
 
 export default function PlayArea(props) {
   const [playAreaData, setPlayAreaData] = useState({
-    current_play_area_data: {},
+    current_play_area_data: {
+      embedLink: ""
+    },
     area_matches_data: []
   })
   let { id } = useParams();
-  if (props.id) {
-    id = props.id;
-  }
   console.log("id before error:", id);
 
   useEffect(() => {
-    if (!id) {
+    if (props.id) {
       id = props.id;
     }
     console.log("Did this even run?", id)
@@ -41,18 +40,18 @@ export default function PlayArea(props) {
       <div style={{ padding: "80px" }}>
         <Typography variant="h6" component="h2" color="inherit">
           Volleyball Corts
+        </Typography>
           <div style={{ border: "1px solid red", width: "100%" }}>
             <iframe
-              src={playAreaData.current_play_area_data.embedLink}
+              src={playAreaData.embedLink}
               style={{ border: 0, height: "100%", width: "100%" }}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               title="googlemap-volleyball-court"
             ></iframe>
           </div>
-        </Typography>
         <Typography variant="h6" component="h2" color="inherit">
-          {playAreaData.current_play_area_data.name}
+          {playAreaData.name}
         </Typography>
         {/* try to render the play area details by using the table  */}
         <TableRow
@@ -64,19 +63,20 @@ export default function PlayArea(props) {
               <Avatar sx={{ width: 56, height: 56 }} alt="Remy Sharp" src={playAreaData.image} />
             </Stack>
           </TableCell>
-          <TableCell align="left">{playAreaData.current_play_area_data.name}</TableCell>
-          <TableCell align="left">{playAreaData.current_play_area_data.description}</TableCell>
-          <TableCell align="left">{playAreaData.current_play_area_data.courtsNumber}</TableCell>
+          <TableCell align="left">{playAreaData.name}</TableCell>
+          <TableCell align="left">{playAreaData.description}</TableCell>
+          <TableCell align="left">{playAreaData.courtsNumber}</TableCell>
           <TableCell align="left">
             <Button variant="contained" component={Link} to={`/playarea/${id}`} >Details</Button>
           </TableCell>
-          {/* <TableCell align="left">{playAreaData.current_play_area_data.latitude}</TableCell>
-          <TableCell align="left">{playAreaData.current_play_area_data.longitude}</TableCell> */}
+          {/* <TableCell align="left">{playAreaData.latitude}</TableCell>
+          <TableCell align="left">{playAreaData.longitude}</TableCell> */}
         </TableRow>
         {!props.dontShowMatchList &&
         <MatchList
           title={"Matches"}
           homeTeamId={Number(id)}
+          showDetailsButton={true}
           matches={playAreaData.area_matches_data}
         />
         }

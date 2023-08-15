@@ -58,12 +58,15 @@ module Api
       @Player = Player.find_by_id(@player_id)
       @teams_current = @Player.teams_current
       @teams_current_with_rosters = @teams_current.map do |team|
-      team = team.as_json.merge(roster: team.roster_records.where(left_at: nil).map(&:player))
+      team = team.as_json.merge(roster: team.roster_records.where(left_at: nil).map(&:player), elo_rating: team.average_elo_rating)
       end
       @teams_history = @Player.teams_history
+      teams_history_with_elo = @teams_history.map do |team|
+        team = team.as_json.merge(elo_rating: team.average_elo_rating)
+      end
       response_data = {
         teams_current: @teams_current_with_rosters,
-        teams_history: @teams_history
+        teams_history: teams_history_with_elo
       }
 
       render json: response_data
