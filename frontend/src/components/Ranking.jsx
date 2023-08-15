@@ -7,6 +7,7 @@ import { fetchRankingData } from "../helpers/fetchRankingData";
 import SpikeTable from "./SpikeTable";
 import SpikeTableItem from "./SpikeTableItem";
 import "../style/Ranking.css";
+import { useTheme } from "@emotion/react";
 
 export default function Ranking() {
   const tableStyle = {
@@ -31,6 +32,7 @@ export default function Ranking() {
   const { state, updateRankingState } = useContext(UserContext);
   const { teams, playerRankings } = state.userData.rankings;
   const [isLoading, setLoading] = useState(true);
+  const theme= useTheme();
   useEffect(() => {
     const updateRanking = async () => {
       setLoading(true);
@@ -114,12 +116,12 @@ export default function Ranking() {
             flexDirection: "row",
             justifyContent: "space-around",
             marginTop: "50px",
+            
           }}
         >
           {!isLoading && (
             <>
               <SpikeTable
-                
                 specialText="Players"
                 headers={playerTableHeaders}
                 children={playerArray}
