@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Profile from './components/Profile';
-import Matches from './components/Matches.js';
+import Matches from './components/Matches.jsx';
+import Match from './components/Match.jsx';
 import Location from './components/PlayArea';
 import Homepage from './components/Homepage';
 import Ranking from './components/Ranking';
@@ -70,6 +71,9 @@ function App() {
             </Route>
             <Route path="/matches">
               <Matches />
+            </Route>
+            <Route path="/match/:id">
+              <Match />
             </Route>
             <Route path="/location">
               <PlayAreaList />

@@ -9,15 +9,22 @@ import { TableCell, TableRow, Button } from "@material-ui/core";
 import MatchList from "./MatchList";
 
 
-export default function PlayArea() {
-  const { state } = useContext(UserContext);
+export default function PlayArea(props) {
   const [playAreaData, setPlayAreaData] = useState({
     current_play_area_data: {},
     area_matches_data: []
   })
-  const { id } = useParams();
+  let { id } = useParams();
+  if (props.id) {
+    id = props.id;
+  }
+  console.log("id before error:", id);
 
   useEffect(() => {
+    if (!id) {
+      id = props.id;
+    }
+    console.log("Did this even run?", id)
     fetchCurrentPlayAreaData(id)
       .then(res => {
         setPlayAreaData(res)
@@ -28,7 +35,6 @@ export default function PlayArea() {
       })
   }, [id]);
 
-  const { teamData } = state;
   return (
     <div>
       <SpikeNavBar />
@@ -67,11 +73,13 @@ export default function PlayArea() {
           {/* <TableCell align="left">{playAreaData.current_play_area_data.latitude}</TableCell>
           <TableCell align="left">{playAreaData.current_play_area_data.longitude}</TableCell> */}
         </TableRow>
+        {!props.dontShowMatchList &&
         <MatchList
           title={"Matches"}
           homeTeamId={Number(id)}
           matches={playAreaData.area_matches_data}
         />
+        }
       </div>
     </div>
   );

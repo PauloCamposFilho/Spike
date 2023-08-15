@@ -1,4 +1,5 @@
 module MatchesHelper
+  include MatchRosterHelper
   private
 
   def authorized_to_create?(player_id, winner_team, other_team)
@@ -21,8 +22,8 @@ module MatchesHelper
     other_team_average_elo = match.other_team.average_elo_rating
     match.as_json.merge(
       play_area: match.play_area,
-      winner_team: match.winner_team.as_json.merge(average_elo_rating: winner_team_average_elo),
-      other_team: match.other_team.as_json.merge(average_elo_rating: other_team_average_elo)
+      winner_team: match.winner_team.as_json.merge(average_elo_rating: winner_team_average_elo, roster: match_roster_for_team(match, match.winner_team)),
+      other_team: match.other_team.as_json.merge(average_elo_rating: other_team_average_elo, roster: match_roster_for_team(match, match.other_team))
     )
   end
 end
