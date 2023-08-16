@@ -32,7 +32,7 @@ export default function Ranking() {
   const { state, updateRankingState } = useContext(UserContext);
   const { teams, playerRankings } = state.userData.rankings;
   const [isLoading, setLoading] = useState(true);
-  const theme= useTheme();
+  const theme = useTheme();
   useEffect(() => {
     const updateRanking = async () => {
       setLoading(true);
@@ -100,7 +100,9 @@ export default function Ranking() {
         <Typography
           variant="h4"
           component="h2"
-          color="inherit"
+          color="#FAFAFA"
+          fontFamily="Fredoka"
+          align="left"
           style={{
             paddingBottom: "10px",
             background: "-webkit-linear-gradient(left, #3498db, #e91e63)",

@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { Typography } from "@material-ui/core";
 import { useParams, Link } from "react-router-dom";
 import { Stack, Avatar } from "@mui/material";
-import { UserContext } from "../contexts/UserContext";
 import SpikeNavBar from "./AppBar";
 import { fetchCurrentPlayAreaData } from "../helpers/fetchPlayAreaData";
 import { TableCell, TableRow, Button } from "@material-ui/core";

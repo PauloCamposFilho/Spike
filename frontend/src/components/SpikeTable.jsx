@@ -1,3 +1,5 @@
+import { useTheme } from "@emotion/react";
+import React from "react";
 import {
   Table,
   TableHead,
@@ -7,6 +9,7 @@ import {
 } from "@mui/material";
 
 export default function SpikeTable(props) {
+  const theme = useTheme();
   return (
     <Table
       sx={{
@@ -21,14 +24,22 @@ export default function SpikeTable(props) {
     >
       <TableHead>
         {props.specialText && (
-          <TableRow>
+          <TableRow
+            style={{
+              background: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.secondary.light})`,
+            }}
+          >
             <TableCell
               colSpan={props.headers.length}
               align="center"
+              style={{
+                background: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.secondary.light})`,
+              }}
               sx={{
                 backgroundColor: "#f2f2f2",
                 padding: "12px",
                 borderBottom: "1px solid lightgrey",
+                color: "#fafafa"
               }}
             >
               <h2>{props.specialText}</h2>
