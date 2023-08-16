@@ -142,7 +142,7 @@ export default function PlusButtonModal(props) {
                       justifyContent: 'center',
                     }}>
                       <QRCodeGenerator
-                        homeTeamId={'1'}
+                        homeTeamId={state.userData.teamsData.checked_in_team.teamInfoData.id}
                         playAreaId={state.userData.currentPlayArea.id}
                         result={newMatchState.resultSelection}
                       />

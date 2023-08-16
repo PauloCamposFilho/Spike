@@ -48,11 +48,24 @@ const TestScanner = () => {
 
   const handleScan = async (result) => {
     if (result) {
-      console.log(result)
+      console.log("homeTeamId in scan", homeTeamId)
+      console.log("result", result)
       setResult("Received");
     try {
       const parsedResult = JSON.parse(result.data);
-      const endpointParams = parsedResult.winnerTeamId ? `${parsedResult.winnerTeamId}/${homeTeamId}/${parsedResult.playAreaId}` : `${homeTeamId}/${parsedResult.otherTeamId}/${parsedResult.playAreaId}`
+      console.log("pased result", parsedResult)
+      let winnerTeamParam;
+      let otherTeamParam;
+      if (parsedResult.winnerTeamId) {
+        winnerTeamParam = parsedResult.winnerTeamId.toString();
+        otherTeamParam = homeTeamId;
+      } else {
+        winnerTeamParam = homeTeamId;
+        otherTeamParam = parsedResult.otherTeamId.toString();
+      }
+      const playAreaParam = parsedResult.playAreaId.toString()
+      const endpointParams = `${winnerTeamParam}/${otherTeamParam}/${playAreaParam}/`
+      console.log("endpoint", endpointParams)
       const response = await fetch(`/api/matches/create/${endpointParams}`, {
         method: 'GET',
       });
