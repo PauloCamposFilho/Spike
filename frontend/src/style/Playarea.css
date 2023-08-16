@@ -6,3 +6,12 @@
   font-weight: bold;
 }
 
+.tag-text {
+  background-color: #00a3fe;
+  color: rgb(250, 250, 250);
+  border-radius: 4px;
+  padding: 8px;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
