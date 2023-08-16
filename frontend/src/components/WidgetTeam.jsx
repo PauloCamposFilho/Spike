@@ -34,7 +34,7 @@ export default function WidgetTeam(props) {
           <Avatar
             sx={{ width: 56, height: 56 }}
             alt="Remy Sharp"
-            src={team.picture}
+            src={team.picture + `?id=${team.id}`}
           />
         </Stack>
       </TableCell>
@@ -60,7 +60,7 @@ export default function WidgetTeam(props) {
       </TableCell>
       <TableCell align="left">
         {team.id !== currentTeam.teamInfoData.id &&
-          <Button variant="contained" style={{ marginLeft: "10px" }} onClick={checkInHandler}>Check-In</Button>
+          <Button variant="contained" style={{ marginLeft: "10px", fontFamily: "Fredoka" }} onClick={checkInHandler}>Check-In</Button>
         }
         {team.id === currentTeam.teamInfoData.id &&
           <span style={{ color: "green", fontWeight: "bold" }}>✔</span>

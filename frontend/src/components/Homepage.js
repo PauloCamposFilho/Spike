@@ -31,14 +31,26 @@ import { theme } from "./Theme";
 import TestScanner from "./QRSCanner";
 
 export default function Homepage() {
-  const { state } = useContext(UserContext);
+  const { state, updateCurrentPlayArea } = useContext(UserContext);
   // const { isLoading } = state.userData.isLoading;
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [isLoading, setLoading] = useState(false);
+
   const theme = useTheme();
   console.log("theme.palette", theme.palette);
   console.log("theme.palette.secondary.light", theme.palette.secondary.light);
+
+  const checkInHandler = (id) => {
+    console.log("Loader ON");
+    setLoading(true);
+    setTimeout(() => {
+      updateCurrentPlayArea(id);
+      setLoading(false);
+      console.log("Loader OFF");
+    }, 800)
+  };
 
   return (
     <div className="home-page">
@@ -86,13 +98,12 @@ export default function Homepage() {
               <Grid item container xs={12} spacing={2}>
                 <Grid item xs={12}>
                   <Typography variant={"h3"}>
-                    Rogers Arena
-                    {/* {state.userData.playAreaData.play_area.name} */}
+                    {state.userData.playAreaData.play_area.name}
                   </Typography>
                 </Grid>
-                <Grid item xs={12} style={{ height: "50%" }}>
+                <Grid item xs={12} style={{ height: "120%" }}>
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2602.332284251036!2d-122.94344676087555!3d49.289048300000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x548679f393721d0f%3A0x361aacc5ca2c032d!2sVolleyball%20BC!5e0!3m2!1sen!2sca!4v1691617114859!5m2!1sen!2sca"
+                    src={state.userData.playAreaData.play_area.embedLink}
                     style={{
                       border: 0,
                       height: "100%",
@@ -116,7 +127,7 @@ export default function Homepage() {
                     spacing={2}
                     style={{ padding: 0 }}
                   >
-                    <Grid item xs={10}>
+                    <Grid item xs={9}>
                       <LinearProgress
                         style={{
                           height: 10,
@@ -129,12 +140,19 @@ export default function Homepage() {
                         value={80}
                       />
                     </Grid>
-                    <Grid item xs={2} style={{ padding: 0 }}>
+                    <Grid item xs={1} style={{ padding: 0 }}>
                       <Typography
-                        style={{ fontFamily: "Bangers", fontSize: "1.4rem" }}
+                        style={{ fontFamily: "Bangers", fontSize: "1.4rem", }}
                       >
                         Jammin!!
                       </Typography>
+                    </Grid>
+                    <Grid item xs={2} style={{ padding: 0, paddingLeft: "30px" }}>
+                      {!state.userData.currentPlayArea.id ?
+                        <Button variant="contained" style={{ backgroundColor: "#dedede", }} onClick={() => checkInHandler(state.userData.playAreaData.play_area.id)}>Check-in</Button>  
+                      : <span style={{ color: "green", fontWeight: "bold", paddingLeft: "30px"}}>✔</span>
+                      }
+                      {isLoading && <CircularProgress />}
                     </Grid>
                   </Grid>
                 </Grid>

@@ -37,9 +37,6 @@ export default function TeamProfile () {
     <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
       <SpikeNavBar/>
       <div style={{ padding: "80px"}}>
-        <Typography variant="h4" component="h2" color="inherit" paddingbottom="10px">
-          {teamData.teamInfoData.name}
-        </Typography>
         {!isLoading &&
         <>
         <Stack direction="row" spacing={2}>

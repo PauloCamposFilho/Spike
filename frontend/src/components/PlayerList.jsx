@@ -15,10 +15,10 @@ export default function PlayerList (props) {
 
   return (
     <TableContainer component={Paper} style={ { "margin-top": "30px" } }>
-      <Table style={{ width: "80%" }} aria-label="simple table">
+      <Table style={{ width: "100%" }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell colSpan={5} align="center"><h2>{title}</h2></TableCell>
+            <TableCell colSpan={6} align="center"><h2>{title}</h2></TableCell>
           </TableRow>
           <TableRow>
             <TableCell colSpan={3} style={{ "width": "110px"}} align="left"><h4>Player</h4></TableCell>

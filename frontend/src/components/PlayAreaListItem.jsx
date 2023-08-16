@@ -8,6 +8,9 @@ import { UserContext } from "../contexts/UserContext";
 import '../style/PlayAreaListItem.scss'
 import ManIcon from '@mui/icons-material/Man';
 import WomanIcon from '@mui/icons-material/Woman';
+import Typography from "@mui/material/Typography";
+
+
 export default function PlayAreaListItem(props) {
   const { id, image, name, description, courtsNumber, latitude, longitude } = props;
   const { state, updateCurrentPlayArea } = useContext(UserContext);

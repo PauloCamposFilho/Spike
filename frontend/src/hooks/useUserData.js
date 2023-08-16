@@ -16,6 +16,9 @@ const initialState = {
   userData: {
     matchesData: [],
     playerAreaData: {},
+    playAreaData: {
+      play_area: {},
+    },
     playerData: {},
     teamsData: {
       isLoading: true,
@@ -51,7 +54,7 @@ const useUserData = () => {
   useEffect(() => {
     // assume default user for now
     const updateInitialState = async () => {
-      const userData = await fetchCurrentUserData(3);
+      const userData = await fetchCurrentUserData(1);
       // const gridData = generateGridData(userData.teamsData.teams_current);
       dispatch({ type: ACTIONS.UPDATE_USER_DATA, data: userData });
       dispatch({ type: ACTIONS.UPDATE_TEAMWIDGET_LOADING_STATUS, data: false});
