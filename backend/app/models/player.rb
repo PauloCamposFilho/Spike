@@ -9,11 +9,11 @@ class Player < ApplicationRecord
   has_many :matched_teams, through: :match_rosters, source: :team
 
   def teams_current
-    teams.where(roster_records: { left_at: nil })
+    teams.where.not(roster_records: { left_at: nil })
   end
 
   def teams_history
-    teams.where.not(roster_records: { left_at: nil })
+    teams.where(roster_records: { left_at: nil })
   end
 
   def matches_played
