@@ -81,7 +81,22 @@ export default function PlayAreaList() {
                   <TableCell style={{fontFamily: "Fredoka", color:"#FAFAFA"}} align="left" colSpan={2}>
                     <h4>Number of Courts</h4>
                   </TableCell>
-                  <TableCell style={{fontFamily: "Fredoka", color:"#FAFAFA"}} align="left">
+                  <TableCell style={{ width: "110px", fontFamily: "Fredoka", color:"#FAFAFA" }} align="center">
+                    <h4>Net Height</h4>
+                  </TableCell>
+                  <TableCell style={{ width: "110px", fontFamily: "Fredoka", color:"#FAFAFA" }} align="center">
+                    <h4>Lined</h4>
+                  </TableCell>
+                  <TableCell style={{ width: "110px", fontFamily: "Fredoka", color:"#FAFAFA" }} align="center">
+                    <h4>Public</h4>
+                  </TableCell>
+                  <TableCell style={{ width: "110px", fontFamily: "Fredoka", color:"#FAFAFA" }} align="center">
+                    <h4>Rentals</h4>
+                  </TableCell>
+                  <TableCell style={{ width: "110px", fontFamily: "Fredoka", color:"#FAFAFA" }} align="center">
+                    <h4>Restrooms</h4>
+                  </TableCell>
+                  <TableCell style={{fontFamily: "Fredoka", color:"#FAFAFA"}} align="center">
                     <h4>Actions</h4>
                   </TableCell>
                 </TableRow>
@@ -94,6 +109,7 @@ export default function PlayAreaList() {
                       image={playArea.image + `${playArea.id}`}
                       name={playArea.name}
                       courtsNumber={playArea.num_courts}
+                      playArea={playArea}
                     />
                   );
                 })}
