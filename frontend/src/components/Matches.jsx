@@ -25,21 +25,22 @@ export default function Matches() {
     <div>
       <SpikeNavBar />
       <div style={{ padding: "80px" }}>
-        {!isLoading &&
         <Grid container style={{
+          display: "flex",
           justifyContent: 'center',
           alignItems: 'center'
         }}>
           <Grid item xs={12}>
-            <MatchList
-              title={"Matches Near You"}
-              matches={matches}
-              showDetailsButton={true}
-            />
+            {!isLoading &&
+              <MatchList
+                title={"Matches Near You"}
+                matches={matches}
+                showDetailsButton={true}
+              />
+            }
           </Grid>
+          {isLoading && <CircularProgress size={300} style={{marginTop: "300px"}} />}
         </Grid>
-        }
-        {isLoading && <CircularProgress size={300} />}
       </div>
     </div>
   );

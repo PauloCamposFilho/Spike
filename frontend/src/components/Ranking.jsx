@@ -136,7 +136,7 @@ export default function Ranking() {
               />
             </>
           )}
-          {isLoading && <CircularProgress />}
+          {isLoading && <CircularProgress size={300} />}
         </div>
       </div>
     </div>
