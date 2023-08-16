@@ -72,16 +72,16 @@ export default function PlayAreaList() {
             <Table style={{ minWidth: "800px" }} aria-label="simple table">
               <TableHead className="table-header" style={{background: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.secondary.light})`}}>
                 <TableRow>
-                  <TableCell style={{ minWidth: "110px" }} align="left">
+                  <TableCell style={{ minWidth: "110px", fontFamily: "Fredoka", color:"#FAFAFA"}} align="left" >
                     <h4>Image</h4>
                   </TableCell>
-                  <TableCell style={{ width: "110px" }} align="left">
+                  <TableCell style={{ width: "110px", fontFamily: "Fredoka", color:"#FAFAFA" }} align="left">
                     <h4>Name</h4>
                   </TableCell>
-                  <TableCell align="left" colSpan={2}>
+                  <TableCell style={{fontFamily: "Fredoka", color:"#FAFAFA"}} align="left" colSpan={2}>
                     <h4>Number of Courts</h4>
                   </TableCell>
-                  <TableCell align="left">
+                  <TableCell style={{fontFamily: "Fredoka", color:"#FAFAFA"}} align="left">
                     <h4>Actions</h4>
                   </TableCell>
                 </TableRow>

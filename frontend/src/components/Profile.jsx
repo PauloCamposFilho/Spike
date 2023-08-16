@@ -22,9 +22,10 @@ import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { fetchCurrentUserData } from "../helpers/fetchCurrentUserData";
 import SpikeNavBar from "./AppBar";
 import { UserContext } from "../contexts/UserContext";
-
+import { useTheme } from "@emotion/react";
 import "../style/Profile.css";
 import MatchList from "./MatchList";
+
 
 
 export default function Profile() {
@@ -47,6 +48,9 @@ export default function Profile() {
     isLoading: true
   });
   const { id } = useParams();
+  // const { playerData, matchesData, teamsData, isLoading } = state.userData;
+  // const classes = useStyles();
+  const theme = useTheme();
   const { playerData, matchesData, teamsData, isLoading } = playerProfileState
   console.log(playerProfileState);
 
@@ -107,8 +111,13 @@ export default function Profile() {
               <Typography
                 variant="h4"
                 component="h2"
-                color="inherit"
                 paddingbottom="10px"
+                style={{
+                  backgroundImage: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.secondary.light})`,
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  fontFamily: "Fredoka"
+                }}
               >
                 {`${playerData.first_name} ${playerData.last_name}`}
               </Typography>
@@ -134,13 +143,13 @@ export default function Profile() {
                     />
                   </Stack>
                 </div>
-                <div className="table-section">
+                <div className="table-section" >
                   <TableContainer component={Paper}>
                     <Table aria-label="simple table">
                       <TableHead className="table-header">
-                        <TableRow>
-                          <TableCell>First Name</TableCell>
-                          <TableCell>Last Name</TableCell>
+                        <TableRow style={{ background: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.secondary.light})`}}>
+                          <TableCell color="white">First Name</TableCell>
+                          <TableCell color="white">Last Name</TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
@@ -190,8 +199,8 @@ export default function Profile() {
                   >
                     <Table style={{ width: "100%" }} aria-label="simple table">
                       <TableHead className="table-header">
-                        <TableRow>
-                          <TableCell colSpan={5} align="center">
+                        <TableRow style={{ background: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.secondary.light})`}}>
+                          <TableCell colSpan={5} color="white">
                             Description
                           </TableCell>
                         </TableRow>

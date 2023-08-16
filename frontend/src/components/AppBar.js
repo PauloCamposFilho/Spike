@@ -80,6 +80,7 @@ export default function SpikeNavBar() {
               aria-controls={open ? "location-resources" : undefined}
               aria-haspopup="true"
               aria-expanded={open ? "true" : undefined}
+              component={Link} to="/location"
             >
               Play Areas
             </Button>
@@ -88,7 +89,7 @@ export default function SpikeNavBar() {
             </Button>
             {/* we can add authentication after the data retrievment test is done */}
           </Stack>
-          {anchorEl && (
+          {/* {anchorEl && (
             <Menu
               id="location-resources"
               anchorEl={anchorEl}
@@ -102,7 +103,7 @@ export default function SpikeNavBar() {
                 Corts
               </MenuItem>
             </Menu>
-          )}
+          )} */}
           <IconButton
             id="nav-menu"
             style={{ marginRight: "8px" }}

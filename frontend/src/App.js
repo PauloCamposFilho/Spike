@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Profile from './components/Profile';
+import Profile from './components/Profile.jsx';
 import Matches from './components/Matches.jsx';
 import Match from './components/Match.jsx';
 import Location from './components/PlayArea';
 import Homepage from './components/Homepage';
-import Ranking from './components/Ranking';
+import Ranking from './components/Ranking.jsx';
 import TeamProfile from './components/TeamProfile';
 import PlayAreaList from './components/PlayAreaList';
 import PlayArea from './components/PlayArea.jsx';
