@@ -8,11 +8,11 @@ class Team < ApplicationRecord
   belongs_to :captain, class_name: 'Player', foreign_key: 'captain_id', optional: true
 
   def players_current
-    players.where.not(roster_records: { left_at: nil })
+    players.where(roster_records: { left_at: nil })
   end
 
   def players_history
-    players.where(roster_records: {left_at: nil })
+    players.where.not(roster_records: {left_at: nil })
   end
 
   def matches_played
