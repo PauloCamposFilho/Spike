@@ -15,13 +15,14 @@ import WinLossForQR from './WinLossForQR';
 import { useContext, useState } from 'react';
 import ScanGenerateForQR from './ScanGenerateForQR';
 import { QRCodeGenerator } from './QRcode';
+import { useTheme } from '@emotion/react';
 
 export default function PlusButtonModal(props) {
   const { open, onClose } = props
   const { state } = useContext(UserContext)
   const { newMatchState, dispatch } = useNewMatch();
   const [scanOrGenerate, setScanOrGenerate] = useState('')
-
+  const theme = useTheme();
   const makeSelection = (selectionType, selection) => {
     switch (selectionType) {
       case "Home Team":
@@ -47,7 +48,7 @@ export default function PlusButtonModal(props) {
   }
 
   return (
-    <Dialog open={open} onClose={onClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+    <Dialog open={open} onClose={onClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description" PaperProps={{ style: { borderWidth: "2px", borderStyle: "solid",  } }}>
       {!newMatchState.modalType &&
         <>
           <DialogTitle>
@@ -160,12 +161,27 @@ export default function PlusButtonModal(props) {
                 </>
               :
               <>
-                <Grid container style={{ flexDirection: "column", justifyContent: "center", alignItems: "center", padding: "2%" }}>
-                  <Grid item>
-                    <Typography variant="h4">Scan your code!</Typography>
-                  </Grid>
-                  <TestScanner />
-                </Grid>
+                <DialogTitle>
+                  <Typography variant="h4" style={{ textAlign: "center" }}>Scan your code!</Typography>
+                </DialogTitle>
+                <DialogContent>
+                  <Box width={400} style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                    <TestScanner />
+                  </Box>
+                </DialogContent>
+                <DialogActions>
+                  <Button
+                    onClick={() => {
+                      resetMatchState();
+                      setScanOrGenerate('');
+                    }}>
+                    Exit
+                  </Button>
+                </DialogActions>
               </>}
         </NewMatchContext.Provider>}
     </Dialog >

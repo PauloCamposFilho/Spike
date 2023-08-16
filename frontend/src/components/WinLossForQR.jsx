@@ -12,10 +12,10 @@ export default function WinLossForQR ()  {
 
   return (
     <Stack direction="column" spacing={2}>
-      <Button variant="contained" direction="row" background={theme.palette.primary.main} onClick={() => makeSelection("Result", "1")}>
+      <Button variant="contained" direction="row" color="primary" onClick={() => makeSelection("Result", "1")} style={{ color: "#F5F5F5", minWidth: '180px' }}>
         <Typography variant="h3">W</Typography>
       </Button>
-      <Button variant="contained" direction="row" background={theme.palette.secondary.main} onClick={() => makeSelection("Result", "0")}>
+      <Button variant="contained" direction="row" color="secondary" onClick={() => makeSelection("Result", "0")} style={{ color: "#F5F5F5", minWidth: '180px'}}>
         <Typography variant="h3">L</Typography>
       </Button>
     </Stack>
