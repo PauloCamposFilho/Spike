@@ -251,3 +251,34 @@ Team.all.each do |team|
   team.update(captain: captain) if captain
 end
 
+# Demo-day specific setup.
+# Add player_id 1 to some teams
+RosterRecord.create!(
+  team: Team.find_by_id(2),
+  player: Player.first,
+  joined_at: Faker::Time.between(from: 2.years.ago, to: 1.year.ago),
+  left_at: nil,
+  is_active: Faker::Boolean.boolean
+)
+RosterRecord.create!(
+  team: Team.find_by_id(3),
+  player: Player.first,
+  joined_at: Faker::Time.between(from: 2.years.ago, to: 1.year.ago),
+  left_at: nil,
+  is_active: Faker::Boolean.boolean
+)
+RosterRecord.create!(
+  team: Team.find_by_id(4),
+  player: Player.first,
+  joined_at: Faker::Time.between(from: 2.years.ago, to: 1.year.ago),
+  left_at: nil,
+  is_active: Faker::Boolean.boolean
+)
+RosterRecord.create!(
+  team: Team.find_by_id(5),
+  player: Player.first,
+  joined_at: Faker::Time.between(from: 2.years.ago, to: 1.year.ago),
+  left_at: nil,
+  is_active: Faker::Boolean.boolean
+)
+Team.find_by_id(2).update(captain: Player.first)
