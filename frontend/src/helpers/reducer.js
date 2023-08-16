@@ -1,6 +1,6 @@
 import { ACTIONS } from "../constants/ACTIONS";
 
-const { SET_CURRENT_PLAY_AREA, OPEN_QR, CLOSE_MODAL, UPDATE_USER_DATA, UPDATE_TEAM_DATA, UPDATE_USER_PAGE_LOADING_STATUS, UPDATE_TEAMWIDGET_LOADING_STATUS, UPDATE_RANKING_DATA } = ACTIONS;
+const { SET_CURRENT_PLAY_AREA, OPEN_QR, CLOSE_MODAL, UPDATE_USER_DATA, UPDATE_TEAM_DATA, UPDATE_USER_PAGE_LOADING_STATUS, UPDATE_TEAMWIDGET_LOADING_STATUS, UPDATE_RANKING_DATA, SET_CURRENT_TEAM } = ACTIONS;
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -24,6 +24,18 @@ const reducer = (state, action) => {
         userData: {...state.userData, isLoading: action.data}
       }
       return profilePageState;
+    // Update a user's current team (for some functions)
+    case SET_CURRENT_TEAM:
+      return {
+        ...state,
+        userData: {
+          ...state.userData,
+          teamsData: {
+            ...state.userData.teamsData,
+            checked_in_team: action.data
+          }
+        }
+      }
     // Update a user's current play area
     case SET_CURRENT_PLAY_AREA:
       const currentPlayAreaAfterUpdate = {
