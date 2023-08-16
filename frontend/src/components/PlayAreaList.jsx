@@ -49,7 +49,7 @@ export default function PlayAreaList() {
             WebkitTextFillColor: "transparent",
           }}
         >
-          Play Area List
+          Courts near you
         </Typography>
         <div
           style={{
