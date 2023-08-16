@@ -117,23 +117,27 @@ export default function Ranking() {
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-around",
+            alignItems: "baseline",
             marginTop: "50px",
-            
+
           }}
         >
           {!isLoading && (
             <>
-              <SpikeTable
-                specialText="Players"
-                headers={playerTableHeaders}
-                children={playerArray}
-              />
-              <SpikeTable
-                
-                specialText="Teams"
-                headers={teamTableHeaders}
-                children={teamsArray}
-              />
+              <div style={{ width: "100%", padding: "30px" }}>
+                <SpikeTable
+                  specialText="Players"
+                  headers={playerTableHeaders}
+                  children={playerArray}
+                />
+              </div>
+              <div style={{ width: "100%", padding: "30px" }}>
+                <SpikeTable
+                  specialText="Teams"
+                  headers={teamTableHeaders}
+                  children={teamsArray}
+                />
+              </div>
             </>
           )}
           {isLoading && <CircularProgress size={300} />}
