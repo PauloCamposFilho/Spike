@@ -37,7 +37,7 @@ import { UserContext } from "../contexts/UserContext";
 const TestScanner = () => {
   const delay = 500;
   const { state } = useContext(UserContext);
-
+  const homeTeamId = state.userData.teamsData.checked_in_team.teamInfoData.id;
   const previewStyle = {
     height: 240,
     width: 320, 
@@ -48,15 +48,31 @@ const TestScanner = () => {
 
   const handleScan = async (result) => {
     if (result) {
-      console.log(result)
-      setResult("Match result registered!");
+      console.log("homeTeamId in scan", homeTeamId)
+      console.log("result", result)
+      setResult("Received");
     try {
-      const response = await fetch(`/api/matches/create/1/2/1`, {
+      const parsedResult = JSON.parse(result.data);
+      console.log("pased result", parsedResult)
+      let winnerTeamParam;
+      let otherTeamParam;
+      if (parsedResult.winnerTeamId) {
+        winnerTeamParam = parsedResult.winnerTeamId.toString();
+        otherTeamParam = homeTeamId;
+      } else {
+        winnerTeamParam = homeTeamId;
+        otherTeamParam = parsedResult.otherTeamId.toString();
+      }
+      const playAreaParam = parsedResult.playAreaId.toString()
+      const endpointParams = `${winnerTeamParam}/${otherTeamParam}/${playAreaParam}/`
+      console.log("endpoint", endpointParams)
+      const response = await fetch(`/api/matches/create/${endpointParams}`, {
         method: 'GET',
       });
 
       if (response.ok) {
         console.log('Success!!!')
+        setResult('Success!!!')
       } else {
         console.error('Error when logging match result');
       }
