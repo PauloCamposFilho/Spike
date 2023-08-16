@@ -11,6 +11,7 @@ export default function MatchListItem(props) {
   const { id, homeTeam, awayTeam, result, playArea, showDetailsButton } = props
 
   return (
+
     <TableRow key={id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
       <TableCell align="left" component={Link} to={`/teams/${homeTeam.id}`}>
         <Stack direction="row" spacing={2}>
@@ -40,5 +41,7 @@ export default function MatchListItem(props) {
         </TableCell>
       }
     </TableRow>
+
+
   )
 }

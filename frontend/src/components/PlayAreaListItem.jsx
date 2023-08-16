@@ -62,7 +62,8 @@ export default function PlayAreaListItem(props) {
         {props.playArea.has_restrooms && <span style={{ color: "green", fontWeight: "bold" }}>✔</span>}
         {!props.playArea.has_restrooms && <span style={{ color: "red", fontWeight: "bold" }}>❌</span>}
       </TableCell>
-      <TableCell align="center">
+      <TableCell align="center" >
+        <div>
         <Button variant="contained" component={Link} to={`/playarea/${id}`} style={{ fontFamily: "Fredoka", color: "#FAFAFA" }}>Details</Button>
         {currentPlayArea.id !== id &&
           <Button variant="contained" style={{ marginLeft: "40px", fontFamily: "Fredoka", color: "#FAFAFA" }} onClick={checkInHandler}>Check-in</Button>
@@ -71,6 +72,7 @@ export default function PlayAreaListItem(props) {
           <span style={{ color: "green", fontWeight: "bold", marginLeft: "50px" }}>✔</span>
         }
         {isLoading && <CircularProgress />}
+        </div>
       </TableCell>
       {/* <TableCell align="left">{latitude}</TableCell>
       <TableCell align="left">{longitude}</TableCell> */}

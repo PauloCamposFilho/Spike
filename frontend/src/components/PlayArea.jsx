@@ -48,6 +48,7 @@ export default function PlayArea(props) {
             WebkitTextFillColor: "transparent",
           }}
         >
+
         </Typography>
         <div style={{ width: "100%", paddingBottom: "20px" }}>
           <iframe
