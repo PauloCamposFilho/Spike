@@ -37,7 +37,7 @@ import { UserContext } from "../contexts/UserContext";
 const TestScanner = () => {
   const delay = 500;
   const { state } = useContext(UserContext);
-
+  const homeTeamId = state.userData.teamsData.checked_in_team.teamInfoData.id;
   const previewStyle = {
     height: 240,
     width: 320, 
@@ -51,12 +51,15 @@ const TestScanner = () => {
       console.log(result)
       setResult("Received");
     try {
-      const response = await fetch(`/api/matches/create/1/2/1`, {
+      const parsedResult = JSON.parse(result.data);
+      const endpointParams = parsedResult.winnerTeamId ? `${parsedResult.winnerTeamId}/${homeTeamId}/${parsedResult.playAreaId}` : `${homeTeamId}/${parsedResult.otherTeamId}/${parsedResult.playAreaId}`
+      const response = await fetch(`/api/matches/create/${endpointParams}`, {
         method: 'GET',
       });
 
       if (response.ok) {
         console.log('Success!!!')
+        setResult('Success!!!')
       } else {
         console.error('Error when logging match result');
       }
