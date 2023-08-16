@@ -43,8 +43,7 @@ const TestScanner = () => {
   const homeTeamId = state.userData.teamsData.checked_in_team.teamInfoData.id;
   const previewStyle = {
     height: 240,
-    width: 320, 
-    margin: "10px",
+    width: 320,
   };
   const [isLoading, setIsLoading] = useState(true)
   const [result, setResult] = useState("No result");
@@ -54,35 +53,35 @@ const TestScanner = () => {
       console.log("homeTeamId in scan", homeTeamId)
       console.log("result", result)
       setResult("Received");
-    try {
-      const parsedResult = JSON.parse(result.data);
-      console.log("pased result", parsedResult)
-      let winnerTeamParam;
-      let otherTeamParam;
-      if (parsedResult.winnerTeamId) {
-        winnerTeamParam = parsedResult.winnerTeamId.toString();
-        otherTeamParam = homeTeamId;
-      } else {
-        winnerTeamParam = homeTeamId;
-        otherTeamParam = parsedResult.otherTeamId.toString();
-      }
-      const playAreaParam = parsedResult.playAreaId.toString()
-      const endpointParams = `${winnerTeamParam}/${otherTeamParam}/${playAreaParam}/`
-      console.log("endpoint", endpointParams)
-      const response = await fetch(`/api/matches/create/${endpointParams}`, {
-        method: 'GET',
-      });
+      try {
+        const parsedResult = JSON.parse(result.data);
+        console.log("pased result", parsedResult)
+        let winnerTeamParam;
+        let otherTeamParam;
+        if (parsedResult.winnerTeamId) {
+          winnerTeamParam = parsedResult.winnerTeamId.toString();
+          otherTeamParam = homeTeamId;
+        } else {
+          winnerTeamParam = homeTeamId;
+          otherTeamParam = parsedResult.otherTeamId.toString();
+        }
+        const playAreaParam = parsedResult.playAreaId.toString()
+        const endpointParams = `${winnerTeamParam}/${otherTeamParam}/${playAreaParam}/`
+        console.log("endpoint", endpointParams)
+        const response = await fetch(`/api/matches/create/${endpointParams}`, {
+          method: 'GET',
+        });
 
-      if (response.ok) {
-        console.log('Success!!!')
-        setResult('Success!!!')
-        setIsLoading(false)
-      } else {
-        console.error('Error when logging match result');
+        if (response.ok) {
+          console.log('Success!!!')
+          setResult('Success!!!')
+          setIsLoading(false)
+        } else {
+          console.error('Error when logging match result');
+        }
+      } catch (error) {
+        console.error('Error when logging match result', error);
       }
-    } catch (error) {
-      console.error('Error when logging match result', error);
-    }
     }
   };
 
@@ -91,19 +90,18 @@ const TestScanner = () => {
   };
 
   return (
-    <Grid container item style={{flexDirection: "column", justifyContent: "center", alignItems: "center", }} spacing={10}>
-      <Grid container item xs={12} style={{justifyContent: "center", alignItems: "center", paddingLeft: "100px"}}>
-        <Grid item xs={12}>
-          <QrReader
-            delay={delay}
-            style={previewStyle}
-            onError={handleError}
-            onScan={handleScan}
-          />
-        </Grid>
+    <Grid container item style={{ flexDirection: "column", justifyContent: "center", alignItems: "center", }} spacing={10}>
+
+      <Grid item xs={12}>
+        <QrReader
+          delay={delay}
+          style={previewStyle}
+          onError={handleError}
+          onScan={handleScan}
+        />
       </Grid>
       <Grid item xs={12}>
-        {isLoading ? <CircularProgress /> : <CheckCircleOutlineRoundedIcon fontSize="large" />}
+        {isLoading ? <CircularProgress /> : <CheckCircleOutlineRoundedIcon fontSize="large" color="success" />}
       </Grid>
     </Grid>
   );
