@@ -13,7 +13,7 @@ export default function ProfileDetails (props) {
   });
   
   return (
-  <Box sx={{ flexGrow: 1 }}>
+  <Box sx={{ flexGrow: 1 }} >
     <Grid container justifyContent={"center"} spacing={2} component={Paper} elevation={3}>
       <Grid item xs={12}>
         <Div >{name}</Div>
