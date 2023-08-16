@@ -8,7 +8,9 @@ const fetchCurrentUserData = async (playerId) => {
     const playAreaRes = await fetch(`/api/players/${playerId}/playarea/favorite`);
     const playerRankingsRes = await fetch(`/api/players/rankings`);
     const teamRankingsRes = await fetch(`/api/teams/rankings`);
-    await fetch(`/api/login/${playerId}`)
+    if(playerId === 1){
+      await fetch(`/api/login/${playerId}`)
+    } 
     // Parse JSON
     const playerData = await playerRes.json();
     const matchesData = await matchesRes.json();
