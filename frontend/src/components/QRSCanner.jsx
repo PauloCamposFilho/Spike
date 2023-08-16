@@ -33,6 +33,9 @@ import React, {
 } from "react";
 import QrReader from "react-web-qr-reader";
 import { UserContext } from "../contexts/UserContext";
+import { CircularProgress, Typography } from "@material-ui/core";
+
+import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 
 const TestScanner = () => {
   const delay = 500;
@@ -41,9 +44,9 @@ const TestScanner = () => {
   const previewStyle = {
     height: 240,
     width: 320, 
-    margin: "10px"
+    margin: "10px",
   };
-
+  const [isLoading, setIsLoading] = useState(true)
   const [result, setResult] = useState("No result");
 
   const handleScan = async (result) => {
@@ -73,6 +76,7 @@ const TestScanner = () => {
       if (response.ok) {
         console.log('Success!!!')
         setResult('Success!!!')
+        setIsLoading(false)
       } else {
         console.error('Error when logging match result');
       }
@@ -99,7 +103,7 @@ const TestScanner = () => {
         </Grid>
       </Grid>
       <Grid item xs={12}>
-        <h3>{result}</h3>
+        {isLoading ? <CircularProgress /> : <CheckCircleOutlineRoundedIcon fontSize="large" />}
       </Grid>
     </Grid>
   );

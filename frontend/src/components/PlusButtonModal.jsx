@@ -160,12 +160,27 @@ export default function PlusButtonModal(props) {
                 </>
               :
               <>
-                <Grid container style={{ flexDirection: "column", justifyContent: "center", alignItems: "center", padding: "2%" }}>
-                  <Grid item>
-                    <Typography variant="h4">Scan your code!</Typography>
-                  </Grid>
-                  <TestScanner />
-                </Grid>
+                <DialogTitle>
+                  <Typography variant="h4" style={{ textAlign: "center" }}>Scan your code!</Typography>
+                </DialogTitle>
+                <DialogContent>
+                  <Box width={400} style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                    <TestScanner />
+                  </Box>
+                </DialogContent>
+                <DialogActions>
+                  <Button
+                    onClick={() => {
+                      resetMatchState();
+                      setScanOrGenerate('');
+                    }}>
+                    Exit
+                  </Button>
+                </DialogActions>
               </>}
         </NewMatchContext.Provider>}
     </Dialog >
