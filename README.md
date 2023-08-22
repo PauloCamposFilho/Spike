@@ -17,7 +17,7 @@ Play Area:  All the meaningful informations such as the court name,  net height 
 Ranking: show the state of the current leaderboards for both players and teams.
 
 ## Final Result 
-!["Screenshot of Spike Project Home Page"]("https://github.com/PauloCamposFilho/Spike/blob/master/docs/screenshot/spike-homepage.png?raw=true")
-!["Screenshot of Spike Project QR Code Generator"]("https://github.com/PauloCamposFilho/Spike/blob/master/docs/screenshot/spike-qrcode.png?raw=true")
-!["Screenshot of Spike Project Play Area"]("https://github.com/PauloCamposFilho/Spike/blob/master/docs/screenshot/spike-playarea.png?raw=true")
+!["Screenshot of Spike Project Home Page"](https://github.com/PauloCamposFilho/Spike/blob/master/docs/screenshot/spike-homepage.png?raw=true)
+!["Screenshot of Spike Project QR Code Generator"](https://github.com/PauloCamposFilho/Spike/blob/master/docs/screenshot/spike-qrcode.png?raw=true)
+!["Screenshot of Spike Project Play Area"](https://github.com/PauloCamposFilho/Spike/blob/master/docs/screenshot/spike-playarea.png?raw=true)
 
